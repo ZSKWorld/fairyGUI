@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="730,1024" overflow="hidden" designImage="ui://vith2b66sbd0e" designImageOffsetX="-722" designImageOffsetY="-225" designImageAlpha="100">
+  <displayList>
+    <graph id="n16_sbd0" name="n16" xy="19,104" size="692,900" type="rect" lineSize="0" fillColor="#fff1dabc" corner="5">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n6_sbd0" name="BtnGuanQia" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="18,18" size="86,53">
+      <Button title="关卡" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n7_sbd0" name="BtnFuBen" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="114,18" size="86,53">
+      <Button title="副本" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n8_sbd0" name="BtnMiJing" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="210,18" size="86,53">
+      <Button title="秘境" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n9_sbd0" name="BtnBoss" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="306,18" size="86,53">
+      <Button title="BOSS" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n10_sbd0" name="BtnCaiJi" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="402,18" size="86,53">
+      <Button title="采集" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <component id="n11_sbd0" name="BtnGongLue" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="498,18" size="86,53" controller="ctrlBgColor,1">
+      <Button title="攻略" titleColor="#ffffff" titleFontSize="30"/>
+    </component>
+    <component id="n12_sbd0" name="BtnWaiYu" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="594,18" size="86,53">
+      <Button title="外域" titleColor="#000000" titleFontSize="30"/>
+    </component>
+    <list id="n15_sbd0" name="ListLog" xy="19,104" size="692,900" overflow="scroll" scrollBarFlags="1028" scrollBar="auto" scrollBarRes="ui://vx9zwsersbd05s," defaultItem="ui://vith2b66sbd0j" autoClearItems="true">
+      <relation target="" sidePair="width-width,height-height"/>
+      <item title="sdfsdf">
+        <property target="title" propertyId="0" value="[size=40]士大夫撒士大夫撒大苏打给 的分公司的大苏打给 的分公司的[/size]"/>
+      </item>
+      <item>
+        <property target="title" propertyId="0" value="撒士大夫撒大苏打给 [size=40]士大夫撒打给的分公司的[/size]撒士大夫撒大苏打给 "/>
+        <property target="TxtNum" propertyId="0" value="1"/>
+      </item>
+      <item>
+        <property target="TxtNum" propertyId="0" value="1"/>
+      </item>
+      <item>
+        <property target="TxtNum" propertyId="0" value="1"/>
+      </item>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+  </displayList>
+  <transition name="EffectShow" autoPlay="true">
+    <item time="0" type="XY" target="n10_sbd0" value="402,-60"/>
+    <item time="0" type="XY" target="n11_sbd0" value="498,-60"/>
+    <item time="0" type="XY" target="n12_sbd0" value="594,-60"/>
+    <item time="0" type="XY" target="n6_sbd0" tween="true" startValue="18,-60" endValue="18,18" duration="2"/>
+    <item time="0" type="XY" target="n7_sbd0" value="114,-60"/>
+    <item time="0" type="XY" target="n8_sbd0" value="210,-60"/>
+    <item time="0" type="XY" target="n9_sbd0" value="306,-60"/>
+    <item time="1" type="XY" target="n7_sbd0" tween="true" startValue="114,-60" endValue="114,18" duration="2"/>
+    <item time="2" type="XY" target="n8_sbd0" tween="true" startValue="210,-60" endValue="210,18" duration="2"/>
+    <item time="3" type="XY" target="n9_sbd0" tween="true" startValue="306,-60" endValue="306,18" duration="2"/>
+    <item time="4" type="XY" target="n10_sbd0" tween="true" startValue="402,-60" endValue="402,18" duration="2"/>
+    <item time="5" type="XY" target="n11_sbd0" tween="true" startValue="498,-60" endValue="498,18" duration="2"/>
+    <item time="6" type="XY" target="n12_sbd0" tween="true" startValue="594,-60" endValue="594,18" duration="2"/>
+  </transition>
+</component>

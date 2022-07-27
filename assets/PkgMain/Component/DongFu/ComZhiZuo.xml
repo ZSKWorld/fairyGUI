@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="730,937" overflow="hidden" designImage="ui://vith2b66sbd018" designImageOffsetX="-753" designImageAlpha="0">
+  <displayList>
+    <component id="n23_sbd0" name="BtnFJZB" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="14,777" pivot="1,0.5" size="320,67" controller="ctrlBgColor,8">
+      <Button title="点我分解装备" titleColor="#ffffff"/>
+    </component>
+    <component id="n21_sbd0" name="BtnFJBS" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="14,855" pivot="1,0.5" size="320,67" controller="ctrlBgColor,8">
+      <Button title="点我分解宝石" titleColor="#ffffff"/>
+    </component>
+    <component id="n25_sbd0" name="BtnYJHC" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="509,856" size="192,67" controller="ctrlBgColor,1">
+      <Button title="一键合成" titleColor="#000000"/>
+    </component>
+    <component id="n11_sbd0" name="BtnJPYL" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="6,158" size="170,70" controller="ctrlBgColor,1">
+      <Button title="极品预览" titleColor="#000000"/>
+    </component>
+    <component id="n12_sbd0" name="BtnDZZB" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="6,238" size="170,70" controller="ctrlBgColor,2">
+      <Button title="打造装备" titleColor="#000000"/>
+    </component>
+    <component id="n13_sbd0" name="BtnZJZB" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="6,318" size="170,70" controller="ctrlBgColor,6">
+      <Button title="终极装备" titleColor="#000000"/>
+    </component>
+    <component id="n14_sbd0" name="BtnCZZB" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="6,398" size="170,70" controller="ctrlBgColor,4">
+      <Button title="重铸装备" titleColor="#000000"/>
+    </component>
+    <component id="n19_sbd0" name="BtnBSHC" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="6,478" size="170,70" controller="ctrlBgColor,0">
+      <Button title="宝石合成" titleColor="#000000"/>
+    </component>
+    <component id="n20_sbd0" name="BtnZZTZ" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="6,558" size="170,70" controller="ctrlBgColor,7">
+      <Button title="制作套装" titleColor="#000000"/>
+    </component>
+    <text id="n26_sbd0" name="n26" xy="189,175" size="204,35" fontSize="25" color="#eb5858" bold="true" text="预览极品满值属性"/>
+    <text id="n28_sbd0" name="n28" xy="189,255" size="404,35" fontSize="25" color="#eb5858" bold="true" text="特殊制作将消耗对应等级的材料一个"/>
+    <text id="n29_sbd0" name="n29" xy="189,335" size="204,35" fontSize="25" color="#eb5858" bold="true" text="游戏中的终极装备"/>
+    <text id="n30_sbd0" name="n30" xy="189,400" size="404,65" fontSize="25" color="#eb5858" leading="0" bold="true" text="重铸装备，星级不变，属性随机生成&#xA;注：强化和刻铭等级不保留"/>
+    <text id="n31_sbd0" name="n31" xy="189,494" size="415,35" fontSize="25" color="#eb5858" bold="true" text="3-5个低级宝石可以合成一个高级宝石"/>
+    <text id="n32_sbd0" name="n32" xy="189,574" size="487,35" fontSize="25" color="#eb5858" bold="true" text="精金石可在副本获取，坦桑石可在boss获取"/>
+    <component id="n16_sbd0" name="CmbLevel" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="6,13" size="718,40">
+      <ComboBox title="10级" visibleItemCount="10" direction="down">
+        <item title="10级"/>
+        <item title="20级"/>
+        <item title="30级"/>
+        <item title="40级"/>
+        <item title="50级"/>
+      </ComboBox>
+    </component>
+    <component id="n17_sbd0" name="CmbType" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="6,58" size="718,40">
+      <ComboBox title="戒指" visibleItemCount="10" direction="down">
+        <item title="戒指"/>
+        <item title="护符"/>
+        <item title="武器"/>
+        <item title="项链"/>
+        <item title="裤子"/>
+        <item title="衣服"/>
+        <item title="头盔"/>
+        <item title="鞋子"/>
+      </ComboBox>
+    </component>
+    <component id="n18_sbd0" name="CmbDetail" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="6,103" size="718,40">
+      <ComboBox title="棉布1级" visibleItemCount="10" direction="down">
+        <item title="棉布1级"/>
+        <item title="棉布2级"/>
+        <item title="棉布3级"/>
+        <item title="棉布4级"/>
+        <item title="棉布5级"/>
+        <item title="棉布1级兑换玄星石"/>
+        <item title="棉布2级兑换玄星石"/>
+        <item title="棉布3级兑换玄星石"/>
+        <item title="棉布4级兑换玄星石"/>
+        <item title="棉布5级兑换玄星石"/>
+      </ComboBox>
+    </component>
+    <component id="n24_sbd0" name="CmbFJZBDJ" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="308,776" size="174,69" controller="ctrlBgColor,1">
+      <ComboBox visibleItemCount="10" direction="up">
+        <item title="[color=#ff0000]1星装备[/color]"/>
+        <item title="2星装备"/>
+        <item title="3星装备"/>
+        <item title="4星装备"/>
+        <item title="5星装备"/>
+        <item title="6星装备"/>
+        <item title="7星装备"/>
+        <item title="8星装备"/>
+        <item title="9星装备"/>
+      </ComboBox>
+    </component>
+    <component id="n22_sbd0" name="CmbFJBSDJ" src="sbd0n" fileName="Component/Combox/CmbDongFu.xml" xy="308,854" size="174,69" controller="ctrlBgColor,1">
+      <ComboBox visibleItemCount="12" direction="up">
+        <item title="1级宝石"/>
+        <item title="2级宝石"/>
+        <item title="3级宝石"/>
+        <item title="4级宝石"/>
+        <item title="5级宝石"/>
+        <item title="6级宝石"/>
+        <item title="7级宝石"/>
+        <item title="8级宝石"/>
+        <item title="9级宝石"/>
+        <item title="洪荒宝石"/>
+        <item title="混沌宝石"/>
+        <item title="鸿蒙宝石"/>
+      </ComboBox>
+    </component>
+  </displayList>
+  <transition name="EffectShow" autoPlay="true">
+    <item time="0" type="XY" target="n11_sbd0" value="-180,158"/>
+    <item time="0" type="XY" target="n12_sbd0" value="-180,238"/>
+    <item time="0" type="XY" target="n13_sbd0" value="-180,318"/>
+    <item time="0" type="XY" target="n14_sbd0" value="-180,398"/>
+    <item time="0" type="XY" target="n16_sbd0" tween="true" startValue="-728,13" endValue="6,13" duration="5"/>
+    <item time="0" type="XY" target="n17_sbd0" value="740,58"/>
+    <item time="0" type="XY" target="n18_sbd0" value="-728,103"/>
+    <item time="0" type="XY" target="n19_sbd0" value="-180,478"/>
+    <item time="0" type="XY" target="n20_sbd0" value="-180,558"/>
+    <item time="0" type="XY" target="n21_sbd0" value="14,1029"/>
+    <item time="0" type="XY" target="n22_sbd0" value="308,1028"/>
+    <item time="0" type="XY" target="n23_sbd0" value="14,951"/>
+    <item time="0" type="XY" target="n24_sbd0" value="308,950"/>
+    <item time="0" type="XY" target="n25_sbd0" value="509,1030"/>
+    <item time="0" type="XY" target="n26_sbd0" value="740,175.5"/>
+    <item time="0" type="XY" target="n28_sbd0" value="740,255.5"/>
+    <item time="0" type="XY" target="n29_sbd0" value="740,335.5"/>
+    <item time="0" type="XY" target="n30_sbd0" value="740,400.5"/>
+    <item time="0" type="XY" target="n31_sbd0" value="740,494.5"/>
+    <item time="0" type="XY" target="n32_sbd0" value="740,574.5"/>
+    <item time="3" type="XY" target="n17_sbd0" tween="true" startValue="740,58" endValue="6,58" duration="5"/>
+    <item time="7" type="XY" target="n18_sbd0" tween="true" startValue="-728,103" endValue="6,103" duration="5"/>
+    <item time="9" type="XY" target="n11_sbd0" tween="true" startValue="-180,158" endValue="6,158" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n12_sbd0" tween="true" startValue="-180,238" endValue="6,238" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n13_sbd0" tween="true" startValue="-180,318" endValue="6,318" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n14_sbd0" tween="true" startValue="-180,398" endValue="6,398" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n19_sbd0" tween="true" startValue="-180,478" endValue="6,478" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n20_sbd0" tween="true" startValue="-180,558" endValue="6,558" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n26_sbd0" tween="true" startValue="740,175.5" endValue="189,175.5" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n28_sbd0" tween="true" startValue="740,255.5" endValue="189,255.5" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n29_sbd0" tween="true" startValue="740,335.5" endValue="189,335.5" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n30_sbd0" tween="true" startValue="740,400.5" endValue="189,400.5" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n31_sbd0" tween="true" startValue="740,494.5" endValue="189,494.5" duration="10" ease="Bounce.Out"/>
+    <item time="9" type="XY" target="n32_sbd0" tween="true" startValue="740,574.5" endValue="189,574.5" duration="10" ease="Bounce.Out"/>
+    <item time="14" type="XY" target="n21_sbd0" tween="true" startValue="14,1029" endValue="14,855" duration="10" ease="Bounce.Out"/>
+    <item time="14" type="XY" target="n22_sbd0" tween="true" startValue="308,1028" endValue="308,854" duration="10" ease="Bounce.Out"/>
+    <item time="14" type="XY" target="n23_sbd0" tween="true" startValue="14,951" endValue="14,777" duration="10" ease="Bounce.Out"/>
+    <item time="14" type="XY" target="n24_sbd0" tween="true" startValue="308,950" endValue="308,776" duration="10" ease="Bounce.Out"/>
+    <item time="14" type="XY" target="n25_sbd0" tween="true" startValue="509,1030" endValue="509,856" duration="10" ease="Bounce.Out"/>
+  </transition>
+</component>

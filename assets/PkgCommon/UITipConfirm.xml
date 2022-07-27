@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334" designImageOffsetX="-781" designImageAlpha="100">
+  <displayList>
+    <graph id="n0_sbd0" name="BtnBg" xy="0,0" size="750,1334" alpha="0.7" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_sbd0" name="n1" xy="45,419" size="660,495" group="n10_sbd0" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff101115"/>
+    <graph id="n2_sbd0" name="n2" xy="45,419" size="660,84" group="n10_sbd0" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f"/>
+    <graph id="n3_sbd0" name="n3" xy="45,830" size="660,84" group="n10_sbd0" touchable="false" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f"/>
+    <component id="n7_sbd0" name="BtnConfirm" src="sbd05i" fileName="Component/BtnCornerTxt.xml" xy="296,838" size="157,69" group="n10_sbd0" controller="ctrlBgColor,7">
+      <Button title="确定" titleColor="#000000" titleFontSize="37"/>
+    </component>
+    <richtext id="n8_sbd0" name="TxtContent" xy="375,667" pivot="0.5,0.5" anchor="true" size="610,101" group="n10_sbd0" touchable="false" fontSize="25" color="#e7c235" vAlign="middle" ubb="true" autoSize="height" bold="true" text="消耗：60点精神力&#xA;掉落：技能·乾坤一掷、小魔石、50元宝、棉布1级、棉布2级、食物">
+      <relation target="n1_sbd0" sidePair="center-center,middle-middle"/>
+    </richtext>
+    <text id="n9_sbd0" name="TxtTitle" xy="323,441" size="104,66" group="n10_sbd0" fontSize="50" color="#ffffff" bold="true" text="提示">
+      <relation target="n1_sbd0" sidePair="center-center"/>
+    </text>
+    <group id="n10_sbd0" name="n10" xy="45,419" size="660,495" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+  </displayList>
+  <transition name="EffectShow">
+    <item time="0" type="Alpha" target="n0_sbd0" tween="true" startValue="0" endValue="0.7" duration="6"/>
+    <item time="0" type="XY" target="n10_sbd0" tween="true" startValue="45,-518" endValue="45,419" duration="6"/>
+  </transition>
+</component>

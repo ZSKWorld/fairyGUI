@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334">
+  <controller name="ctrlState" pages="0,登录,1,注册" selected="0"/>
+  <displayList>
+    <graph id="n0_qjdo" name="n0" xy="0,0" size="750,1334" type="rect" lineSize="0" fillColor="#ff555555">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n10_qjdo" name="n10" xy="296,706" size="270,42" group="n4_qjdo" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
+      <relation target="n2_qjdo" sidePair="width-width,height-height,left-left,top-top"/>
+    </graph>
+    <graph id="n12_qjdo" name="n12" xy="296,767" size="270,42" group="n4_qjdo" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
+      <relation target="n3_qjdo" sidePair="width-width,height-height,left-left,top-top"/>
+    </graph>
+    <component id="n13_qjdo" name="BtnLogin" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="386,860" size="161,60" group="n4_qjdo">
+      <Button title="登录" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n15_sbd0" name="BtnLoginRegister" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="202,860" size="161,60" group="n4_qjdo">
+      <Button title="注册" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <text id="n2_qjdo" name="TxtAccount" xy="296,714" size="270,42" group="n4_qjdo" fontSize="30" color="#ffffff" autoSize="none" bold="true" autoClearText="true" text="123456" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
+    <text id="n3_qjdo" name="TxtPassword" xy="296,775" size="270,42" group="n4_qjdo" fontSize="30" color="#ffffff" autoSize="none" bold="true" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
+    <text id="n5_qjdo" name="n5" xy="184,714" size="94,42" group="n4_qjdo" fontSize="30" color="#ffffff" bold="true" text="账号："/>
+    <text id="n6_qjdo" name="n6" xy="184,775" size="94,42" group="n4_qjdo" fontSize="30" color="#ffffff" bold="true" text="密码："/>
+    <text id="n14_qjdo" name="n14" xy="91,413" pivot="0.5,0.5" size="568,239" group="n4_qjdo" font="ui://vx9zwserqjdo8" fontSize="188" color="#ffffff" text="修仙传"/>
+    <group id="n4_qjdo" name="n4" xy="91,413" size="568,507" advanced="true">
+      <gearDisplay controller="ctrlState" pages="0"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+    <graph id="n26_sbd0" name="n26" xy="296,521" size="270,42" group="n24_sbd0" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
+      <relation target="n18_sbd0" sidePair="width-width,height-height,left-left,top-top"/>
+    </graph>
+    <graph id="n27_sbd0" name="n27" xy="296,582" size="270,42" group="n24_sbd0" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
+      <relation target="n19_sbd0" sidePair="width-width,height-height,left-left,top-top"/>
+    </graph>
+    <graph id="n28_sbd0" name="n28" xy="296,643" size="270,42" group="n24_sbd0" type="rect" lineSize="0" lineColor="#ff333333" fillColor="#ff333333">
+      <relation target="n22_sbd0" sidePair="width-width,height-height,left-left,top-top"/>
+    </graph>
+    <component id="n29_sbd0" name="BtnRegisterBack" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="202,736" size="161,60" group="n24_sbd0">
+      <Button title="返回" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <component id="n25_sbd0" name="BtnRegister" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="387,736" size="161,60" group="n24_sbd0">
+      <Button title="注册" titleColor="#ffffff" titleFontSize="40"/>
+    </component>
+    <text id="n18_sbd0" name="TxtRegisterAccount" xy="296,529" size="270,42" group="n24_sbd0" fontSize="30" color="#ffffff" autoSize="none" bold="true" autoClearText="true" text="123456" input="true" prompt="请输入账号" restrict="[0-9a-zA-Z]"/>
+    <text id="n19_sbd0" name="TxtRegisterPassword" xy="296,590" size="270,42" group="n24_sbd0" fontSize="30" color="#ffffff" autoSize="none" bold="true" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
+    <text id="n22_sbd0" name="TxtRegisterName" xy="296,651" size="270,42" group="n24_sbd0" fontSize="30" color="#ffffff" autoSize="none" bold="true" autoClearText="true" text="123456" input="true" prompt="请输入密码" restrict="[0-9a-zA-Z]" password="true"/>
+    <text id="n20_sbd0" name="n20" xy="184,529" size="94,42" group="n24_sbd0" fontSize="30" color="#ffffff" bold="true" text="账号："/>
+    <text id="n21_sbd0" name="n21" xy="184,590" size="94,42" group="n24_sbd0" fontSize="30" color="#ffffff" bold="true" text="密码："/>
+    <text id="n23_sbd0" name="n23" xy="184,651" size="94,42" group="n24_sbd0" fontSize="30" color="#ffffff" bold="true" text="名字："/>
+    <group id="n24_sbd0" name="n24" xy="184,521" size="382,275" advanced="true">
+      <gearDisplay controller="ctrlState" pages="1"/>
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+  </displayList>
+  <transition name="t0" autoPlay="true">
+    <item time="0" type="Alpha" target="n14_qjdo" value="0"/>
+    <item time="0" type="Skew" target="n14_qjdo" value="0,0"/>
+    <item time="4" type="Alpha" target="n14_qjdo" tween="true" startValue="0" endValue="1" duration="40" ease="Linear"/>
+    <item time="4" type="Skew" target="n14_qjdo" tween="true" startValue="0,0" endValue="0,360" duration="40"/>
+  </transition>
+</component>

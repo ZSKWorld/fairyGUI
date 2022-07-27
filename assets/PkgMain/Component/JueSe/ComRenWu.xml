@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="730,932" designImage="ui://vith2b66sbd0f" designImageOffsetX="-752" designImageOffsetY="-225" designImageAlpha="100">
+  <displayList>
+    <graph id="n2_sbd0" name="n2" xy="4,0" size="722,403" type="rect" lineSize="0" lineColor="#ff6d6f74" fillColor="#ff101115">
+      <relation target="" sidePair="width-width"/>
+    </graph>
+    <graph id="n55_sbd0" name="n55" xy="4,420" size="722,512" type="rect" lineSize="0" lineColor="#ff6d6f74" fillColor="#ff101115">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n16_sbd0" name="TxtJingLi" xy="20,15" size="290,35" group="n34_sbd0" fontSize="25" color="#9d9d9d" bold="true" singleLine="true" text="精力：7456.2万/8789.6万"/>
+    <richtext id="n35_sbd0" name="TxtJinAtk" xy="20,58" size="219,35" group="n34_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="金攻：[color=#EFEF00]7123456785[/color]"/>
+    <richtext id="n36_sbd0" name="TxtMuAtk" xy="20,101" size="107,35" group="n34_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="木攻：[color=#028803]75[/color]"/>
+    <richtext id="n37_sbd0" name="TxtShuiAtk" xy="20,144" size="121,35" group="n34_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="水攻：[color=#00BDF5]528[/color]"/>
+    <richtext id="n38_sbd0" name="TxtHuoAtk" xy="20,187" size="107,35" group="n34_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="火攻：[color=#A20203]58[/color]"/>
+    <richtext id="n39_sbd0" name="TxtTuAtk" xy="20,230" size="107,35" group="n34_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="土攻：[color=#B55310]58[/color]"/>
+    <text id="n40_sbd0" name="TxtMoHe" xy="20,273" size="107,35" group="n34_sbd0" fontSize="25" color="#9d9d9d" bold="true" singleLine="true" text="魔核：55"/>
+    <text id="n41_sbd0" name="TxtMoBi" xy="20,316" size="107,35" group="n34_sbd0" fontSize="25" color="#9d9d9d" bold="true" singleLine="true" text="魔币：20"/>
+    <text id="n42_sbd0" name="TxtLingShi" xy="20,359" size="107,35" group="n34_sbd0" fontSize="25" color="#9d9d9d" bold="true" singleLine="true" text="灵石：45"/>
+    <group id="n34_sbd0" name="n34" xy="20,15" size="290,379" advanced="true"/>
+    <text id="n43_sbd0" name="TxtJingLiHF" xy="402,15" size="252,35" group="n52_sbd0" fontSize="25" color="#9d9d9d" bold="true" singleLine="true" text="精力恢复：391.00点/s"/>
+    <richtext id="n44_sbd0" name="TxtJinDef" xy="402,58" size="219,35" group="n52_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="金防：[color=#EFEF00]7235659845[/color]"/>
+    <richtext id="n45_sbd0" name="TxtMuDef" xy="402,101" size="107,35" group="n52_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="木防：[color=#028803]75[/color]"/>
+    <richtext id="n46_sbd0" name="TxtShuiDef" xy="402,144" size="121,35" group="n52_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="水防：[color=#00BDF5]528[/color]"/>
+    <richtext id="n47_sbd0" name="TxtHuoDef" xy="402,187" size="107,35" group="n52_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="火防：[color=#A20203]58[/color]"/>
+    <richtext id="n48_sbd0" name="TxtTuDef" xy="402,230" size="107,35" group="n52_sbd0" touchable="false" fontSize="25" color="#9d9d9d" ubb="true" bold="true" singleLine="true" text="土防：[color=#B55310]58[/color]"/>
+    <text id="n49_sbd0" name="TxtHunPo" xy="402,273" size="107,35" group="n52_sbd0" fontSize="25" color="#9d9d9d" bold="true" singleLine="true" text="魂魄：55"/>
+    <text id="n50_sbd0" name="TxtGemScore" xy="402,316" size="143,35" group="n52_sbd0" fontSize="25" color="#9d9d9d" bold="true" singleLine="true" text="宝石积分：0"/>
+    <text id="n51_sbd0" name="TxtExp" xy="402,359" size="203,35" group="n52_sbd0" fontSize="25" color="#9d9d9d" bold="true" singleLine="true" text="升级经验：49.0万"/>
+    <group id="n52_sbd0" name="n52" xy="402,15" size="252,379" advanced="true">
+      <relation target="" sidePair="center-center%"/>
+    </group>
+    <text id="n132_sbd0" name="n132" xy="58,472" pivot="0.5,0.5" anchor="true" size="62,35" group="n158_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="武器:"/>
+    <text id="n133_sbd0" name="n133" xy="58,555" pivot="0.5,0.5" anchor="true" size="62,35" group="n158_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="项链:"/>
+    <text id="n134_sbd0" name="n134" xy="58,637" pivot="0.5,0.5" anchor="true" size="62,35" group="n158_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="戒指:"/>
+    <text id="n135_sbd0" name="n135" xy="58,719" pivot="0.5,0.5" anchor="true" size="62,35" group="n158_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="护符:"/>
+    <text id="n136_sbd0" name="n136" xy="58,801" pivot="0.5,0.5" anchor="true" size="62,35" group="n158_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="坐骑:"/>
+    <text id="n137_sbd0" name="n137" xy="58,883" pivot="0.5,0.5" anchor="true" size="62,35" group="n158_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="暗器:"/>
+    <component id="n138_sbd0" name="BtnWQ" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="227,473" pivot="0.5,0.5" anchor="true" size="253,67" group="n158_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n139_sbd0" name="BtnXL" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="227,555" pivot="0.5,0.5" anchor="true" size="253,67" group="n158_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n140_sbd0" name="BtnJZ" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="227,637" pivot="0.5,0.5" anchor="true" size="253,67" group="n158_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n141_sbd0" name="BtnHF" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="227,719" pivot="0.5,0.5" anchor="true" size="253,67" group="n158_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n142_sbd0" name="BtnZQ" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="227,801" pivot="0.5,0.5" anchor="true" size="253,67" group="n158_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n143_sbd0" name="BtnAQ" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="227,883" pivot="0.5,0.5" anchor="true" size="253,67" group="n158_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <group id="n158_sbd0" name="n158" xy="27,439" size="326,477" advanced="true">
+      <relation target="n2_sbd0" sidePair="top-bottom"/>
+    </group>
+    <text id="n144_sbd0" name="n144" xy="407,472" pivot="0.5,0.5" anchor="true" size="62,35" group="n156_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="头盔:"/>
+    <text id="n145_sbd0" name="n145" xy="407,554" pivot="0.5,0.5" anchor="true" size="62,35" group="n156_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="衣服:"/>
+    <text id="n146_sbd0" name="n146" xy="407,636" pivot="0.5,0.5" anchor="true" size="62,35" group="n156_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="下装:"/>
+    <text id="n147_sbd0" name="n147" xy="407,718" pivot="0.5,0.5" anchor="true" size="62,35" group="n156_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="鞋子:"/>
+    <text id="n148_sbd0" name="n148" xy="407,800" pivot="0.5,0.5" anchor="true" size="62,35" group="n156_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="时装:"/>
+    <text id="n149_sbd0" name="n149" xy="407,882" pivot="0.5,0.5" anchor="true" size="62,35" group="n156_sbd0" fontSize="25" color="#a0a0a0" bold="true" singleLine="true" text="法宝:"/>
+    <component id="n150_sbd0" name="BtnTK" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="575,473" pivot="0.5,0.5" anchor="true" size="253,67" group="n156_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#0066ff" titleFontSize="27"/>
+    </component>
+    <component id="n151_sbd0" name="BtnYF" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="575,555" pivot="0.5,0.5" anchor="true" size="253,67" group="n156_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n152_sbd0" name="BtnXZ" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="575,637" pivot="0.5,0.5" anchor="true" size="253,67" group="n156_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n153_sbd0" name="BtnXieZ" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="575,719" pivot="0.5,0.5" anchor="true" size="253,67" group="n156_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n154_sbd0" name="BtnSZ" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="575,801" pivot="0.5,0.5" anchor="true" size="253,67" group="n156_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <component id="n155_sbd0" name="BtnFB" src="sbd05i" fileName="Component/BtnCornerTxt.xml" pkg="vx9zwser" xy="575,883" pivot="0.5,0.5" anchor="true" size="253,67" group="n156_sbd0" controller="ctrlBgColor,3">
+      <Button title="村里最好的武器" titleColor="#a0a0a0" titleFontSize="27"/>
+    </component>
+    <group id="n156_sbd0" name="n156" xy="376,439" size="325,477" advanced="true">
+      <relation target="" sidePair="center-center%"/>
+      <relation target="n2_sbd0" sidePair="top-bottom"/>
+    </group>
+  </displayList>
+</component>
