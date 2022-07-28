@@ -2,7 +2,6 @@ import MenuDoc_Base from "./MenuDoc_Base";
 export default class MenuDoc_CreateComponent extends MenuDoc_Base {
     protected InitMenData(): void {
         this.menuData = {
-            name: "MenuDoc_CreateComponent",
             text: "自定义组件",
             childEnable: true,
             selectCallback: this.CallBack,

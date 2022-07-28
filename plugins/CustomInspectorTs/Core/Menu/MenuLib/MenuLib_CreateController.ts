@@ -17,7 +17,7 @@ export default class MenuLib_CreateController extends MenuLib_Base {
     private controllerName: string;
     protected InitMenData(): void {
         const _this = this;
-        this.menuData = { name: "MenuLib_CreateController", text: "为编辑对象创建图片控制器", selectCallback: () => { _this.CallBack(); } };
+        this.menuData = { text: "为编辑对象创建图片控制器", selectCallback: () => { _this.CallBack(); } };
     }
 
     protected OnCreate(): void {
@@ -106,7 +106,7 @@ export default class MenuLib_CreateController extends MenuLib_Base {
             let notExportedFileNames: string[] = [];
             let index = 0;
             this.selectRES.ForEach((v) => {
-                selectStr += `\t${index++}.\t${v.fileName}\n`;
+                selectStr += `\t${ index++ }.\t${ v.fileName }\n`;
                 (v.type != FairyEditor.FPackageItemType.IMAGE) && notImageFileNames.push(v.name);
                 (v.exported == false && v.owner != FairyEditor.App.activeDoc.inspectingTarget.pkg) && notExportedFileNames.push(v.name);
             });
@@ -127,25 +127,25 @@ export default class MenuLib_CreateController extends MenuLib_Base {
         }
     }
     /** 获取新建控制器默认名称 */
-    private GetDefaultControllerName():string{
-        const oldNames:string[] = [];
-        FairyEditor.App.activeDoc.content.controllers.ForEach((v)=>oldNames.push(v.name));
+    private GetDefaultControllerName(): string {
+        const oldNames: string[] = [];
+        FairyEditor.App.activeDoc.content.controllers.ForEach((v) => oldNames.push(v.name));
         const count = FairyEditor.App.activeDoc.content.controllers.Count;
         for (let i = 1; i <= count; i++) {
-            if (oldNames.includes("c"+i) == false) {
-                return "c"+i;
+            if (oldNames.indexOf("c" + i) == -1) {
+                return "c" + i;
             }
         }
         return "c" + (count + 1);
     }
     /** 检查名字是否和已存在控制器名称重复 */
-    private CheckDuplicateName(name:string){
+    private CheckDuplicateName(name: string) {
         const controllers = FairyEditor.App.activeDoc.content.controllers;
         for (let i = controllers.Count - 1; i >= 0; i--) {
             if (controllers.get_Item(i).name == name) {
                 return true;
-            }            
-        }        
+            }
+        }
     }
 
     protected OnDestroy(): void {

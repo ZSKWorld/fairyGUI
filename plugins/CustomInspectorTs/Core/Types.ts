@@ -2,24 +2,31 @@ import { System } from "csharp";
 export interface IDestroy {
     Destroy(): void;
 }
-export interface IMenu extends IDestroy{
-    Create(index:number):void;
+export interface IMenu extends IDestroy {
+    Create(index: number): void;
 }
 export interface IMenuData {
-    name: string;
+    /**菜单变量名 */
+    name?: string;
+    /** 菜单显示内容 */
     text: string;
+    /** */
     url?: string;
+    /** 插入索引，只能小于菜单项数量，默认-1，即插入末尾 */
     atIndex?: number;
+    /** 是否启用该菜单项子菜单 */
     childEnable?: boolean;
+    /** 子菜单数据 */
     childs?: IMenuData[];
+    /** 点击回调 */
     selectCallback?: System.Action$1<string>;
 };
 
-export interface IComponentCustomData{
+export interface IComponentCustomData {
     funcId?: number;
     tipType?: string;
     holdPress?: string;
-    effect?: { [key: string]: string };
+    effect?: { [ key: string ]: string };
 }
 
 export const enum ShowObjectType {
@@ -54,7 +61,7 @@ export const enum InspectorName {
     RichText = "richtext",
     TextEffect = "texteffect",
 
-    
+
     ComBasic = "comBasic",
     ComRelation = "comRelation",
     ComEtc = "comEtc",
@@ -96,7 +103,7 @@ export const enum MoreControllIndex {
 }
 
 /** 属性控制 list 索引 */
-export const enum InspectorControlListIndex{
+export const enum InspectorControlListIndex {
     /** 默认显示 */
     Display1,
     /** 显示-2  */
@@ -119,7 +126,12 @@ export const enum InspectorControlListIndex{
     FontSize,
 }
 
-export const enum AppConfirmResult{
+export const enum AppConfirmResult {
     Yes = "yes",
     No = "no",
+}
+
+export const enum ConfigType{
+    None = "",
+    PublishSettings = "publishSettings"
 }

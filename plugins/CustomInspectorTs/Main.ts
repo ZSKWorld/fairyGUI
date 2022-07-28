@@ -4,37 +4,42 @@ import BaseInspector from './Core/Inspectors/BaseInspector';
 import BtnInspector from './Core/Inspectors/BtnInspector';
 import ComInspector from './Core/Inspectors/ComInspector';
 import TextLayoutInspector from './Core/Inspectors/TextLayoutInspector';
-import MenuDoc_CreateLuaName from './Core/Menu/MenuDoc/MenuDoc_CreateLuaName';
-import MenuDoc_CreateRelation from './Core/Menu/MenuDoc/MenuDoc_CreateRelation';
-import MenuDoc_Test from './Core/Menu/MenuDoc/MenuDoc_Test';
-import MenuLib_CreateController from './Core/Menu/MenuLib/MenuLib_CreateController';
-import MenuLib_Test from './Core/Menu/MenuLib/MenuLib_Test';
+import MenuMain_Publish from './Core/Menu/MenuMain/MenuMain_Publish';
 import { IMenu, InspectorName, ShowObjectType } from './Core/Types';
 
-//FairyEditor.App.docFactory.contextMenu
+//编辑区菜单
 const docMenus: IMenu[] = [
     // new MenuDoc_CreateComponent(),
-    new MenuDoc_CreateRelation(),
-    new MenuDoc_CreateLuaName(),
+    // new MenuDoc_CreateRelation(),
+    // new MenuDoc_CreateLuaName(),
 
     // new MenuDoc_Test(),
 ];
 
-//FairyEditor.App.libView.contextMenu
+//资源库菜单
 const libsMenus: IMenu[] = [
-    new MenuLib_CreateController(),
+    // new MenuLib_CreateController(),
 
     // new MenuLib_Test(),
-]
+];
+
+//主菜单
+const mainMenu: IMenu[] = [
+    new MenuMain_Publish(),
+];
+
 docMenus.forEach((v, index) => v.Create(index));
 libsMenus.forEach((v, index) => v.Create(index));
+mainMenu.forEach((v, index) => v.Create(index));
+
 docMenus.length && FairyEditor.App.docFactory.contextMenu.AddSeperator(docMenus.length);
 libsMenus.length && FairyEditor.App.libView.contextMenu.AddSeperator(libsMenus.length);
 
+//检查器
 const inspectors: BaseInspector[] = [
-    new BtnInspector(new InspectorInfo("Custom", "BtnInspector", InspectorName.Custom_BtnInspector, "按钮自定义数据", ShowObjectType.Button, true)),
-    new ComInspector(new InspectorInfo("Custom", "BtnInspector", InspectorName.Custom_ComInspector, "组件自定义数据", ShowObjectType.Component, true, true)),
-    new TextLayoutInspector(new InspectorInfo("Custom", "TextInspector", "TextInspector", "文本横竖排", ShowObjectType.Mixed, true)),
+    // new BtnInspector(new InspectorInfo("Custom", "BtnInspector", InspectorName.Custom_BtnInspector, "按钮自定义数据", ShowObjectType.Button, true)),
+    // new ComInspector(new InspectorInfo("Custom", "BtnInspector", InspectorName.Custom_ComInspector, "组件自定义数据", ShowObjectType.Component, true, true)),
+    // new TextLayoutInspector(new InspectorInfo("Custom", "TextInspector", "TextInspector", "文本横竖排", ShowObjectType.Mixed, true)),
 ];
 inspectors.forEach((v) => v.AddInspector());
 
@@ -48,7 +53,8 @@ inspectors.forEach((v) => v.AddInspector());
 
 
 export function onDestroy() {
-    docMenus.forEach((v) => v.Destroy());
-    libsMenus.forEach((v) => v.Destroy());
-    inspectors.forEach((v) => v.OnDestroy());
+    docMenus.forEach(v => v.Destroy());
+    libsMenus.forEach(v => v.Destroy());
+    mainMenu.forEach(v => v.Destroy());
+    inspectors.forEach(v => v.Destroy());
 }

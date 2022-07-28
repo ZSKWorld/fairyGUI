@@ -34,5 +34,5 @@ export default abstract class BaseInspector extends FairyEditor.View.PluginInspe
     }
 
     public abstract UpdateUI(): boolean;
-    public abstract OnDestroy(): void;
+    protected abstract OnDestroy(): void;
 }

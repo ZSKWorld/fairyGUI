@@ -4,7 +4,6 @@ const MenuDoc_Base_1 = require("./MenuDoc_Base");
 class MenuDoc_CreateComponent extends MenuDoc_Base_1.default {
     InitMenData() {
         this.menuData = {
-            name: "MenuDoc_CreateComponent",
             text: "自定义组件",
             childEnable: true,
             selectCallback: this.CallBack,

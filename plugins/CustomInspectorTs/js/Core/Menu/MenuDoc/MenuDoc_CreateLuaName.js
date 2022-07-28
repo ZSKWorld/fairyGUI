@@ -22,7 +22,7 @@ class MenuDoc_CreateLuaName extends MenuDoc_Base_1.default {
     };
     InitMenData() {
         const _this = this;
-        this.menuData = { name: "MenuDoc_CreateLuaName", text: "创建Lua名称代码到剪切板", selectCallback: () => { _this.CallBack(); } };
+        this.menuData = { text: "创建Lua名称代码到剪切板", selectCallback: () => { _this.CallBack(); } };
     }
     CallBack() {
         const target = csharp_1.FairyEditor.App.activeDoc.GetSelection();
@@ -34,7 +34,7 @@ class MenuDoc_CreateLuaName extends MenuDoc_Base_1.default {
             // self.TxtName = com:GetChild("n10")
             for (let i = 0; i < count; i++) {
                 const child = target.get_Item(i);
-                if (child instanceof csharp_1.FairyEditor.FComponent && child.extention?._type == "Button" /* Button */) {
+                if (child instanceof csharp_1.FairyEditor.FComponent && child.extention?._type == "Button" /* ShowObjectType.Button */) {
                     result += `---@type CommonBtnView\n`
                         + `self.${child.name} = self:AddView(com:GetChild("${child.name}"),CommonBtnView.Create())\n`;
                 }

@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
 class EditorUtils {
     /**
-     * @description: 创建目录
-     * @param {IMenuData} data 目录数据
-     * @param {FairyEditor} parent 父目录
+     * @description: 创建菜单目录
+     * @param {IMenuData} data 菜单数据
+     * @param {FairyEditor} parent 父菜单
      * @return {*}
      */
     static CreateMenu(data, parent) {
@@ -19,7 +19,7 @@ class EditorUtils {
             return csharp_1.FairyEditor.App.Alert(`目录有重名：${data.name}--${data.text}`);
         nameArr.push(data.name);
         if (data.childs) {
-            parent.AddItem(data.text, data.name, data.atIndex ?? 0, true, data.selectCallback);
+            parent.AddItem(data.text, data.name, data.atIndex ?? -1, true, data.selectCallback);
             if (data.childEnable) {
                 const curMenu = parent.GetSubMenu(data.name);
                 data.childs.forEach((v) => EditorUtils.createMenu(v, curMenu, nameArr));
@@ -54,7 +54,7 @@ class EditorUtils {
         return xml;
     }
     /**
-     * @description: 删除目录
+     * @description: 删除菜单
      * @param {string} name
      * @return {*}
      */
@@ -83,6 +83,21 @@ class EditorUtils {
     static GetFilePath(name) {
         return csharp_1.FairyEditor.App.pluginManager.basePath + "/" + eval("__dirname").replace("/Core", "").replace("/js", "") + "/Packages/" + name;
     }
+    /** 获取插件根目录名字 */
+    static GetPluginRootDirName() {
+        return eval("__dirname").split("/")[0];
+    }
+    /**获取config下的配置文件 */
+    static GetConfig(type, fileName) {
+        const dir = type ? type + "/" : "";
+        const cfgPath = `${csharp_1.FairyEditor.App.pluginManager.projectPluginFolder}/${this.GetPluginRootDirName()}/config/${dir}${fileName}.json`;
+        if (csharp_1.System.IO.File.Exists(cfgPath) == false)
+            return console.warn("文件不存在" + cfgPath);
+        const cfgJsonStr = csharp_1.System.IO.File.ReadAllText(cfgPath);
+        if (!cfgJsonStr)
+            return console.warn("文件内容为空" + cfgPath);
+        return JSON.parse(cfgJsonStr);
+    }
 }
 exports.default = EditorUtils;
 //界面
@@ -106,3 +121,13 @@ exports.default = EditorUtils;
 //tool      工具
 //view      视图
 //help      帮助
+//各种路径
+// FairyEditor.App.project.basePath
+// FairyEditor.App.project.assetsPath
+// FairyEditor.App.project.objsPath
+// FairyEditor.App.project.settingsPath
+// FairyEditor.App.pluginManager.userPluginFolder
+// FairyEditor.App.pluginManager.projectPluginFolder
+// FairyEditor.App.pluginManager.basePath
+//从插件目录开始的路径
+//eval("__dirname")

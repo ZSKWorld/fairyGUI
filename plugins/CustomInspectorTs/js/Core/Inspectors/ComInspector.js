@@ -59,13 +59,13 @@ class ComInspector extends BaseInspector_1.default {
         const data = JSON.stringify(this.customJsonData);
         if (App.activeDoc.GetSelection().Count == 0) {
             App.activeDoc.content.remark = data == "{}" ? null : data;
-            App.inspectorView.Refresh("comEtc" /* ComEtc */);
+            App.inspectorView.Refresh("comEtc" /* InspectorName.ComEtc */);
         }
         else {
             App.activeDoc.inspectingTarget.customData = data == "{}" ? null : data;
-            App.inspectorView.Refresh("etc" /* Etc */);
+            App.inspectorView.Refresh("etc" /* InspectorName.Etc */);
         }
-        App.inspectorView.Refresh("BtnInspector" /* Custom_BtnInspector */);
+        App.inspectorView.Refresh("BtnInspector" /* InspectorName.Custom_BtnInspector */);
         csharp_1.FairyEditor.App.activeDoc.SetModified(true);
     }
     OnDestroy() {

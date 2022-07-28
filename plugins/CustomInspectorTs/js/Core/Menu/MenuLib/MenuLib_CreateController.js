@@ -4,7 +4,7 @@ const csharp_1 = require("csharp");
 const puerts_1 = require("puerts");
 const EditorUtils_1 = require("../../EditorUtils");
 const MenuLib_Base_1 = require("./MenuLib_Base");
-const List = puerts_1.$generic(csharp_1.System.Collections.Generic.List$1, csharp_1.FairyEditor.FPackageItem);
+const List = (0, puerts_1.$generic)(csharp_1.System.Collections.Generic.List$1, csharp_1.FairyEditor.FPackageItem);
 class MenuLib_CreateController extends MenuLib_Base_1.default {
     /** libView item 点击事件 */
     itemClick;
@@ -17,7 +17,7 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
     controllerName;
     InitMenData() {
         const _this = this;
-        this.menuData = { name: "MenuLib_CreateController", text: "为编辑对象创建图片控制器", selectCallback: () => { _this.CallBack(); } };
+        this.menuData = { text: "为编辑对象创建图片控制器", selectCallback: () => { _this.CallBack(); } };
     }
     OnCreate() {
         this.selectRES = new List();
@@ -34,7 +34,7 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
                 return csharp_1.FairyEditor.App.Alert("偶尔有bug很正常，稍安勿躁，重新创建试试!!!");
             }
         });
-        csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* Gear */).panel.GetChild("add").asButton.onClick.Add(this.addMoreControlClick);
+        csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* InspectorName.Gear */).panel.GetChild("add").asButton.onClick.Add(this.addMoreControlClick);
     }
     OnItemClick(event) {
         const targetRES = csharp_1.FairyEditor.App.libView.GetSelectedResources(false);
@@ -60,7 +60,7 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
         if (!this.createEnable)
             return;
         //点击图标按钮
-        let iconButton = csharp_1.FairyEditor.App.groot.GetChildAt(1).asCom.GetChildAt(1).asList.GetChildAt(6 /* Icon */).asButton;
+        let iconButton = csharp_1.FairyEditor.App.groot.GetChildAt(1).asCom.GetChildAt(1).asList.GetChildAt(6 /* MoreControllIndex.Icon */).asButton;
         iconButton.FireClick(true, true);
         //控制器页数
         let pageData = [];
@@ -69,7 +69,7 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
         csharp_1.FairyEditor.App.activeDoc.AddController(EditorUtils_1.default.CreateControllerXML(this.controllerName, pageData));
         const controller = csharp_1.FairyEditor.App.activeDoc.content.GetController(this.controllerName);
         //选择图标控制器
-        csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* Gear */).panel.GetChild("list").asList.GetChildAt(8 /* Icon */).asCom.GetChild("controller").asLabel.onClick.Call();
+        csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* InspectorName.Gear */).panel.GetChild("list").asList.GetChildAt(8 /* InspectorControlListIndex.Icon */).asCom.GetChild("controller").asLabel.onClick.Call();
         let iconControlBtn;
         for (let i = 0; i < csharp_1.FairyEditor.App.groot.GetChildAt(1).asCom.GetChildAt(1).asList.numItems; i++) {
             iconControlBtn = csharp_1.FairyEditor.App.groot.GetChildAt(1).asCom.GetChildAt(1).asList.GetChildAt(i).asButton;
@@ -92,7 +92,7 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
     CallBack() {
         if (csharp_1.FairyEditor.App.activeDoc.GetSelection().Count == 0)
             return csharp_1.FairyEditor.App.Alert("未选中编辑对象");
-        if (csharp_1.FairyEditor.App.activeDoc?.inspectingObjectType != "loader" /* Loader */)
+        if (csharp_1.FairyEditor.App.activeDoc?.inspectingObjectType != "loader" /* ShowObjectType.Loader */)
             return csharp_1.FairyEditor.App.Alert("编辑对象必须是\"装载器\"");
         // this.selectRES = FairyEditor.App.libView.GetSelectedResources(false);
         let selectStr = "确认控制器图片顺序:\n";
@@ -112,12 +112,12 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
             if (this.selectRES.Count == 1)
                 return csharp_1.FairyEditor.App.Alert("就选一个图片？？？直接拖不就行了？");
             csharp_1.FairyEditor.App.Confirm(selectStr, (result) => {
-                if (result == "yes" /* Yes */) {
+                if (result == "yes" /* AppConfirmResult.Yes */) {
                     this.controllerName = this.GetDefaultControllerName();
                     csharp_1.FairyEditor.App.Input("控制器名字", this.controllerName, (name) => {
                         this.controllerName = name || this.controllerName;
                         //点击“+更多控制”
-                        csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* Gear */).panel.GetChild("add").asButton.FireClick(true, true);
+                        csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* InspectorName.Gear */).panel.GetChild("add").asButton.FireClick(true, true);
                         this.createEnable = true;
                     });
                 }
@@ -130,7 +130,7 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
         csharp_1.FairyEditor.App.activeDoc.content.controllers.ForEach((v) => oldNames.push(v.name));
         const count = csharp_1.FairyEditor.App.activeDoc.content.controllers.Count;
         for (let i = 1; i <= count; i++) {
-            if (oldNames.includes("c" + i) == false) {
+            if (oldNames.indexOf("c" + i) == -1) {
                 return "c" + i;
             }
         }
@@ -150,7 +150,7 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
         csharp_1.FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onClickItem.Remove(this.itemClick);
         csharp_1.FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onRightClickItem.Remove(this.itemClick);
         csharp_1.FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onRightClickItem.Remove(this.itemClick);
-        csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* Gear */).panel.GetChild("add").asButton.onClick.Remove(this.addMoreControlClick);
+        csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* InspectorName.Gear */).panel.GetChild("add").asButton.onClick.Remove(this.addMoreControlClick);
     }
 }
 exports.default = MenuLib_CreateController;

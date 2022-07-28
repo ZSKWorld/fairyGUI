@@ -2,33 +2,33 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.onDestroy = void 0;
 const csharp_1 = require("csharp");
-const InspectorInfo_1 = require("./Core/InspectorInfo");
-const BtnInspector_1 = require("./Core/Inspectors/BtnInspector");
-const ComInspector_1 = require("./Core/Inspectors/ComInspector");
-const TextLayoutInspector_1 = require("./Core/Inspectors/TextLayoutInspector");
-const MenuDoc_CreateLuaName_1 = require("./Core/Menu/MenuDoc/MenuDoc_CreateLuaName");
-const MenuDoc_CreateRelation_1 = require("./Core/Menu/MenuDoc/MenuDoc_CreateRelation");
-const MenuLib_CreateController_1 = require("./Core/Menu/MenuLib/MenuLib_CreateController");
-//FairyEditor.App.docFactory.contextMenu
+const MenuMain_Publish_1 = require("./Core/Menu/MenuMain/MenuMain_Publish");
+//编辑区菜单
 const docMenus = [
-    // new MenuDoc_CreateComponent(),
-    new MenuDoc_CreateRelation_1.default(),
-    new MenuDoc_CreateLuaName_1.default(),
-    // new MenuDoc_Test(),
+// new MenuDoc_CreateComponent(),
+// new MenuDoc_CreateRelation(),
+// new MenuDoc_CreateLuaName(),
+// new MenuDoc_Test(),
 ];
-//FairyEditor.App.libView.contextMenu
+//资源库菜单
 const libsMenus = [
-    new MenuLib_CreateController_1.default(),
-    // new MenuLib_Test(),
+// new MenuLib_CreateController(),
+// new MenuLib_Test(),
+];
+//主菜单
+const mainMenu = [
+    new MenuMain_Publish_1.default(),
 ];
 docMenus.forEach((v, index) => v.Create(index));
 libsMenus.forEach((v, index) => v.Create(index));
+mainMenu.forEach((v, index) => v.Create(index));
 docMenus.length && csharp_1.FairyEditor.App.docFactory.contextMenu.AddSeperator(docMenus.length);
 libsMenus.length && csharp_1.FairyEditor.App.libView.contextMenu.AddSeperator(libsMenus.length);
+//检查器
 const inspectors = [
-    new BtnInspector_1.default(new InspectorInfo_1.default("Custom", "BtnInspector", "BtnInspector" /* Custom_BtnInspector */, "按钮自定义数据", "Button" /* Button */, true)),
-    new ComInspector_1.default(new InspectorInfo_1.default("Custom", "BtnInspector", "ComInspector" /* Custom_ComInspector */, "组件自定义数据", "component" /* Component */, true, true)),
-    new TextLayoutInspector_1.default(new InspectorInfo_1.default("Custom", "TextInspector", "TextInspector", "文本横竖排", "mixed" /* Mixed */, true)),
+// new BtnInspector(new InspectorInfo("Custom", "BtnInspector", InspectorName.Custom_BtnInspector, "按钮自定义数据", ShowObjectType.Button, true)),
+// new ComInspector(new InspectorInfo("Custom", "BtnInspector", InspectorName.Custom_ComInspector, "组件自定义数据", ShowObjectType.Component, true, true)),
+// new TextLayoutInspector(new InspectorInfo("Custom", "TextInspector", "TextInspector", "文本横竖排", ShowObjectType.Mixed, true)),
 ];
 inspectors.forEach((v) => v.AddInspector());
 // export function onPublish(handler: FairyEditor.PublishHandler) {
@@ -38,8 +38,9 @@ inspectors.forEach((v) => v.AddInspector());
 //     genCode(handler); //do it myself
 // }
 function onDestroy() {
-    docMenus.forEach((v) => v.Destroy());
-    libsMenus.forEach((v) => v.Destroy());
-    inspectors.forEach((v) => v.OnDestroy());
+    docMenus.forEach(v => v.Destroy());
+    libsMenus.forEach(v => v.Destroy());
+    mainMenu.forEach(v => v.Destroy());
+    inspectors.forEach(v => v.Destroy());
 }
 exports.onDestroy = onDestroy;

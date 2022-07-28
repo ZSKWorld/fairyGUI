@@ -14,7 +14,7 @@ class TextLayoutInspector extends BaseInspector_1.default {
     }
     UpdateUI() {
         const type = csharp_1.FairyEditor.App.activeDoc.inspectingObjectType;
-        const show = type == "text" /* Text */ || type == "richtext" /* RichText */;
+        const show = type == "text" /* ShowObjectType.Text */ || type == "richtext" /* ShowObjectType.RichText */;
         if (show) {
             this.textArea.title = this.TransformLine(csharp_1.FairyEditor.App.activeDoc.inspectingTarget.text);
         }
@@ -24,7 +24,7 @@ class TextLayoutInspector extends BaseInspector_1.default {
         csharp_1.FairyEditor.App.activeDoc.inspectingTarget.relations.AddItem(csharp_1.FairyEditor.App.activeDoc.content, csharp_1.FairyEditor.FRelationType.Size);
         csharp_1.FairyEditor.App.activeDoc.inspectingTarget.text = this.TransformLine(this.textArea.title);
         const type = csharp_1.FairyEditor.App.activeDoc.inspectingObjectType;
-        csharp_1.FairyEditor.App.inspectorView.GetInspector(type == "text" /* Text */ ? "text" /* Text */ : "richtext" /* RichText */).UpdateUI();
+        csharp_1.FairyEditor.App.inspectorView.GetInspector(type == "text" /* ShowObjectType.Text */ ? "text" /* InspectorName.Text */ : "richtext" /* InspectorName.RichText */).UpdateUI();
     }
     TransformLine(str) {
         let result = str;

@@ -1,10 +1,10 @@
-import { FairyEditor, FairyGUI } from "csharp";
-import { IMenuData } from "./Types";
+import { FairyEditor, FairyGUI, System } from "csharp";
+import { ConfigType, IMenuData } from "./Types";
 export default class EditorUtils {
     /**
-     * @description: 创建目录
-     * @param {IMenuData} data 目录数据
-     * @param {FairyEditor} parent 父目录
+     * @description: 创建菜单目录
+     * @param {IMenuData} data 菜单数据
+     * @param {FairyEditor} parent 父菜单
      * @return {*}
      */
     public static CreateMenu(data: IMenuData, parent?: FairyEditor.Component.IMenu): void {
@@ -13,10 +13,10 @@ export default class EditorUtils {
         EditorUtils.createMenu(data, parent, nameCheckArr);
     }
     private static createMenu(data: IMenuData, parent: FairyEditor.Component.IMenu, nameArr: string[]): void {
-        if (nameArr.indexOf(data.name) != -1) return FairyEditor.App.Alert(`目录有重名：${data.name}--${data.text}`);
+        if (nameArr.indexOf(data.name) != -1) return FairyEditor.App.Alert(`目录有重名：${ data.name }--${ data.text }`);
         nameArr.push(data.name);
         if (data.childs) {
-            parent.AddItem(data.text, data.name, data.atIndex ?? 0, true, data.selectCallback);
+            parent.AddItem(data.text, data.name, data.atIndex ?? -1, true, data.selectCallback);
             if (data.childEnable) {
                 const curMenu: FairyEditor.Component.IMenu = parent.GetSubMenu(data.name);
                 data.childs.forEach((v) => EditorUtils.createMenu(v, curMenu, nameArr));
@@ -25,7 +25,7 @@ export default class EditorUtils {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, false, data.selectCallback);
         }
     }
-    
+
     /**
      * 创建控制器XML数据
      * @param name 控制器名字
@@ -42,7 +42,7 @@ export default class EditorUtils {
         // xml.SetAttribute("homePageType","variable"); //首页类型
         // xml.SetAttribute("homePage","Test");
         if (!pageNames || !pageNames.length) {
-            pageNames = ["", ""];
+            pageNames = [ "", "" ];
         }
         let pageData = "";
         pageNames.forEach((v, index) => { pageData += index + "," + v + (index == pageNames.length - 1 ? "" : ",") });
@@ -51,7 +51,7 @@ export default class EditorUtils {
         return xml;
     }
     /**
-     * @description: 删除目录
+     * @description: 删除菜单
      * @param {string} name
      * @return {*}
      */
@@ -66,7 +66,7 @@ export default class EditorUtils {
      */
     public static AddComponent(url: string): void {
         if (!FairyEditor.App.activeDoc) return;
-        if (url.startsWith("ui://") == false) return FairyEditor.App.Alert(`错误的组件URL---${url}\nURL必须以 ui:// 开头`);
+        if (url.startsWith("ui://") == false) return FairyEditor.App.Alert(`错误的组件URL---${ url }\nURL必须以 ui:// 开头`);
         FairyEditor.App.activeDoc.UnselectAll();
         FairyEditor.App.activeDoc.InsertObject(url);
     }
@@ -78,6 +78,21 @@ export default class EditorUtils {
      */
     public static GetFilePath(name: string): string {
         return FairyEditor.App.pluginManager.basePath + "/" + (eval("__dirname") as string).replace("/Core", "").replace("/js", "") + "/Packages/" + name;
+    }
+
+    /** 获取插件根目录名字 */
+    public static GetPluginRootDirName() {
+        return (eval("__dirname") as string).split("/")[ 0 ];
+    }
+
+    /**获取config下的配置文件 */
+    public static GetConfig<T = any>(type: ConfigType, fileName: string): T {
+        const dir = type ? type + "/" : "";
+        const cfgPath = `${ FairyEditor.App.pluginManager.projectPluginFolder }/${ this.GetPluginRootDirName() }/config/${ dir }${ fileName }.json`;
+        if (System.IO.File.Exists(cfgPath) == false) return console.warn("文件不存在" + cfgPath) as unknown as T;
+        const cfgJsonStr = System.IO.File.ReadAllText(cfgPath);
+        if (!cfgJsonStr) return console.warn("文件内容为空" + cfgPath) as unknown as T;
+        return JSON.parse(cfgJsonStr) as T;
     }
 }
 
@@ -95,6 +110,7 @@ export default class EditorUtils {
 //fairygui.PlugInView           10  插件
 //fairygui.DocumentView         11  编辑页面
 //fairygui.TestView             12  测试页面
+
 //主界面上方选项变量名
 //file      文件
 //edit      编辑
@@ -102,3 +118,15 @@ export default class EditorUtils {
 //tool      工具
 //view      视图
 //help      帮助
+
+//各种路径
+// FairyEditor.App.project.basePath
+// FairyEditor.App.project.assetsPath
+// FairyEditor.App.project.objsPath
+// FairyEditor.App.project.settingsPath
+// FairyEditor.App.pluginManager.userPluginFolder
+// FairyEditor.App.pluginManager.projectPluginFolder
+// FairyEditor.App.pluginManager.basePath
+
+//从插件目录开始的路径
+//eval("__dirname")

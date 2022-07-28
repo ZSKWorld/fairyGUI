@@ -2,9 +2,9 @@
 import { FairyEditor } from "csharp";
 import MenuBase from "../MenuBase";
 
-export default abstract class MenuLib_Base extends MenuBase{
+/** 抽出来一层处理资源库菜单 */
+export default abstract class MenuLib_Base extends MenuBase {
     public constructor() {
-        super();
-        this.parentMenu = FairyEditor.App.libView.contextMenu;
+        super(FairyEditor.App.libView.contextMenu);
     }
 }

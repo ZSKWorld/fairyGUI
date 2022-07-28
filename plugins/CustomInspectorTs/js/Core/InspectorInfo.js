@@ -21,7 +21,7 @@ class InspectorInfo {
     ShowInComponent = true;
     //动效面板显示
     ShowInTransition = true;
-    constructor(PkgName, ComponentName, InspectorName, InspectorTitle, ForObjectType = "mixed" /* Mixed */, ShowInSelection = false, ShowInComponent = false, ShowInTransition = false) {
+    constructor(PkgName, ComponentName, InspectorName, InspectorTitle, ForObjectType = "mixed" /* ShowObjectType.Mixed */, ShowInSelection = false, ShowInComponent = false, ShowInTransition = false) {
         this.PkgName = PkgName;
         this.ComponentName = ComponentName;
         this.InspectorName = InspectorName;

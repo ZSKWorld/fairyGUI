@@ -9,7 +9,6 @@ export default class MenuDoc_CreateRelation extends MenuDoc_Base {
     private rightClickCallback: FairyGUI.EventCallback0;
     protected InitMenData(): void {
         this.menuData = {
-            name: "MenuDoc_CreateRelation",
             text: "关联",
             childEnable: true,
             childs: []

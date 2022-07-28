@@ -4,7 +4,7 @@ const MenuDoc_Base_1 = require("./MenuDoc_Base");
 class MenuDoc_Test extends MenuDoc_Base_1.default {
     InitMenData() {
         const _this = this;
-        this.menuData = { name: "MenuDoc_Test", text: "测试", selectCallback: () => { _this.CallBack(); } };
+        this.menuData = { text: "测试", selectCallback: () => { _this.CallBack(); } };
     }
     CallBack() {
     }

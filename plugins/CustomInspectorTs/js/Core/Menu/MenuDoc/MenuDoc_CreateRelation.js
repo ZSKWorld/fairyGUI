@@ -8,7 +8,6 @@ class MenuDoc_CreateRelation extends MenuDoc_Base_1.default {
     rightClickCallback;
     InitMenData() {
         this.menuData = {
-            name: "MenuDoc_CreateRelation",
             text: "关联",
             childEnable: true,
             childs: []
@@ -41,7 +40,7 @@ class MenuDoc_CreateRelation extends MenuDoc_Base_1.default {
     CallBack(name) {
         if (this.relationFirst && this.relationSecond) {
             this.relationFirst.relations.AddItem(this.relationSecond, csharp_1.FairyEditor.FRelationType[name]);
-            csharp_1.FairyEditor.App.inspectorView.GetInspector("relation" /* Relation */).UpdateUI();
+            csharp_1.FairyEditor.App.inspectorView.GetInspector("relation" /* InspectorName.Relation */).UpdateUI();
             csharp_1.FairyEditor.App.activeDoc.SetModified(true);
         }
     }

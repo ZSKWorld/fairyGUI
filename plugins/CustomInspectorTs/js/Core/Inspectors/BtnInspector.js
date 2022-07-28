@@ -75,8 +75,8 @@ class BtnInspector extends BaseInspector_1.default {
     SetCustomData() {
         const data = JSON.stringify(this.customJsonData);
         App.activeDoc.inspectingTarget.customData = data == "{}" ? null : data;
-        App.inspectorView.Refresh("etc" /* Etc */);
-        App.inspectorView.Refresh("ComInspector" /* Custom_ComInspector */);
+        App.inspectorView.Refresh("etc" /* InspectorName.Etc */);
+        App.inspectorView.Refresh("ComInspector" /* InspectorName.Custom_ComInspector */);
         csharp_1.FairyEditor.App.activeDoc.SetModified(true);
     }
     OnDestroy() {

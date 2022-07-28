@@ -1,11 +1,9 @@
-import { FairyEditor, FairyGUI, System } from "csharp";
-import { $generic } from "puerts";
 import MenuLib_Base from "./MenuLib_Base";
 
 export default class MenuLib_Test extends MenuLib_Base {
     protected InitMenData(): void {
         const _this = this;
-        this.menuData = { name: "MenuLib_Test", text: "测试", selectCallback: () => { this.CallBack(); } };
+        this.menuData = { text: "测试", selectCallback: () => { this.CallBack(); } };
     }
 
     protected OnCreate(): void {

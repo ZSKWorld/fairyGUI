@@ -22,7 +22,7 @@ export default class MenuDoc_CreateLuaName extends MenuDoc_Base {
     };
     protected InitMenData(): void {
         const _this = this;
-        this.menuData = { name: "MenuDoc_CreateLuaName", text: "创建Lua名称代码到剪切板", selectCallback: () => { _this.CallBack(); } };
+        this.menuData = { text: "创建Lua名称代码到剪切板", selectCallback: () => { _this.CallBack(); } };
     }
 
     private CallBack() {
