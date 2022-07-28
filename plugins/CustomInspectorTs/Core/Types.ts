@@ -1,7 +1,9 @@
 import { System } from "csharp";
-export interface IMenu{
+export interface IDestroy {
+    Destroy(): void;
+}
+export interface IMenu extends IDestroy{
     Create(index:number):void;
-    Destroy():void;
 }
 export interface IMenuData {
     name: string;
