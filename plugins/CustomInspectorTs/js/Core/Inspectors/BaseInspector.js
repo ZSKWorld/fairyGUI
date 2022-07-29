@@ -1,27 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
-const EditorUtils_1 = require("../EditorUtils");
+const DecoratorFactory_1 = require("../Utils/DecoratorFactory");
 class BaseInspector extends csharp_1.FairyEditor.View.PluginInspector {
-    info;
-    curTarget = csharp_1.FairyEditor.App.activeDoc?.inspectingTarget;
-    _lastTarget;
-    get lastInspectingTarget() {
-        return this._lastTarget;
-    }
     constructor(info) {
+        var _a;
         super();
+        this.curTarget = (_a = csharp_1.FairyEditor.App.activeDoc) === null || _a === void 0 ? void 0 : _a.inspectingTarget;
         this.info = info;
-        csharp_1.FairyEditor.App.pluginManager.LoadUIPackage(EditorUtils_1.default.GetFilePath(this.info.PkgName));
         this.panel = csharp_1.FairyGUI.UIPackage.CreateObject(this.info.PkgName, this.info.ComponentName).asCom;
+        (0, DecoratorFactory_1.ViewChildInit)(this);
         this.updateAction = () => {
-            if (csharp_1.FairyEditor.App.activeDoc?.inspectingTarget != this.curTarget) {
+            var _a;
+            if (((_a = csharp_1.FairyEditor.App.activeDoc) === null || _a === void 0 ? void 0 : _a.inspectingTarget) != this.curTarget) {
                 this._lastTarget = this.curTarget;
                 this.curTarget = csharp_1.FairyEditor.App.activeDoc.inspectingTarget;
             }
             return this.UpdateUI();
         };
         this.disposeAction = () => { return this.OnDestroy(); };
+    }
+    get lastInspectingTarget() {
+        return this._lastTarget;
     }
     AddInspector() {
         csharp_1.FairyEditor.App.inspectorView.AddInspector(() => this, this.info.InspectorName, this.info.InspectorTitle);
@@ -30,6 +30,8 @@ class BaseInspector extends csharp_1.FairyEditor.View.PluginInspector {
         this.info.ShowInTransition && csharp_1.FairyEditor.App.docFactory.ConnectInspector(this.info.InspectorName, this.info.ForObjectType, false, true);
     }
     Destroy() {
+        this.curTarget = null;
+        this._lastTarget = null;
         this.OnDestroy();
     }
 }

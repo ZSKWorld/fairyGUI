@@ -3,28 +3,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
 const MenuDoc_Base_1 = require("./MenuDoc_Base");
 class MenuDoc_CreateLuaName extends MenuDoc_Base_1.default {
-    typeToType = {
-        Button: "FairyGUI.GButton",
-        text: "FairyGUI.GTextField",
-        richtext: "FairyGUI.GRichTextField",
-        inputtext: "FairyGUI.GTextInput",
-        graph: "FairyGUI.GGraph",
-        list: "FairyGUI.GList",
-        loader: "FairyGUI.GLoader",
-        loader3D: "FairyGUI.GLoader3D",
-        Slider: "FairyGUI.GSlider",
-        component: "FairyGUI.GComponent",
-        image: "FairyGUI.GImage",
-        group: "FairyGUI.GGroup",
-        ComboBox: "FairyGUI.GComboBox",
-        ProgressBar: "FairyGUI.GProgressBar",
-        ScrollBar: "FairyGUI.GScrollBar",
-    };
+    constructor() {
+        super(...arguments);
+        this.typeToType = {
+            Button: "FairyGUI.GButton",
+            text: "FairyGUI.GTextField",
+            richtext: "FairyGUI.GRichTextField",
+            inputtext: "FairyGUI.GTextInput",
+            graph: "FairyGUI.GGraph",
+            list: "FairyGUI.GList",
+            loader: "FairyGUI.GLoader",
+            loader3D: "FairyGUI.GLoader3D",
+            Slider: "FairyGUI.GSlider",
+            component: "FairyGUI.GComponent",
+            image: "FairyGUI.GImage",
+            group: "FairyGUI.GGroup",
+            ComboBox: "FairyGUI.GComboBox",
+            ProgressBar: "FairyGUI.GProgressBar",
+            ScrollBar: "FairyGUI.GScrollBar",
+        };
+    }
     InitMenData() {
         const _this = this;
         this.menuData = { text: "创建Lua名称代码到剪切板", selectCallback: () => { _this.CallBack(); } };
     }
     CallBack() {
+        var _a;
         const target = csharp_1.FairyEditor.App.activeDoc.GetSelection();
         const count = target.Count;
         const ctrlCount = csharp_1.FairyEditor.App.activeDoc.content.controllers.Count;
@@ -34,7 +38,7 @@ class MenuDoc_CreateLuaName extends MenuDoc_Base_1.default {
             // self.TxtName = com:GetChild("n10")
             for (let i = 0; i < count; i++) {
                 const child = target.get_Item(i);
-                if (child instanceof csharp_1.FairyEditor.FComponent && child.extention?._type == "Button" /* ShowObjectType.Button */) {
+                if (child instanceof csharp_1.FairyEditor.FComponent && ((_a = child.extention) === null || _a === void 0 ? void 0 : _a._type) == "Button" /* ShowObjectType.Button */) {
                     result += `---@type CommonBtnView\n`
                         + `self.${child.name} = self:AddView(com:GetChild("${child.name}"),CommonBtnView.Create())\n`;
                 }

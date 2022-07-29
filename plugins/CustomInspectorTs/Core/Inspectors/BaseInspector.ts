@@ -1,7 +1,9 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import EditorUtils from "../EditorUtils";
 import InspectorInfo from "../InspectorInfo";
-export default abstract class BaseInspector extends FairyEditor.View.PluginInspector {
+import { IDestroy } from "../Types";
+import { ViewChildInit } from "../Utils/DecoratorFactory";
+import EditorUtils from "../Utils/EditorUtils";
+export default abstract class BaseInspector extends FairyEditor.View.PluginInspector implements IDestroy {
     protected info: InspectorInfo;
     private curTarget: FairyEditor.FObject = FairyEditor.App.activeDoc?.inspectingTarget;
     private _lastTarget: FairyEditor.FObject;
@@ -11,8 +13,8 @@ export default abstract class BaseInspector extends FairyEditor.View.PluginInspe
     public constructor(info: InspectorInfo) {
         super();
         this.info = info;
-        FairyEditor.App.pluginManager.LoadUIPackage(EditorUtils.GetFilePath(this.info.PkgName));
         this.panel = FairyGUI.UIPackage.CreateObject(this.info.PkgName, this.info.ComponentName).asCom;
+        ViewChildInit(this);
         this.updateAction = () => {
             if (FairyEditor.App.activeDoc?.inspectingTarget != this.curTarget) {
                 this._lastTarget = this.curTarget;
@@ -30,6 +32,8 @@ export default abstract class BaseInspector extends FairyEditor.View.PluginInspe
         this.info.ShowInTransition && FairyEditor.App.docFactory.ConnectInspector(this.info.InspectorName, this.info.ForObjectType, false, true);
     }
     public Destroy() {
+        this.curTarget = null;
+        this._lastTarget = null;
         this.OnDestroy();
     }
 

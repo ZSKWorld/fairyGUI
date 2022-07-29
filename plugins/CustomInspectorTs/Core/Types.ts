@@ -2,8 +2,8 @@ import { System } from "csharp";
 export interface IDestroy {
     Destroy(): void;
 }
-export interface IMenu extends IDestroy {
-    Create(index: number): void;
+export interface IMenu {
+    Create(): void;
 }
 export interface IMenuData {
     /**菜单变量名 */
@@ -160,7 +160,7 @@ export const enum AppConfirmResult {
     No = "no",
 }
 
-export const enum ConfigType{
+export const enum ConfigType {
     None = "",
     PublishSettings = "publishSettings"
 }

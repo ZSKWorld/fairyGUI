@@ -1,21 +1,19 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
+const DecoratorFactory_1 = require("../Utils/DecoratorFactory");
 const BaseInspector_1 = require("./BaseInspector");
 const App = csharp_1.FairyEditor.App;
 class ComInspector extends BaseInspector_1.default {
-    btnEffectAdd;
-    btnEffectRemove;
-    inputEffectKey;
-    inputEffectValue;
-    customJsonData;
     constructor(info) {
         super(info);
         this.panel.GetController("c1").selectedIndex = 1;
-        this.btnEffectAdd = this.panel.GetChild("BtnEffectAdd").asButton;
-        this.btnEffectRemove = this.panel.GetChild("BtnEffectRemove").asButton;
-        this.inputEffectKey = this.panel.GetChild("InputEffectKey").asLabel;
-        this.inputEffectValue = this.panel.GetChild("InputEffectValue").asLabel;
         // this.inputEffectKey.GetTextField().asTextInput.onChanged.Add(new FairyGUI.EventCallback0(()=>{
         //     console.log(this.inputEffectKey.title);
         // }));
@@ -66,9 +64,25 @@ class ComInspector extends BaseInspector_1.default {
             App.inspectorView.Refresh("etc" /* InspectorName.Etc */);
         }
         App.inspectorView.Refresh("BtnInspector" /* InspectorName.Custom_BtnInspector */);
-        csharp_1.FairyEditor.App.activeDoc.SetModified(true);
+        App.activeDoc.SetModified(true);
     }
     OnDestroy() {
+        this.btnEffectAdd = null;
+        this.btnEffectRemove = null;
+        this.inputEffectKey = null;
+        this.inputEffectValue = null;
     }
 }
+__decorate([
+    (0, DecoratorFactory_1.ViewChild)("BtnEffectAdd")
+], ComInspector.prototype, "btnEffectAdd", void 0);
+__decorate([
+    (0, DecoratorFactory_1.ViewChild)("BtnEffectRemove")
+], ComInspector.prototype, "btnEffectRemove", void 0);
+__decorate([
+    (0, DecoratorFactory_1.ViewChild)("InputEffectKey")
+], ComInspector.prototype, "inputEffectKey", void 0);
+__decorate([
+    (0, DecoratorFactory_1.ViewChild)("InputEffectValue")
+], ComInspector.prototype, "inputEffectValue", void 0);
 exports.default = ComInspector;

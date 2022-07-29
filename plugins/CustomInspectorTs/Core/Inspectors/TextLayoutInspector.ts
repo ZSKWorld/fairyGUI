@@ -1,34 +1,36 @@
 import { FairyEditor, FairyGUI } from "csharp";
 import InspectorInfo from "../InspectorInfo";
 import { InspectorName, ShowObjectType } from "../Types";
+import { ViewChild } from "../Utils/DecoratorFactory";
 import BaseInspector from "./BaseInspector";
+const { App, FRelationType } = FairyEditor;
 
 export default class TextLayoutInspector extends BaseInspector {
+    @ViewChild("TextArea")
     private textArea: FairyGUI.GLabel;
+    @ViewChild("BtnSubmit")
     private btnSubmit: FairyGUI.GButton;
 
     private text: string;
     public constructor(info: InspectorInfo) {
         super(info);
-        this.textArea = this.panel.GetChild("TextArea").asLabel;
-        this.btnSubmit = this.panel.GetChild("BtnSubmit").asButton;
 
         this.btnSubmit.onClick.Add(() => { this.OnBtnSubmit(); });
     }
     public UpdateUI(): boolean {
-        const type = FairyEditor.App.activeDoc.inspectingObjectType;
+        const type = App.activeDoc.inspectingObjectType;
         const show = type == ShowObjectType.Text || type == ShowObjectType.RichText;
         if (show) {
-            this.textArea.title = this.TransformLine(FairyEditor.App.activeDoc.inspectingTarget.text);
+            this.textArea.title = this.TransformLine(App.activeDoc.inspectingTarget.text);
         }
         return show;
     }
 
     private OnBtnSubmit() {
-        FairyEditor.App.activeDoc.inspectingTarget.relations.AddItem(FairyEditor.App.activeDoc.content, FairyEditor.FRelationType.Size);
-        FairyEditor.App.activeDoc.inspectingTarget.text = this.TransformLine(this.textArea.title);
-        const type = FairyEditor.App.activeDoc.inspectingObjectType;
-        FairyEditor.App.inspectorView.GetInspector(type == ShowObjectType.Text ? InspectorName.Text : InspectorName.RichText).UpdateUI();
+        App.activeDoc.inspectingTarget.relations.AddItem(App.activeDoc.content, FRelationType.Size);
+        App.activeDoc.inspectingTarget.text = this.TransformLine(this.textArea.title);
+        const type = App.activeDoc.inspectingObjectType;
+        App.inspectorView.GetInspector(type == ShowObjectType.Text ? InspectorName.Text : InspectorName.RichText).UpdateUI();
     }
 
     private TransformLine(str: string) {
@@ -41,10 +43,10 @@ export default class TextLayoutInspector extends BaseInspector {
             arr.forEach((v, index) => {
                 strLen = v.length;
                 for (let i = 0; i < strLen; i++) {
-                    resultArr[i] = resultArr[i] || [];
-                    tempArr = resultArr[i];
+                    resultArr[ i ] = resultArr[ i ] || [];
+                    tempArr = resultArr[ i ];
                     this.FillChar(tempArr, index);
-                    tempArr.push(v[i]);
+                    tempArr.push(v[ i ]);
                 }
             });
             result = "";
@@ -63,6 +65,8 @@ export default class TextLayoutInspector extends BaseInspector {
         }
     }
     public OnDestroy(): void {
+        this.textArea = null;
+        this.btnSubmit = null;
     }
 
 }

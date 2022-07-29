@@ -1,30 +1,33 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
+const DecoratorFactory_1 = require("../Utils/DecoratorFactory");
 const BaseInspector_1 = require("./BaseInspector");
+const { App, FRelationType } = csharp_1.FairyEditor;
 class TextLayoutInspector extends BaseInspector_1.default {
-    textArea;
-    btnSubmit;
-    text;
     constructor(info) {
         super(info);
-        this.textArea = this.panel.GetChild("TextArea").asLabel;
-        this.btnSubmit = this.panel.GetChild("BtnSubmit").asButton;
         this.btnSubmit.onClick.Add(() => { this.OnBtnSubmit(); });
     }
     UpdateUI() {
-        const type = csharp_1.FairyEditor.App.activeDoc.inspectingObjectType;
+        const type = App.activeDoc.inspectingObjectType;
         const show = type == "text" /* ShowObjectType.Text */ || type == "richtext" /* ShowObjectType.RichText */;
         if (show) {
-            this.textArea.title = this.TransformLine(csharp_1.FairyEditor.App.activeDoc.inspectingTarget.text);
+            this.textArea.title = this.TransformLine(App.activeDoc.inspectingTarget.text);
         }
         return show;
     }
     OnBtnSubmit() {
-        csharp_1.FairyEditor.App.activeDoc.inspectingTarget.relations.AddItem(csharp_1.FairyEditor.App.activeDoc.content, csharp_1.FairyEditor.FRelationType.Size);
-        csharp_1.FairyEditor.App.activeDoc.inspectingTarget.text = this.TransformLine(this.textArea.title);
-        const type = csharp_1.FairyEditor.App.activeDoc.inspectingObjectType;
-        csharp_1.FairyEditor.App.inspectorView.GetInspector(type == "text" /* ShowObjectType.Text */ ? "text" /* InspectorName.Text */ : "richtext" /* InspectorName.RichText */).UpdateUI();
+        App.activeDoc.inspectingTarget.relations.AddItem(App.activeDoc.content, FRelationType.Size);
+        App.activeDoc.inspectingTarget.text = this.TransformLine(this.textArea.title);
+        const type = App.activeDoc.inspectingObjectType;
+        App.inspectorView.GetInspector(type == "text" /* ShowObjectType.Text */ ? "text" /* InspectorName.Text */ : "richtext" /* InspectorName.RichText */).UpdateUI();
     }
     TransformLine(str) {
         let result = str;
@@ -57,6 +60,14 @@ class TextLayoutInspector extends BaseInspector_1.default {
         }
     }
     OnDestroy() {
+        this.textArea = null;
+        this.btnSubmit = null;
     }
 }
+__decorate([
+    (0, DecoratorFactory_1.ViewChild)("TextArea")
+], TextLayoutInspector.prototype, "textArea", void 0);
+__decorate([
+    (0, DecoratorFactory_1.ViewChild)("BtnSubmit")
+], TextLayoutInspector.prototype, "btnSubmit", void 0);
 exports.default = TextLayoutInspector;

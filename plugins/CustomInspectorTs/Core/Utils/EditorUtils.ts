@@ -1,29 +1,38 @@
 import { FairyEditor, FairyGUI, System } from "csharp";
-import { ConfigType, IMenuData } from "./Types";
+import { ConfigType, IMenuData } from "../Types";
 export default class EditorUtils {
     /**
      * @description: 创建菜单目录
-     * @param {IMenuData} data 菜单数据
-     * @param {FairyEditor} parent 父菜单
-     * @return {*}
+     * @param data 菜单数据
+     * @param parent 父菜单
      */
     public static CreateMenu(data: IMenuData, parent?: FairyEditor.Component.IMenu): void {
         if (!data) return;
         const nameCheckArr = [];
-        EditorUtils.createMenu(data, parent, nameCheckArr);
+        EditorUtils.CreateMenu2(data, parent, nameCheckArr);
     }
-    private static createMenu(data: IMenuData, parent: FairyEditor.Component.IMenu, nameArr: string[]): void {
+
+    private static CreateMenu2(data: IMenuData, parent: FairyEditor.Component.IMenu, nameArr: string[]): void {
         if (nameArr.indexOf(data.name) != -1) return FairyEditor.App.Alert(`目录有重名：${ data.name }--${ data.text }`);
         nameArr.push(data.name);
         if (data.childs) {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, true, data.selectCallback);
             if (data.childEnable) {
                 const curMenu: FairyEditor.Component.IMenu = parent.GetSubMenu(data.name);
-                data.childs.forEach((v) => EditorUtils.createMenu(v, curMenu, nameArr));
+                data.childs.forEach((v) => EditorUtils.CreateMenu2(v, curMenu, nameArr));
             }
         } else {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, false, data.selectCallback);
         }
+    }
+
+    /**
+     * @description: 删除菜单
+     * @param name
+     */
+    public static RemoveMenu(name: string, parentMenu: FairyEditor.Component.IMenu) {
+        parentMenu = parentMenu || FairyEditor.App.docFactory.contextMenu;
+        parentMenu.RemoveItem(name);
     }
 
     /**
@@ -50,19 +59,10 @@ export default class EditorUtils {
         // xml.SetAttribute("selected",0);
         return xml;
     }
-    /**
-     * @description: 删除菜单
-     * @param {string} name
-     * @return {*}
-     */
-    public static RemoveMenu(name: string, parentMenu: FairyEditor.Component.IMenu) {
-        parentMenu = parentMenu || FairyEditor.App.docFactory.contextMenu;
-        parentMenu.RemoveItem(name);
-    }
+
     /**
      * @description: 向编辑器中添加组件
-     * @param {string} url 组件URL
-     * @return {*}
+     * @param url 组件URL
      */
     public static AddComponent(url: string): void {
         if (!FairyEditor.App.activeDoc) return;
@@ -71,24 +71,23 @@ export default class EditorUtils {
         FairyEditor.App.activeDoc.InsertObject(url);
     }
 
+    /** 获取插件根目录名字 */
+    public static GetPluginRootDir() {
+        return FairyEditor.App.pluginManager.projectPluginFolder + "/" + (eval("__dirname") as string).split("/")[ 0 ];
+    }
+
     /**
      * 获取包地址
      * @param name 包名
-     * @returns 包地址
      */
     public static GetFilePath(name: string): string {
-        return FairyEditor.App.pluginManager.basePath + "/" + (eval("__dirname") as string).replace("/Core", "").replace("/js", "") + "/Packages/" + name;
-    }
-
-    /** 获取插件根目录名字 */
-    public static GetPluginRootDirName() {
-        return (eval("__dirname") as string).split("/")[ 0 ];
+        return this.GetPluginRootDir() + "/Packages/" + name;
     }
 
     /**获取config下的配置文件 */
     public static GetConfig<T = any>(type: ConfigType, fileName: string): T {
         const dir = type ? type + "/" : "";
-        const cfgPath = `${ FairyEditor.App.pluginManager.projectPluginFolder }/${ this.GetPluginRootDirName() }/config/${ dir }${ fileName }.json`;
+        const cfgPath = `${ this.GetPluginRootDir() }/config/${ dir }${ fileName }.json`;
         if (System.IO.File.Exists(cfgPath) == false) return console.warn("文件不存在" + cfgPath) as unknown as T;
         const cfgJsonStr = System.IO.File.ReadAllText(cfgPath);
         if (!cfgJsonStr) return console.warn("文件内容为空" + cfgPath) as unknown as T;

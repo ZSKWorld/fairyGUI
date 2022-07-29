@@ -1,6 +1,6 @@
 import { FairyEditor, FairyGUI, System } from "csharp";
 import { $generic } from "puerts";
-import EditorUtils from "../../EditorUtils";
+import EditorUtils from "../../Utils/EditorUtils";
 import { AppConfirmResult, InspectorControlListIndex, InspectorName, MoreControllIndex, ShowObjectType } from "../../Types";
 import MenuLib_Base from "./MenuLib_Base";
 const List = $generic(System.Collections.Generic.List$1, FairyEditor.FPackageItem);
@@ -154,6 +154,10 @@ export default class MenuLib_CreateController extends MenuLib_Base {
         FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onRightClickItem.Remove(this.itemClick);
         FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onRightClickItem.Remove(this.itemClick);
         FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Remove(this.addMoreControlClick);
+        this.itemClick = null;
+        this.addMoreControlClick = null;
+        this.selectRES.Clear();
+        this.selectRES = null;
     }
 }
 

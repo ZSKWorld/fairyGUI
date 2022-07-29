@@ -4,13 +4,7 @@
 		{
 			"type": "shell",
 			"command": "tsc",
-			"label": "生成到项目路径",
-			"problemMatcher": []
-		},
-		{
-			"type": "shell",
-			"command": "tsc --outDir C:\\Users\\Redmoon\\Desktop\\FGUICustomInspector\\plugins\\CustomInspectorTs\\js",
-			"label": "生成到测试路径",
+			"label": "编译",
 			"problemMatcher": []
 		}
 	]

@@ -6,22 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @return {*}
  */
 class InspectorInfo {
-    //包名
-    PkgName;
-    //包内组件名
-    ComponentName;
-    InspectorName;
-    //检查器显示标题
-    InspectorTitle;
-    //显示元件类型
-    ForObjectType;
-    //组件选择显示
-    ShowInSelection = false;
-    //背景选择显示
-    ShowInComponent = true;
-    //动效面板显示
-    ShowInTransition = true;
     constructor(PkgName, ComponentName, InspectorName, InspectorTitle, ForObjectType = "mixed" /* ShowObjectType.Mixed */, ShowInSelection = false, ShowInComponent = false, ShowInTransition = false) {
+        //组件选择显示
+        this.ShowInSelection = false;
+        //背景选择显示
+        this.ShowInComponent = true;
+        //动效面板显示
+        this.ShowInTransition = true;
         this.PkgName = PkgName;
         this.ComponentName = ComponentName;
         this.InspectorName = InspectorName;

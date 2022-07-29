@@ -2,19 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
 const puerts_1 = require("puerts");
-const EditorUtils_1 = require("../../EditorUtils");
+const EditorUtils_1 = require("../../Utils/EditorUtils");
 const MenuLib_Base_1 = require("./MenuLib_Base");
 const List = (0, puerts_1.$generic)(csharp_1.System.Collections.Generic.List$1, csharp_1.FairyEditor.FPackageItem);
 class MenuLib_CreateController extends MenuLib_Base_1.default {
-    /** libView item 点击事件 */
-    itemClick;
-    /** “+更多控制” 点击事件 */
-    addMoreControlClick;
-    /** 资源库选中资源 */
-    selectRES;
-    createEnable;
-    /** 添加的控制器名称 */
-    controllerName;
     InitMenData() {
         const _this = this;
         this.menuData = { text: "为编辑对象创建图片控制器", selectCallback: () => { _this.CallBack(); } };
@@ -90,9 +81,10 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
         this.createEnable = false;
     }
     CallBack() {
+        var _a;
         if (csharp_1.FairyEditor.App.activeDoc.GetSelection().Count == 0)
             return csharp_1.FairyEditor.App.Alert("未选中编辑对象");
-        if (csharp_1.FairyEditor.App.activeDoc?.inspectingObjectType != "loader" /* ShowObjectType.Loader */)
+        if (((_a = csharp_1.FairyEditor.App.activeDoc) === null || _a === void 0 ? void 0 : _a.inspectingObjectType) != "loader" /* ShowObjectType.Loader */)
             return csharp_1.FairyEditor.App.Alert("编辑对象必须是\"装载器\"");
         // this.selectRES = FairyEditor.App.libView.GetSelectedResources(false);
         let selectStr = "确认控制器图片顺序:\n";
@@ -151,6 +143,10 @@ class MenuLib_CreateController extends MenuLib_Base_1.default {
         csharp_1.FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onRightClickItem.Remove(this.itemClick);
         csharp_1.FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onRightClickItem.Remove(this.itemClick);
         csharp_1.FairyEditor.App.inspectorView.GetInspector("gear" /* InspectorName.Gear */).panel.GetChild("add").asButton.onClick.Remove(this.addMoreControlClick);
+        this.itemClick = null;
+        this.addMoreControlClick = null;
+        this.selectRES.Clear();
+        this.selectRES = null;
     }
 }
 exports.default = MenuLib_CreateController;
