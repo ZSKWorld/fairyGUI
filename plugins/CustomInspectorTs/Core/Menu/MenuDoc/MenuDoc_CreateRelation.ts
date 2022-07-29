@@ -1,5 +1,5 @@
 import { FairyEditor, FairyGUI } from 'csharp';
-import { InspectorName } from '../../Types';
+import { InspectorName, ViewID } from '../../Types';
 import MenuDoc_Base from './MenuDoc_Base';
 
 
@@ -9,6 +9,7 @@ export default class MenuDoc_CreateRelation extends MenuDoc_Base {
     private rightClickCallback: FairyGUI.EventCallback0;
     protected InitMenData(): void {
         this.menuData = {
+            atIndex: 0,
             text: "关联",
             childEnable: true,
             childs: []
@@ -48,10 +49,13 @@ export default class MenuDoc_CreateRelation extends MenuDoc_Base {
 
     protected OnCreate(): void {
         this.rightClickCallback = new FairyGUI.EventCallback0(() => { this.OnRightClick(); });
-        FairyEditor.App.docView.docContainer.onRightClick.Add(this.rightClickCallback);
+        // FairyEditor.App.docView.docContainer.onRightClick.Add(this.rightClickCallback);
+        FairyEditor.App.viewManager.GetView(ViewID.HierarchyView).onRightClick.Add(this.rightClickCallback);
     }
 
     private OnRightClick() {
+        //FairyEditor.App.activeDoc.inspectingTarget == FairyEditor.App.activeDoc.content
+
         let targets = FairyEditor.App.activeDoc.GetSelection();
         this.relationFirst = null;
         this.relationSecond = null;
@@ -74,6 +78,6 @@ export default class MenuDoc_CreateRelation extends MenuDoc_Base {
     }
 
     protected OnDestroy(): void {
-        FairyEditor.App.docView.docContainer.onRightClick.Remove(this.rightClickCallback);
+        FairyEditor.App.viewManager.GetView(ViewID.HierarchyView).onRightClick.Remove(this.rightClickCallback);
     }
 }

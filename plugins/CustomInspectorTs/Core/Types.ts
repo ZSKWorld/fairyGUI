@@ -126,6 +126,35 @@ export const enum InspectorControlListIndex {
     FontSize,
 }
 
+export const enum ViewID {
+    /** 0   资源库 */
+    LibraryView = "fairygui.LibraryView",
+    /** 1   检查器 */
+    InspectorView = "fairygui.InspectorView",
+    /** 2   显示列表 */
+    HierarchyView = "fairygui.HierarchyView",
+    /** 3   预览 */
+    PreviewView = "fairygui.PreviewView",
+    /** 4   时间轴 */
+    TimelineView = "fairygui.TimelineView",
+    /** 5   动效 */
+    TransitionListView = "fairygui.TransitionListView",
+    /** 6   收藏夹 */
+    FavoritesView = "fairygui.FavoritesView",
+    /** 7   搜索 */
+    SearchView = "fairygui.SearchView",
+    /** 8   控制台 */
+    ConsoleView = "fairygui.ConsoleView",
+    /** 9   引用 */
+    ReferenceView = "fairygui.ReferenceView",
+    /** 10  插件 */
+    PlugInView = "fairygui.PlugInView",
+    /** 11  编辑页面 */
+    DocumentView = "fairygui.DocumentView",
+    /** 12  测试页面 */
+    TestView = "fairygui.TestView",
+}
+
 export const enum AppConfirmResult {
     Yes = "yes",
     No = "no",
