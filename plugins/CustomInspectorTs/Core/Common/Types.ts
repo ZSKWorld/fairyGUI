@@ -1,10 +1,6 @@
 import { System } from "csharp";
-export interface IDestroy {
-    Destroy(): void;
-}
-export interface IMenu {
-    Create(): void;
-}
+
+/** 菜单创建数据 */
 export interface IMenuData {
     /**菜单变量名 */
     name?: string;
@@ -22,13 +18,19 @@ export interface IMenuData {
     selectCallback?: System.Action$1<string>;
 };
 
+/** 自定义数据类型 */
 export interface IComponentCustomData {
+    /** 方法id */
     funcId?: number;
+    /** 提示类型 */
     tipType?: string;
+    /** 按下时长 */
     holdPress?: string;
+    /** 特效 */
     effect?: { [ key: string ]: string };
 }
 
+/** 元件类型 */
 export const enum ShowObjectType {
     Mixed = "mixed",
     Button = "Button",              //FairyGUI.GButton
@@ -47,6 +49,8 @@ export const enum ShowObjectType {
     ProgressBar = "ProgressBar",    //FairyGUI.GProgressBar
     ScrollBar = "ScrollBar",        //FairyGUI.GScrollBar
 }
+
+/**检查器各个模块名字 */
 export const enum InspectorName {
     Info = "info",
     Basic = "basic",
@@ -126,6 +130,7 @@ export const enum InspectorControlListIndex {
     FontSize,
 }
 
+/** 编辑器页面id */
 export const enum ViewID {
     /** 0   资源库 */
     LibraryView = "fairygui.LibraryView",
@@ -155,11 +160,13 @@ export const enum ViewID {
     TestView = "fairygui.TestView",
 }
 
+/**编辑器确认弹窗回调参数类型 */
 export const enum AppConfirmResult {
     Yes = "yes",
     No = "no",
 }
 
+/**配置类型，值也是config目录下子目录名字，方便使用和修改 */
 export const enum ConfigType {
     None = "",
     PublishSettings = "publishSettings"

@@ -7,15 +7,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
-const DecoratorFactory_1 = require("../Utils/DecoratorFactory");
+const Decorators_1 = require("../Utils/Decorators");
 const BaseInspector_1 = require("./BaseInspector");
 const { App, FRelationType } = csharp_1.FairyEditor;
 class TextLayoutInspector extends BaseInspector_1.default {
-    constructor(info) {
-        super(info);
-        this.btnSubmit.onClick.Add(() => { this.OnBtnSubmit(); });
+    OnCreate() {
+        this.btnSubmit.onClick.Add(() => this.OnBtnSubmitClick());
     }
-    UpdateUI() {
+    OnUpdate() {
         const type = App.activeDoc.inspectingObjectType;
         const show = type == "text" /* ShowObjectType.Text */ || type == "richtext" /* ShowObjectType.RichText */;
         if (show) {
@@ -23,7 +22,11 @@ class TextLayoutInspector extends BaseInspector_1.default {
         }
         return show;
     }
-    OnBtnSubmit() {
+    OnDestroy() {
+        this.textArea = null;
+        this.btnSubmit = null;
+    }
+    OnBtnSubmitClick() {
         App.activeDoc.inspectingTarget.relations.AddItem(App.activeDoc.content, FRelationType.Size);
         App.activeDoc.inspectingTarget.text = this.TransformLine(this.textArea.title);
         const type = App.activeDoc.inspectingObjectType;
@@ -59,15 +62,11 @@ class TextLayoutInspector extends BaseInspector_1.default {
             }
         }
     }
-    OnDestroy() {
-        this.textArea = null;
-        this.btnSubmit = null;
-    }
 }
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("TextArea")
+    (0, Decorators_1.ViewChild)("TextArea")
 ], TextLayoutInspector.prototype, "textArea", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("BtnSubmit")
+    (0, Decorators_1.ViewChild)("BtnSubmit")
 ], TextLayoutInspector.prototype, "btnSubmit", void 0);
 exports.default = TextLayoutInspector;

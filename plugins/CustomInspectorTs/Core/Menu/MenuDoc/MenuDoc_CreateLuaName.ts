@@ -1,5 +1,5 @@
 import { FairyEditor } from "csharp";
-import { ShowObjectType } from "../../Types";
+import { ShowObjectType } from "../../Common/Types";
 import MenuDoc_Base from "./MenuDoc_Base";
 
 export default class MenuDoc_CreateLuaName extends MenuDoc_Base {
@@ -20,9 +20,8 @@ export default class MenuDoc_CreateLuaName extends MenuDoc_Base {
         ProgressBar: "FairyGUI.GProgressBar",
         ScrollBar: "FairyGUI.GScrollBar",
     };
-    protected InitMenData(): void {
-        const _this = this;
-        this.menuData = { text: "创建Lua名称代码到剪切板", selectCallback: () => { _this.CallBack(); } };
+    protected InitMenuData(): void {
+        this.menuData = { text: "创建Lua名称代码到剪切板", selectCallback: () => this.CallBack() };
     }
 
     private CallBack() {
@@ -39,21 +38,23 @@ export default class MenuDoc_CreateLuaName extends MenuDoc_Base {
                 const child = target.get_Item(i);
                 if (child instanceof FairyEditor.FComponent && child.extention?._type == ShowObjectType.Button) {
                     result += `---@type CommonBtnView\n`
-                        + `self.${child.name} = self:AddView(com:GetChild("${child.name}"),CommonBtnView.Create())\n`;
+                        + `self.${ child.name } = self:AddView(com:GetChild("${ child.name }"),CommonBtnView.Create())\n`;
                 }
                 else {
-                    result += `---@type CS.${this.typeToType[child.objectType]}\nself.${child.name} = com:GetChild("${child.name}")\n`;
+                    result += `---@type CS.${ this.typeToType[ child.objectType ] }\nself.${ child.name } = com:GetChild("${ child.name }")\n`;
                 }
             }
         } else if (ctrlCount > 0) {
             for (let i = 0; i < ctrlCount; i++) {
                 const child = FairyEditor.App.activeDoc.content.controllers.get_Item(i);
                 result += `---@type CS.FairyGUI.Controller\n`;
-                result += `self.Ctrl_${child.name} = com:GetController("${child.name}")\n`;
+                result += `self.Ctrl_${ child.name } = com:GetController("${ child.name }")\n`;
             }
         }
         if (result) FairyEditor.Clipboard.SetText(result);
     }
+
     protected OnCreate(): void { }
+    
     protected OnDestroy(): void { }
 }

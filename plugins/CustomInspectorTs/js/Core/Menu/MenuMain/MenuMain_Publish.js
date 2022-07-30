@@ -12,12 +12,11 @@ class MenuMain_Publish extends MenuMain_Base_1.default {
     InitMenData() {
         this.platformCfg = EditorUtils_1.default.GetConfig("publishSettings" /* ConfigType.PublishSettings */, "PlatformConfig");
         if (this.platformCfg) {
-            const _this = this;
             this.platformKeys = Object.keys(this.platformCfg).filter(v => !!this.platformCfg[v].enable);
             this.menuData = {
                 text: "发布",
                 childEnable: true,
-                childs: this.platformKeys.map(key => ({ name: key, text: key, selectCallback: (str) => { _this.translatePublishPlatform(str); } }))
+                childs: this.platformKeys.map(key => ({ name: key, text: key, selectCallback: (str) => this.translatePublishPlatform(str) }))
             };
         }
     }
@@ -49,7 +48,7 @@ class MenuMain_Publish extends MenuMain_Base_1.default {
         }
     }
     /**切换发布平台 */
-    translatePublishPlatform(platform) {
+    translatePublishPlatform(platform, showTip = true) {
         const newSetting = this.getSetting(platform);
         if (newSetting) {
             //设置全局设置并保存
@@ -64,7 +63,7 @@ class MenuMain_Publish extends MenuMain_Base_1.default {
             // setTimeout(() => {
             //     FairyEditor.App.CloseWaiting();
             // }, 500);
-            Tip_1.default.Inst.Show(`切换发布平台到 [color=#ff0000]${csharp_1.FairyEditor.App.project.type}[/color]`);
+            showTip && Tip_1.default.Inst.Show(`切换发布平台到 [color=#ff0000]${csharp_1.FairyEditor.App.project.type}[/color]`);
         }
         const curMenu = this.parentMenu.GetSubMenu(this.menuData.name);
         this.platformKeys.forEach(key => curMenu.SetItemChecked(key, key == csharp_1.FairyEditor.App.project.type));
@@ -73,7 +72,7 @@ class MenuMain_Publish extends MenuMain_Base_1.default {
         const list = csharp_1.FairyEditor.App.mainView.panel.GetChild('menuBar').asCom.GetChild('list').asList;
         this.menuBtn = list.GetChildAt(list.numChildren - 1).asButton;
         this.menuBtn.GetChild('title').asTextField.UBBEnabled = true;
-        this.translatePublishPlatform(csharp_1.FairyEditor.App.project.type);
+        this.translatePublishPlatform(csharp_1.FairyEditor.App.project.type, false);
     }
     OnDestroy() {
         this.menuBtn = null;

@@ -6,9 +6,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Decorators_1 = require("./Utils/Decorators");
+const Decorators_1 = require("../Utils/Decorators");
 /**
- * 编辑器基类，所有的自定义类除了继承自编辑器的类以外，其他的都要继承该类，以达到统一销毁的目的
+ * 自定义类基类，所有的自定义类除了继承自编辑器的类以外，其他的都要继承该类，以达到统一销毁的目的
  */
 let BaseClass = class BaseClass {
 };

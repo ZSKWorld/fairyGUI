@@ -1,38 +1,32 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
-const DecoratorFactory_1 = require("../Utils/DecoratorFactory");
-class BaseInspector extends csharp_1.FairyEditor.View.PluginInspector {
+const Decorators_1 = require("../Utils/Decorators");
+let BaseInspector = class BaseInspector extends csharp_1.FairyEditor.View.PluginInspector {
     constructor(info) {
-        var _a;
         super();
-        this.curTarget = (_a = csharp_1.FairyEditor.App.activeDoc) === null || _a === void 0 ? void 0 : _a.inspectingTarget;
         this.info = info;
-        this.panel = csharp_1.FairyGUI.UIPackage.CreateObject(this.info.PkgName, this.info.ComponentName).asCom;
-        (0, DecoratorFactory_1.ViewChildInit)(this);
-        this.updateAction = () => {
-            var _a;
-            if (((_a = csharp_1.FairyEditor.App.activeDoc) === null || _a === void 0 ? void 0 : _a.inspectingTarget) != this.curTarget) {
-                this._lastTarget = this.curTarget;
-                this.curTarget = csharp_1.FairyEditor.App.activeDoc.inspectingTarget;
-            }
-            return this.UpdateUI();
-        };
-        this.disposeAction = () => { return this.OnDestroy(); };
+        this.panel = csharp_1.FairyGUI.UIPackage.CreateObject(info.PkgName, info.ComponentName).asCom;
+        (0, Decorators_1.ViewChildInit)(this);
+        this.updateAction = () => this.OnUpdate();
+        this.disposeAction = () => this.OnDestroy();
     }
-    get lastInspectingTarget() {
-        return this._lastTarget;
+    Create() {
+        const { InspectorName, InspectorTitle, ForObjectType, ShowInSelection, ShowInComponent, ShowInTransition } = this.info;
+        csharp_1.FairyEditor.App.inspectorView.AddInspector(() => this, InspectorName, InspectorTitle);
+        ShowInSelection && csharp_1.FairyEditor.App.docFactory.ConnectInspector(InspectorName, ForObjectType, false, false);
+        ShowInComponent && csharp_1.FairyEditor.App.docFactory.ConnectInspector(InspectorName, ForObjectType, true, false);
+        ShowInTransition && csharp_1.FairyEditor.App.docFactory.ConnectInspector(InspectorName, ForObjectType, false, true);
+        this.OnCreate();
     }
-    AddInspector() {
-        csharp_1.FairyEditor.App.inspectorView.AddInspector(() => this, this.info.InspectorName, this.info.InspectorTitle);
-        this.info.ShowInSelection && csharp_1.FairyEditor.App.docFactory.ConnectInspector(this.info.InspectorName, this.info.ForObjectType, false, false);
-        this.info.ShowInComponent && csharp_1.FairyEditor.App.docFactory.ConnectInspector(this.info.InspectorName, this.info.ForObjectType, true, false);
-        this.info.ShowInTransition && csharp_1.FairyEditor.App.docFactory.ConnectInspector(this.info.InspectorName, this.info.ForObjectType, false, true);
-    }
-    Destroy() {
-        this.curTarget = null;
-        this._lastTarget = null;
-        this.OnDestroy();
-    }
-}
+};
+BaseInspector = __decorate([
+    (0, Decorators_1.DestroyInstanceClass)("Dispose")
+], BaseInspector);
 exports.default = BaseInspector;

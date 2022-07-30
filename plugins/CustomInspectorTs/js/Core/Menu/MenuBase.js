@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const BaseClass_1 = require("../BaseClass");
+const BaseClass_1 = require("../Common/BaseClass");
 const EditorUtils_1 = require("../Utils/EditorUtils");
 /**
  * 菜单基类
@@ -17,7 +17,7 @@ class MenuBase extends BaseClass_1.default {
         this.OnCreate();
     }
     Destroy() {
-        EditorUtils_1.default.RemoveMenu(this.menuData.name, this.parentMenu);
+        this.parentMenu.RemoveItem(this.menuData.name);
         this.parentMenu = null;
         this.OnDestroy();
     }

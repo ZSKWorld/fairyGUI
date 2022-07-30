@@ -1,6 +1,6 @@
 import MenuDoc_Base from "./MenuDoc_Base";
 export default class MenuDoc_CreateComponent extends MenuDoc_Base {
-    protected InitMenData(): void {
+    protected InitMenuData(): void {
         this.menuData = {
             text: "自定义组件",
             childEnable: true,
@@ -43,7 +43,10 @@ export default class MenuDoc_CreateComponent extends MenuDoc_Base {
         // url && EditorUtils.AddComponent(url);
         // FairyEditor.App.activeDoc.SetModified(true);
     }
-    protected OnCreate(): void {}
-    protected OnDestroy(): void {}
+
+    protected OnCreate(): void { }
+
+    protected OnDestroy(): void { }
+    
 }
 

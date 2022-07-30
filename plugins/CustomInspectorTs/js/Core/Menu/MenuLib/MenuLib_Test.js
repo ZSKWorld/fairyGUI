@@ -3,8 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const MenuLib_Base_1 = require("./MenuLib_Base");
 class MenuLib_Test extends MenuLib_Base_1.default {
     InitMenData() {
-        const _this = this;
-        this.menuData = { text: "测试", selectCallback: () => { this.CallBack(); } };
+        this.menuData = { text: "测试", selectCallback: () => this.CallBack() };
     }
     OnCreate() {
     }

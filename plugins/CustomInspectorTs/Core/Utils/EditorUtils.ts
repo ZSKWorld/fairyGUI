@@ -1,5 +1,5 @@
 import { FairyEditor, FairyGUI, System } from "csharp";
-import { ConfigType, IMenuData } from "../Types";
+import { ConfigType, IMenuData } from "../Common/Types";
 export default class EditorUtils {
     /**
      * @description: 创建菜单目录
@@ -9,7 +9,7 @@ export default class EditorUtils {
     public static CreateMenu(data: IMenuData, parent?: FairyEditor.Component.IMenu): void {
         if (!data) return;
         const nameCheckArr = [];
-        EditorUtils.CreateMenu2(data, parent, nameCheckArr);
+        this.CreateMenu2(data, parent, nameCheckArr);
     }
 
     private static CreateMenu2(data: IMenuData, parent: FairyEditor.Component.IMenu, nameArr: string[]): void {
@@ -19,20 +19,11 @@ export default class EditorUtils {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, true, data.selectCallback);
             if (data.childEnable) {
                 const curMenu: FairyEditor.Component.IMenu = parent.GetSubMenu(data.name);
-                data.childs.forEach((v) => EditorUtils.CreateMenu2(v, curMenu, nameArr));
+                data.childs.forEach((v) => this.CreateMenu2(v, curMenu, nameArr));
             }
         } else {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, false, data.selectCallback);
         }
-    }
-
-    /**
-     * @description: 删除菜单
-     * @param name
-     */
-    public static RemoveMenu(name: string, parentMenu: FairyEditor.Component.IMenu) {
-        parentMenu = parentMenu || FairyEditor.App.docFactory.contextMenu;
-        parentMenu.RemoveItem(name);
     }
 
     /**

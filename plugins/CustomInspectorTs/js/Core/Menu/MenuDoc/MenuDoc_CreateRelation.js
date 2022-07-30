@@ -10,10 +10,8 @@ class MenuDoc_CreateRelation extends MenuDoc_Base_1.default {
             childEnable: true,
             childs: []
         };
-        const _this = this;
         Object.keys(csharp_1.FairyEditor.FRelationType).slice(0, 25).forEach((v) => {
-            //这个地方不能直接赋值 selectCallback = this.CallBack ，selectCallback会绑定到全局执行
-            this.menuData.childs.push({ name: v, text: this.GetRelationText(v), selectCallback: (name) => { _this.CallBack(name); } });
+            this.menuData.childs.push({ name: v, text: this.GetRelationText(v), selectCallback: (name) => this.CallBack(name) });
         });
     }
     GetRelationText(str) {
@@ -43,7 +41,7 @@ class MenuDoc_CreateRelation extends MenuDoc_Base_1.default {
         }
     }
     OnCreate() {
-        this.rightClickCallback = new csharp_1.FairyGUI.EventCallback0(() => { this.OnRightClick(); });
+        this.rightClickCallback = new csharp_1.FairyGUI.EventCallback0(() => this.OnRightClick());
         csharp_1.FairyEditor.App.docView.docContainer.onRightClick.Add(this.rightClickCallback);
         csharp_1.FairyEditor.App.viewManager.GetView("fairygui.HierarchyView" /* ViewID.HierarchyView */).onRightClick.Add(this.rightClickCallback);
     }
@@ -69,7 +67,7 @@ class MenuDoc_CreateRelation extends MenuDoc_Base_1.default {
         }
         this.parentMenu.SetItemText(this.menuData.name, name);
         const curMenu = this.parentMenu.GetSubMenu(this.menuData.name);
-        this.menuData.childs.forEach((v) => curMenu.SetItemEnabled(v.name, count > 0));
+        this.menuData.childs.forEach(v => curMenu.SetItemEnabled(v.name, count > 0));
     }
     OnDestroy() {
         csharp_1.FairyEditor.App.docView.docContainer.onRightClick.Remove(this.rightClickCallback);

@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
-const BaseClass_1 = require("../BaseClass");
+const BaseClass_1 = require("./BaseClass");
 const Const_1 = require("./Const");
+/** 弹窗提示 */
 class Tip extends BaseClass_1.default {
     constructor() {
         super();
@@ -22,7 +23,7 @@ class Tip extends BaseClass_1.default {
     }
     InitComp() {
         if (!this.comp) {
-            this.comp = csharp_1.FairyGUI.UIPackage.CreateObject(Const_1.PkgName, Const_1.Pkg_Tip).asLabel;
+            this.comp = csharp_1.FairyGUI.UIPackage.CreateObject(Const_1.PkgCustom, Const_1.PkgCustom_Tip).asLabel;
             this.showAni = this.comp.GetTransitionAt(0);
             const main = csharp_1.FairyEditor.App.mainView.panel;
             main.AddChild(this.comp);

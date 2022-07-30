@@ -7,20 +7,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
-const DecoratorFactory_1 = require("../Utils/DecoratorFactory");
+const Decorators_1 = require("../Utils/Decorators");
 const BaseInspector_1 = require("./BaseInspector");
 const App = csharp_1.FairyEditor.App;
 class ComInspector extends BaseInspector_1.default {
-    constructor(info) {
-        super(info);
+    OnCreate() {
         this.panel.GetController("c1").selectedIndex = 1;
         // this.inputEffectKey.GetTextField().asTextInput.onChanged.Add(new FairyGUI.EventCallback0(()=>{
         //     console.log(this.inputEffectKey.title);
         // }));
-        this.btnEffectAdd.onClick.Add((context) => { this.OnBtnEffectAdd(context); });
-        this.btnEffectRemove.onClick.Add((context) => { this.OnBtnEffectRemove(context); });
+        this.btnEffectAdd.onClick.Add((context) => this.OnBtnEffectAddClick(context));
+        this.btnEffectRemove.onClick.Add((context) => this.OnBtnEffectRemoveClick(context));
     }
-    UpdateUI() {
+    OnUpdate() {
         let data = "";
         let selectCount = App.activeDoc.GetSelection().Count;
         if (selectCount == 0)
@@ -33,7 +32,13 @@ class ComInspector extends BaseInspector_1.default {
         this.inputEffectValue.title = "";
         return selectCount <= 1;
     }
-    OnBtnEffectAdd(context) {
+    OnDestroy() {
+        this.btnEffectAdd = null;
+        this.btnEffectRemove = null;
+        this.inputEffectKey = null;
+        this.inputEffectValue = null;
+    }
+    OnBtnEffectAddClick(context) {
         let key = this.inputEffectKey.title.trim();
         let value = this.inputEffectValue.title.trim();
         if (!key || !value)
@@ -43,7 +48,7 @@ class ComInspector extends BaseInspector_1.default {
         this.customJsonData.effect[key] = value;
         this.SetCustomData();
     }
-    OnBtnEffectRemove(context) {
+    OnBtnEffectRemoveClick(context) {
         if (!this.customJsonData.effect)
             return;
         let key = this.inputEffectKey.title.trim();
@@ -66,23 +71,17 @@ class ComInspector extends BaseInspector_1.default {
         App.inspectorView.Refresh("BtnInspector" /* InspectorName.Custom_BtnInspector */);
         App.activeDoc.SetModified(true);
     }
-    OnDestroy() {
-        this.btnEffectAdd = null;
-        this.btnEffectRemove = null;
-        this.inputEffectKey = null;
-        this.inputEffectValue = null;
-    }
 }
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("BtnEffectAdd")
+    (0, Decorators_1.ViewChild)("BtnEffectAdd")
 ], ComInspector.prototype, "btnEffectAdd", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("BtnEffectRemove")
+    (0, Decorators_1.ViewChild)("BtnEffectRemove")
 ], ComInspector.prototype, "btnEffectRemove", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("InputEffectKey")
+    (0, Decorators_1.ViewChild)("InputEffectKey")
 ], ComInspector.prototype, "inputEffectKey", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("InputEffectValue")
+    (0, Decorators_1.ViewChild)("InputEffectValue")
 ], ComInspector.prototype, "inputEffectValue", void 0);
 exports.default = ComInspector;

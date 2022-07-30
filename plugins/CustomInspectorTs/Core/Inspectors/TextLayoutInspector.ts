@@ -1,7 +1,6 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import InspectorInfo from "../InspectorInfo";
-import { InspectorName, ShowObjectType } from "../Types";
-import { ViewChild } from "../Utils/DecoratorFactory";
+import { InspectorName, ShowObjectType } from "../Common/Types";
+import { ViewChild } from "../Utils/Decorators";
 import BaseInspector from "./BaseInspector";
 const { App, FRelationType } = FairyEditor;
 
@@ -11,13 +10,11 @@ export default class TextLayoutInspector extends BaseInspector {
     @ViewChild("BtnSubmit")
     private btnSubmit: FairyGUI.GButton;
 
-    private text: string;
-    public constructor(info: InspectorInfo) {
-        super(info);
-
-        this.btnSubmit.onClick.Add(() => { this.OnBtnSubmit(); });
+    protected OnCreate(): void {
+        this.btnSubmit.onClick.Add(() => this.OnBtnSubmitClick());
     }
-    public UpdateUI(): boolean {
+
+    protected OnUpdate(): boolean {
         const type = App.activeDoc.inspectingObjectType;
         const show = type == ShowObjectType.Text || type == ShowObjectType.RichText;
         if (show) {
@@ -26,7 +23,12 @@ export default class TextLayoutInspector extends BaseInspector {
         return show;
     }
 
-    private OnBtnSubmit() {
+    protected OnDestroy(): void {
+        this.textArea = null;
+        this.btnSubmit = null;
+    }
+
+    private OnBtnSubmitClick() {
         App.activeDoc.inspectingTarget.relations.AddItem(App.activeDoc.content, FRelationType.Size);
         App.activeDoc.inspectingTarget.text = this.TransformLine(this.textArea.title);
         const type = App.activeDoc.inspectingObjectType;
@@ -63,10 +65,6 @@ export default class TextLayoutInspector extends BaseInspector {
                 arr.push("\t");
             }
         }
-    }
-    public OnDestroy(): void {
-        this.textArea = null;
-        this.btnSubmit = null;
     }
 
 }

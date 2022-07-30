@@ -1,9 +1,8 @@
 import MenuLib_Base from "./MenuLib_Base";
 
 export default class MenuLib_Test extends MenuLib_Base {
-    protected InitMenData(): void {
-        const _this = this;
-        this.menuData = { text: "测试", selectCallback: () => { this.CallBack(); } };
+    protected InitMenuData(): void {
+        this.menuData = { text: "测试", selectCallback: () => this.CallBack() };
     }
 
     protected OnCreate(): void {

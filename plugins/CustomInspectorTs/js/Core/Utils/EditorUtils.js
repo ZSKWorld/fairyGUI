@@ -11,7 +11,7 @@ class EditorUtils {
         if (!data)
             return;
         const nameCheckArr = [];
-        EditorUtils.CreateMenu2(data, parent, nameCheckArr);
+        this.CreateMenu2(data, parent, nameCheckArr);
     }
     static CreateMenu2(data, parent, nameArr) {
         var _a, _b;
@@ -22,20 +22,12 @@ class EditorUtils {
             parent.AddItem(data.text, data.name, (_a = data.atIndex) !== null && _a !== void 0 ? _a : -1, true, data.selectCallback);
             if (data.childEnable) {
                 const curMenu = parent.GetSubMenu(data.name);
-                data.childs.forEach((v) => EditorUtils.CreateMenu2(v, curMenu, nameArr));
+                data.childs.forEach((v) => this.CreateMenu2(v, curMenu, nameArr));
             }
         }
         else {
             parent.AddItem(data.text, data.name, (_b = data.atIndex) !== null && _b !== void 0 ? _b : -1, false, data.selectCallback);
         }
-    }
-    /**
-     * @description: 删除菜单
-     * @param name
-     */
-    static RemoveMenu(name, parentMenu) {
-        parentMenu = parentMenu || csharp_1.FairyEditor.App.docFactory.contextMenu;
-        parentMenu.RemoveItem(name);
     }
     /**
      * 创建控制器XML数据

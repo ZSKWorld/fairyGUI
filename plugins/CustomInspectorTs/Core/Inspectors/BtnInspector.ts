@@ -1,7 +1,7 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import InspectorInfo from "../InspectorInfo";
-import { IComponentCustomData, InspectorName } from "../Types";
-import { ViewChild } from "../Utils/DecoratorFactory";
+import Tip from "../Common/Tip";
+import { IComponentCustomData, InspectorName } from "../Common/Types";
+import { ViewChild } from "../Utils/Decorators";
 import BaseInspector from "./BaseInspector";
 const App = FairyEditor.App;
 
@@ -21,17 +21,15 @@ export default class BtnInspector extends BaseInspector {
 
     /**自定义的json数据 */
     private customJsonData: IComponentCustomData;
-    public constructor(info: InspectorInfo) {
-        super(info);
-        this.panel.GetController("c1").selectedIndex = 0;
 
-        this.btnFunc.onClick.Add((context) => { this.OnBtnFunc(context); });
-        this.btnTip.onClick.Add((context) => { this.OnBtnTip(context); });
-        this.btnHoldPress.onClick.Add((context) => { this.OnBtnHoldPress(context); });
+    protected OnCreate(): void {
+        this.panel.GetController("c1").selectedIndex = 0;
+        this.btnFunc.onClick.Add((context) => this.OnBtnFuncClick(context));
+        this.btnTip.onClick.Add((context) => this.OnBtnTipClick(context));
+        this.btnHoldPress.onClick.Add((context) => this.OnBtnHoldPressClick(context));
     }
 
-
-    public UpdateUI(): boolean {
+    protected OnUpdate(): boolean {
         const data = App.activeDoc.inspectingTarget.customData;
         this.customJsonData = data ? JSON.parse(data) : null;
         this.inputFunc.title = this.customJsonData?.funcId?.toString() || "";
@@ -40,10 +38,19 @@ export default class BtnInspector extends BaseInspector {
         return App.activeDoc.GetSelection().Count <= 1;
     }
 
-    private OnBtnFunc(context: FairyGUI.EventContext) {
+    protected OnDestroy() {
+        this.btnFunc = null;
+        this.inputFunc = null;
+        this.btnTip = null;
+        this.inputTip = null;
+        this.btnHoldPress = null;
+        this.inputHoldPress = null;
+    }
+
+    private OnBtnFuncClick(context: FairyGUI.EventContext) {
         if (this.inputFunc.title) {
             let funcId = Number(this.inputFunc.title);
-            if (isNaN(funcId)) return App.Alert("必须纯数字");
+            if (isNaN(funcId)) return Tip.Inst.Show("必须纯数字");
             this.customJsonData = this.customJsonData || {};
             this.customJsonData.funcId = Number(this.inputFunc.title);
         }
@@ -53,7 +60,7 @@ export default class BtnInspector extends BaseInspector {
         this.SetCustomData();
     }
 
-    private OnBtnTip(context: FairyGUI.EventContext) {
+    private OnBtnTipClick(context: FairyGUI.EventContext) {
         if (this.inputTip.title) {
             this.customJsonData = this.customJsonData || {};
             this.customJsonData.tipType = this.inputTip.title;
@@ -64,7 +71,7 @@ export default class BtnInspector extends BaseInspector {
         this.SetCustomData();
     }
 
-    private OnBtnHoldPress(context: FairyGUI.EventContext) {
+    private OnBtnHoldPressClick(context: FairyGUI.EventContext) {
         let text = Number(this.inputHoldPress.title)
         if (text) {
             this.customJsonData = this.customJsonData || {};
@@ -81,14 +88,5 @@ export default class BtnInspector extends BaseInspector {
         App.inspectorView.Refresh(InspectorName.Etc);
         App.inspectorView.Refresh(InspectorName.Custom_ComInspector);
         App.activeDoc.SetModified(true);
-    }
-
-    public OnDestroy() {
-        this.btnFunc = null;
-        this.inputFunc = null;
-        this.btnTip = null;
-        this.inputTip = null;
-        this.btnHoldPress = null;
-        this.inputHoldPress = null;
     }
 }

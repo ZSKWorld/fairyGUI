@@ -1,12 +1,10 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import BaseClass from "../BaseClass";
-import { PkgName, Pkg_Tip } from "./Const";
-
+import BaseClass from "./BaseClass";
+import { PkgCustom, PkgCustom_Tip } from "./Const";
+/** 弹窗提示 */
 export default class Tip extends BaseClass {
     private static _inst: Tip;
     public static get Inst() { return Tip._inst || (Tip._inst = new Tip()); }
-
-    private interverId: number;
 
     private comp: FairyGUI.GLabel;
     private showAni: FairyGUI.Transition;
@@ -21,8 +19,8 @@ export default class Tip extends BaseClass {
         this.showAni.Play();
     }
 
-    public Destroy(): void {
-        if(this.comp){
+    protected Destroy(): void {
+        if (this.comp) {
             this.comp.Dispose();
             this.comp = null;
             this.showAni = null;
@@ -31,7 +29,7 @@ export default class Tip extends BaseClass {
 
     private InitComp() {
         if (!this.comp) {
-            this.comp = FairyGUI.UIPackage.CreateObject(PkgName, Pkg_Tip).asLabel;
+            this.comp = FairyGUI.UIPackage.CreateObject(PkgCustom, PkgCustom_Tip).asLabel;
             this.showAni = this.comp.GetTransitionAt(0);
 
             const main = FairyEditor.App.mainView.panel;

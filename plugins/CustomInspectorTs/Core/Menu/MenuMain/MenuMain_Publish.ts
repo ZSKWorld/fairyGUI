@@ -1,12 +1,10 @@
 import { FairyEditor, FairyGUI } from "csharp";
 import Tip from "../../Common/Tip";
-import { ConfigType } from "../../Types";
+import { ConfigType } from "../../Common/Types";
 import EditorUtils from "../../Utils/EditorUtils";
 import MenuMain_Base from "./MenuMain_Base";
 
-type Partial<T> = {
-    [ P in keyof T ]?: Partial<T[ P ]>;
-};
+type Partial<T> = { [ P in keyof T ]?: Partial<T[ P ]>; };
 type PlatformConfig = { [ key: string ]: { enable: boolean, configName: string } };
 
 export default class MenuMain_Publish extends MenuMain_Base {
@@ -16,15 +14,15 @@ export default class MenuMain_Publish extends MenuMain_Base {
     /** 平台配置文件 */
     private platformCfg: PlatformConfig;
     private settingsMap: { [ key: string ]: Partial<FairyEditor.GlobalPublishSettings> } = {};
-    protected InitMenData(): void {
+    
+    protected InitMenuData(): void {
         this.platformCfg = EditorUtils.GetConfig(ConfigType.PublishSettings, "PlatformConfig");
         if (this.platformCfg) {
-            const _this = this;
             this.platformKeys = Object.keys(this.platformCfg).filter(v => !!this.platformCfg[ v ].enable);
             this.menuData = {
                 text: "发布",
                 childEnable: true,
-                childs: this.platformKeys.map(key => ({ name: key, text: key, selectCallback: (str) => { _this.translatePublishPlatform(str); } }))
+                childs: this.platformKeys.map(key => ({ name: key, text: key, selectCallback: (str) => this.translatePublishPlatform(str) }))
             };
         }
     }
@@ -40,7 +38,7 @@ export default class MenuMain_Publish extends MenuMain_Base {
     }
 
     private copySetting(target: any, source: any) {
-        //只读字段，更改会报错
+        //C#只读字段，不能更改
         const readOnlyKey = [ "fileName" ];
         for (const key in source) {
             if (Object.prototype.hasOwnProperty.call(source, key)) {
@@ -55,7 +53,7 @@ export default class MenuMain_Publish extends MenuMain_Base {
     }
 
     /**切换发布平台 */
-    private translatePublishPlatform(platform: string) {
+    private translatePublishPlatform(platform: string, showTip: boolean = true) {
         const newSetting = this.getSetting(platform);
         if (newSetting) {
             //设置全局设置并保存
@@ -67,11 +65,7 @@ export default class MenuMain_Publish extends MenuMain_Base {
             FairyEditor.App.project.type = platform;
             FairyEditor.App.project.Save();
             this.menuBtn.title = `当前发布到[color=#ff0000]${ FairyEditor.App.project.type }[/color]`;
-            // FairyEditor.App.ShowWaiting("切换发布平台到" + FairyEditor.App.project.type);
-            // setTimeout(() => {
-            //     FairyEditor.App.CloseWaiting();
-            // }, 500);
-            Tip.Inst.Show(`切换发布平台到 [color=#ff0000]${ FairyEditor.App.project.type }[/color]`);
+            showTip && Tip.Inst.Show(`切换发布平台到 [color=#ff0000]${ FairyEditor.App.project.type }[/color]`);
         }
         const curMenu = this.parentMenu.GetSubMenu(this.menuData.name);
         this.platformKeys.forEach(key => curMenu.SetItemChecked(key, key == FairyEditor.App.project.type));
@@ -81,7 +75,7 @@ export default class MenuMain_Publish extends MenuMain_Base {
         const list = FairyEditor.App.mainView.panel.GetChild('menuBar').asCom.GetChild('list').asList;
         this.menuBtn = list.GetChildAt(list.numChildren - 1).asButton;
         this.menuBtn.GetChild('title').asTextField.UBBEnabled = true;
-        this.translatePublishPlatform(FairyEditor.App.project.type);
+        this.translatePublishPlatform(FairyEditor.App.project.type, false);
     }
 
     protected OnDestroy(): void {

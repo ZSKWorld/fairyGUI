@@ -1,7 +1,8 @@
 import { FairyEditor, FairyGUI, System } from "csharp";
 import { $generic } from "puerts";
+import Tip from "../../Common/Tip";
+import { AppConfirmResult, InspectorControlListIndex, InspectorName, MoreControllIndex, ShowObjectType } from "../../Common/Types";
 import EditorUtils from "../../Utils/EditorUtils";
-import { AppConfirmResult, InspectorControlListIndex, InspectorName, MoreControllIndex, ShowObjectType } from "../../Types";
 import MenuLib_Base from "./MenuLib_Base";
 const List = $generic(System.Collections.Generic.List$1, FairyEditor.FPackageItem);
 
@@ -15,14 +16,18 @@ export default class MenuLib_CreateController extends MenuLib_Base {
     private createEnable: boolean;
     /** 添加的控制器名称 */
     private controllerName: string;
-    protected InitMenData(): void {
-        const _this = this;
-        this.menuData = { text: "为编辑对象创建图片控制器", selectCallback: () => { _this.CallBack(); } };
+
+    protected InitMenuData(): void {
+        this.menuData = {
+            atIndex: 0,
+            text: "为编辑对象创建图片控制器",
+            selectCallback: () => this.CallBack()
+        };
     }
 
     protected OnCreate(): void {
         this.selectRES = new List<FairyEditor.FPackageItem>();
-        this.itemClick = new FairyGUI.EventCallback1((event) => { this.OnItemClick(event); })
+        this.itemClick = new FairyGUI.EventCallback1(event => this.OnItemClick(event))
         FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onClickItem.Add(this.itemClick);
         FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onClickItem.Add(this.itemClick);
         FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onRightClickItem.Add(this.itemClick);
@@ -32,7 +37,7 @@ export default class MenuLib_CreateController extends MenuLib_Base {
             try {
                 this.OnAddMoreControlClick(event);
             } catch (error) {
-                return FairyEditor.App.Alert("偶尔有bug很正常，稍安勿躁，重新创建试试!!!");
+                return Tip.Inst.Show("偶尔有bug很正常，稍安勿躁，重新创建试试!!!");
             }
         });
         FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Add(this.addMoreControlClick);
@@ -67,17 +72,18 @@ export default class MenuLib_CreateController extends MenuLib_Base {
         iconButton.FireClick(true, true);
 
         //控制器页数
-        let pageData: string[] = [];
-        this.selectRES.ForEach((v) => pageData.push(""));
+        let pageData: string[] = new Array(this.selectRES.Count).fill("");
         //添加控制器
         FairyEditor.App.activeDoc.AddController(EditorUtils.CreateControllerXML(this.controllerName, pageData));
         const controller = FairyEditor.App.activeDoc.content.GetController(this.controllerName);
 
         //选择图标控制器
         FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("list").asList.GetChildAt(InspectorControlListIndex.Icon).asCom.GetChild("controller").asLabel.onClick.Call();
+
         let iconControlBtn: FairyGUI.GButton;
-        for (let i = 0; i < FairyEditor.App.groot.GetChildAt(1).asCom.GetChildAt(1).asList.numItems; i++) {
-            iconControlBtn = FairyEditor.App.groot.GetChildAt(1).asCom.GetChildAt(1).asList.GetChildAt(i).asButton;
+        let ctrlList = FairyEditor.App.groot.GetChildAt(1).asCom.GetChildAt(1).asList;
+        for (let i = 0; i < ctrlList.numItems; i++) {
+            iconControlBtn = ctrlList.GetChildAt(i).asButton;
             if (iconControlBtn.title == this.controllerName) {
                 iconControlBtn.FireClick(true, true);
                 break;
@@ -96,23 +102,22 @@ export default class MenuLib_CreateController extends MenuLib_Base {
     }
 
     private CallBack() {
-        if (FairyEditor.App.activeDoc.GetSelection().Count == 0) return FairyEditor.App.Alert("未选中编辑对象");
+        if (FairyEditor.App.activeDoc.GetSelection().Count == 0) return Tip.Inst.Show("未选中编辑对象");
         if (FairyEditor.App.activeDoc?.inspectingObjectType != ShowObjectType.Loader)
-            return FairyEditor.App.Alert("编辑对象必须是\"装载器\"");
-        // this.selectRES = FairyEditor.App.libView.GetSelectedResources(false);
-        let selectStr = "确认控制器图片顺序:\n";
+            return Tip.Inst.Show("编辑对象必须是\"装载器\"");
         if (this.selectRES.Count) {
             let notImageFileNames: string[] = [];
             let notExportedFileNames: string[] = [];
             let index = 0;
-            this.selectRES.ForEach((v) => {
+            let selectStr = "确认控制器图片顺序:\n";
+            this.selectRES.ForEach(v => {
                 selectStr += `\t${ index++ }.\t${ v.fileName }\n`;
                 (v.type != FairyEditor.FPackageItemType.IMAGE) && notImageFileNames.push(v.name);
                 (v.exported == false && v.owner != FairyEditor.App.activeDoc.inspectingTarget.pkg) && notExportedFileNames.push(v.name);
             });
             if (notImageFileNames.length) return FairyEditor.App.Alert("不能包含非图片资源:\n" + notImageFileNames.join("\n"));
             if (notExportedFileNames.length) return FairyEditor.App.Alert("不能使用其他包未导出的图片资源:\n" + notExportedFileNames.join("\n"));
-            if (this.selectRES.Count == 1) return FairyEditor.App.Alert("就选一个图片？？？直接拖不就行了？");
+            if (this.selectRES.Count == 1) return Tip.Inst.Show("就选一个图片？？？直接拖不就行了？");
             FairyEditor.App.Confirm(selectStr, (result: string) => {
                 if (result == AppConfirmResult.Yes) {
                     this.controllerName = this.GetDefaultControllerName();
@@ -126,10 +131,11 @@ export default class MenuLib_CreateController extends MenuLib_Base {
             });
         }
     }
+
     /** 获取新建控制器默认名称 */
     private GetDefaultControllerName(): string {
         const oldNames: string[] = [];
-        FairyEditor.App.activeDoc.content.controllers.ForEach((v) => oldNames.push(v.name));
+        FairyEditor.App.activeDoc.content.controllers.ForEach(v => oldNames.push(v.name));
         const count = FairyEditor.App.activeDoc.content.controllers.Count;
         for (let i = 1; i <= count; i++) {
             if (oldNames.indexOf("c" + i) == -1) {
@@ -138,6 +144,7 @@ export default class MenuLib_CreateController extends MenuLib_Base {
         }
         return "c" + (count + 1);
     }
+
     /** 检查名字是否和已存在控制器名称重复 */
     private CheckDuplicateName(name: string) {
         const controllers = FairyEditor.App.activeDoc.content.controllers;

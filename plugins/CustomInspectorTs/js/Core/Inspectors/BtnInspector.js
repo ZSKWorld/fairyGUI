@@ -7,18 +7,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const csharp_1 = require("csharp");
-const DecoratorFactory_1 = require("../Utils/DecoratorFactory");
+const Tip_1 = require("../Common/Tip");
+const Decorators_1 = require("../Utils/Decorators");
 const BaseInspector_1 = require("./BaseInspector");
 const App = csharp_1.FairyEditor.App;
 class BtnInspector extends BaseInspector_1.default {
-    constructor(info) {
-        super(info);
+    OnCreate() {
         this.panel.GetController("c1").selectedIndex = 0;
-        this.btnFunc.onClick.Add((context) => { this.OnBtnFunc(context); });
-        this.btnTip.onClick.Add((context) => { this.OnBtnTip(context); });
-        this.btnHoldPress.onClick.Add((context) => { this.OnBtnHoldPress(context); });
+        this.btnFunc.onClick.Add((context) => this.OnBtnFuncClick(context));
+        this.btnTip.onClick.Add((context) => this.OnBtnTipClick(context));
+        this.btnHoldPress.onClick.Add((context) => this.OnBtnHoldPressClick(context));
     }
-    UpdateUI() {
+    OnUpdate() {
         var _a, _b, _c, _d;
         const data = App.activeDoc.inspectingTarget.customData;
         this.customJsonData = data ? JSON.parse(data) : null;
@@ -27,11 +27,19 @@ class BtnInspector extends BaseInspector_1.default {
         this.inputHoldPress.title = ((_d = this.customJsonData) === null || _d === void 0 ? void 0 : _d.holdPress) || "0";
         return App.activeDoc.GetSelection().Count <= 1;
     }
-    OnBtnFunc(context) {
+    OnDestroy() {
+        this.btnFunc = null;
+        this.inputFunc = null;
+        this.btnTip = null;
+        this.inputTip = null;
+        this.btnHoldPress = null;
+        this.inputHoldPress = null;
+    }
+    OnBtnFuncClick(context) {
         if (this.inputFunc.title) {
             let funcId = Number(this.inputFunc.title);
             if (isNaN(funcId))
-                return App.Alert("必须纯数字");
+                return Tip_1.default.Inst.Show("必须纯数字");
             this.customJsonData = this.customJsonData || {};
             this.customJsonData.funcId = Number(this.inputFunc.title);
         }
@@ -42,7 +50,7 @@ class BtnInspector extends BaseInspector_1.default {
             return;
         this.SetCustomData();
     }
-    OnBtnTip(context) {
+    OnBtnTipClick(context) {
         if (this.inputTip.title) {
             this.customJsonData = this.customJsonData || {};
             this.customJsonData.tipType = this.inputTip.title;
@@ -54,7 +62,7 @@ class BtnInspector extends BaseInspector_1.default {
             return;
         this.SetCustomData();
     }
-    OnBtnHoldPress(context) {
+    OnBtnHoldPressClick(context) {
         let text = Number(this.inputHoldPress.title);
         if (text) {
             this.customJsonData = this.customJsonData || {};
@@ -74,31 +82,23 @@ class BtnInspector extends BaseInspector_1.default {
         App.inspectorView.Refresh("ComInspector" /* InspectorName.Custom_ComInspector */);
         App.activeDoc.SetModified(true);
     }
-    OnDestroy() {
-        this.btnFunc = null;
-        this.inputFunc = null;
-        this.btnTip = null;
-        this.inputTip = null;
-        this.btnHoldPress = null;
-        this.inputHoldPress = null;
-    }
 }
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("BtnFunc")
+    (0, Decorators_1.ViewChild)("BtnFunc")
 ], BtnInspector.prototype, "btnFunc", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("InputFunc")
+    (0, Decorators_1.ViewChild)("InputFunc")
 ], BtnInspector.prototype, "inputFunc", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("BtnTip")
+    (0, Decorators_1.ViewChild)("BtnTip")
 ], BtnInspector.prototype, "btnTip", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("InputTip")
+    (0, Decorators_1.ViewChild)("InputTip")
 ], BtnInspector.prototype, "inputTip", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("BtnHoldPress")
+    (0, Decorators_1.ViewChild)("BtnHoldPress")
 ], BtnInspector.prototype, "btnHoldPress", void 0);
 __decorate([
-    (0, DecoratorFactory_1.ViewChild)("InputHoldPress")
+    (0, Decorators_1.ViewChild)("InputHoldPress")
 ], BtnInspector.prototype, "inputHoldPress", void 0);
 exports.default = BtnInspector;

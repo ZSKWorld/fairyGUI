@@ -1,12 +1,15 @@
 import MenuDoc_Base from "./MenuDoc_Base";
 
 export default class MenuDoc_Test extends MenuDoc_Base {
-    protected InitMenData(): void {
-        const _this = this;
-        this.menuData = { text: "测试", selectCallback: () => { _this.CallBack(); } };
+    protected InitMenuData(): void {
+        this.menuData = { text: "测试", selectCallback: () => this.CallBack() };
     }
+
     private CallBack() {
     }
-    protected OnCreate(): void {}
-    protected OnDestroy(): void {}
+
+    protected OnCreate(): void { }
+
+    protected OnDestroy(): void { }
+    
 }

@@ -1,6 +1,5 @@
 import { FairyEditor, FairyGUI } from 'csharp';
-import EditorUtils from '../../Utils/EditorUtils';
-import { InspectorName, ViewID } from '../../Types';
+import { InspectorName, ViewID } from '../../Common/Types';
 import MenuDoc_Base from './MenuDoc_Base';
 
 
@@ -8,19 +7,19 @@ export default class MenuDoc_CreateRelation extends MenuDoc_Base {
     private relationFirst: FairyEditor.FObject;
     private relationSecond: FairyEditor.FObject;
     private rightClickCallback: FairyGUI.EventCallback0;
-    protected InitMenData(): void {
+
+    protected InitMenuData(): void {
         this.menuData = {
             atIndex: 0,
             text: "关联",
             childEnable: true,
             childs: []
         };
-        const _this = this;
         Object.keys(FairyEditor.FRelationType).slice(0, 25).forEach((v) => {
-            //这个地方不能直接赋值 selectCallback = this.CallBack ，selectCallback会绑定到全局执行
-            this.menuData.childs.push({ name: v, text: this.GetRelationText(v), selectCallback: (name: string) => { _this.CallBack(name) } });
+            this.menuData.childs.push({ name: v, text: this.GetRelationText(v), selectCallback: (name: string) => this.CallBack(name) });
         });
     }
+
     private GetRelationText(str: string) {
         str = str.replace(/LeftExt/g, "左延展");
         str = str.replace(/RightExt/g, "右延展");
@@ -40,6 +39,7 @@ export default class MenuDoc_CreateRelation extends MenuDoc_Base {
         str = str.replace(/_/g, "->");
         return str;
     }
+    
     private CallBack(name: string) {
         if (this.relationFirst && this.relationSecond) {
             this.relationFirst.relations.AddItem(this.relationSecond, FairyEditor.FRelationType[ name ]);
@@ -49,7 +49,7 @@ export default class MenuDoc_CreateRelation extends MenuDoc_Base {
     }
 
     protected OnCreate(): void {
-        this.rightClickCallback = new FairyGUI.EventCallback0(() => { this.OnRightClick(); });
+        this.rightClickCallback = new FairyGUI.EventCallback0(() => this.OnRightClick());
         FairyEditor.App.docView.docContainer.onRightClick.Add(this.rightClickCallback);
         FairyEditor.App.viewManager.GetView(ViewID.HierarchyView).onRightClick.Add(this.rightClickCallback);
     }
@@ -75,7 +75,7 @@ export default class MenuDoc_CreateRelation extends MenuDoc_Base {
         }
         this.parentMenu.SetItemText(this.menuData.name, name);
         const curMenu = this.parentMenu.GetSubMenu(this.menuData.name);
-        this.menuData.childs.forEach((v) => curMenu.SetItemEnabled(v.name, count > 0));
+        this.menuData.childs.forEach(v => curMenu.SetItemEnabled(v.name, count > 0));
     }
 
     protected OnDestroy(): void {
