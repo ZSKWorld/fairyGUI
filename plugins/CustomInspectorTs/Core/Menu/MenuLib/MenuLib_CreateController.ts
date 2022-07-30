@@ -1,12 +1,12 @@
 import { FairyEditor, FairyGUI, System } from "csharp";
 import { $generic } from "puerts";
-import Tip from "../../Common/Tip";
-import { AppConfirmResult, InspectorControlListIndex, InspectorName, MoreControllIndex, ShowObjectType } from "../../Common/Types";
-import EditorUtils from "../../Utils/EditorUtils";
-import MenuLib_Base from "./MenuLib_Base";
+import { Tip } from "../../common/Tip";
+import { AppConfirmResult, InspectorControlListIndex, InspectorName, MoreControllIndex, ShowObjectType } from "../../common/Types";
+import { EditorUtils } from "../../utils/EditorUtils";
+import { MenuLib_Base } from "./MenuLib_Base";
 const List = $generic(System.Collections.Generic.List$1, FairyEditor.FPackageItem);
 
-export default class MenuLib_CreateController extends MenuLib_Base {
+export class MenuLib_CreateController extends MenuLib_Base {
     /** libView item 点击事件 */
     private itemClick: FairyGUI.EventCallback1;
     /** “+更多控制” 点击事件 */
@@ -41,6 +41,18 @@ export default class MenuLib_CreateController extends MenuLib_Base {
             }
         });
         FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Add(this.addMoreControlClick);
+    }
+
+    protected OnDestroy(): void {
+        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onClickItem.Remove(this.itemClick);
+        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onClickItem.Remove(this.itemClick);
+        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onRightClickItem.Remove(this.itemClick);
+        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onRightClickItem.Remove(this.itemClick);
+        FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Remove(this.addMoreControlClick);
+        this.itemClick = null;
+        this.addMoreControlClick = null;
+        this.selectRES.Clear();
+        this.selectRES = null;
     }
 
     private OnItemClick(event: FairyGUI.EventContext) {
@@ -153,18 +165,6 @@ export default class MenuLib_CreateController extends MenuLib_Base {
                 return true;
             }
         }
-    }
-
-    protected OnDestroy(): void {
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onClickItem.Remove(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onClickItem.Remove(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onRightClickItem.Remove(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onRightClickItem.Remove(this.itemClick);
-        FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Remove(this.addMoreControlClick);
-        this.itemClick = null;
-        this.addMoreControlClick = null;
-        this.selectRES.Clear();
-        this.selectRES = null;
     }
 }
 

@@ -1,12 +1,12 @@
 import { FairyEditor } from "csharp";
-import BaseClass from "../Common/BaseClass";
-import { IMenuData } from "../Common/Types";
-import EditorUtils from "../Utils/EditorUtils";
+import { IMenuData } from "../common/Types";
+import { BaseClass } from "../libs/BaseClass";
+import { EditorUtils } from "../utils/EditorUtils";
 
 /**
  * 菜单基类
  */
-export default abstract class MenuBase extends BaseClass {
+export abstract class MenuBase extends BaseClass {
     /** 菜单数据，name属性一般不需要手动设置，默认根据类名作为name */
     protected menuData: IMenuData;
     /** 父菜单，现在的菜单都是附加在已有的菜单上的 */
@@ -19,7 +19,7 @@ export default abstract class MenuBase extends BaseClass {
 
     public Create(): void {
         this.InitMenuData();
-        this.menuData.name = this.menuData.name || this[ "__proto__" ].constructor.name;
+        this.menuData.name ||= this[ "__proto__" ].constructor.name;
         EditorUtils.CreateMenu(this.menuData, this.parentMenu);
         this.OnCreate();
     }

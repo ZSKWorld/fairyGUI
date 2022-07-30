@@ -1,9 +1,9 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import InspectorData from "./InspectorData";
-import { DestroyInstanceClass, ViewChildInit } from "../Utils/Decorators";
+import { DestroyInstanceClass, ViewChildInit } from "../utils/Decorators";
+import { InspectorData } from "./InspectorData";
 
 @DestroyInstanceClass("Dispose")
-export default abstract class BaseInspector extends FairyEditor.View.PluginInspector {
+export abstract class BaseInspector extends FairyEditor.View.PluginInspector {
     protected info: InspectorData;
     public constructor(info: InspectorData) {
         super();

@@ -1,8 +1,8 @@
 import { System } from "csharp";
 
-/** 菜单创建数据 */
+/** 菜单项创建数据 */
 export interface IMenuData {
-    /**菜单变量名 */
+    /**菜单名 */
     name?: string;
     /** 菜单显示内容 */
     text: string;
@@ -11,9 +11,9 @@ export interface IMenuData {
     /** 插入索引，只能小于菜单项数量，默认-1，即插入末尾 */
     atIndex?: number;
     /** 是否启用该菜单项子菜单 */
-    childEnable?: boolean;
+    isSubMenu?: boolean;
     /** 子菜单数据 */
-    childs?: IMenuData[];
+    subMenuData?: IMenuData[];
     /** 点击回调 */
     selectCallback?: System.Action$1<string>;
 };
@@ -166,7 +166,7 @@ export const enum AppConfirmResult {
     No = "no",
 }
 
-/**配置类型，值也是config目录下子目录名字，方便使用和修改 */
+/**配置类型，值是config目录下子目录名字，方便使用和修改 */
 export const enum ConfigType {
     None = "",
     PublishSettings = "publishSettings"

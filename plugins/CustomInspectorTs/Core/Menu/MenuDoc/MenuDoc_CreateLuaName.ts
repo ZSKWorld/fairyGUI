@@ -1,8 +1,8 @@
 import { FairyEditor } from "csharp";
-import { ShowObjectType } from "../../Common/Types";
-import MenuDoc_Base from "./MenuDoc_Base";
+import { ShowObjectType } from "../../common/Types";
+import { MenuDoc_Base } from "./MenuDoc_Base";
 
-export default class MenuDoc_CreateLuaName extends MenuDoc_Base {
+export class MenuDoc_CreateLuaName extends MenuDoc_Base {
     private typeToType = {
         Button: "FairyGUI.GButton",
         text: "FairyGUI.GTextField",
@@ -23,6 +23,10 @@ export default class MenuDoc_CreateLuaName extends MenuDoc_Base {
     protected InitMenuData(): void {
         this.menuData = { text: "创建Lua名称代码到剪切板", selectCallback: () => this.CallBack() };
     }
+
+    protected OnCreate(): void { }
+
+    protected OnDestroy(): void { }
 
     private CallBack() {
         const target = FairyEditor.App.activeDoc.GetSelection();
@@ -53,8 +57,4 @@ export default class MenuDoc_CreateLuaName extends MenuDoc_Base {
         }
         if (result) FairyEditor.Clipboard.SetText(result);
     }
-
-    protected OnCreate(): void { }
-    
-    protected OnDestroy(): void { }
 }

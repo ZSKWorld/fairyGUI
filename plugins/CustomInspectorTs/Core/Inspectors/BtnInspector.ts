@@ -1,11 +1,11 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import Tip from "../Common/Tip";
-import { IComponentCustomData, InspectorName } from "../Common/Types";
-import { ViewChild } from "../Utils/Decorators";
-import BaseInspector from "./BaseInspector";
+import { Tip } from "../common/Tip";
+import { IComponentCustomData, InspectorName } from "../common/Types";
+import { ViewChild } from "../utils/Decorators";
+import {BaseInspector} from "./BaseInspector";
 const App = FairyEditor.App;
 
-export default class BtnInspector extends BaseInspector {
+export class BtnInspector extends BaseInspector {
     @ViewChild("BtnFunc")
     private btnFunc: FairyGUI.GButton;
     @ViewChild("InputFunc")

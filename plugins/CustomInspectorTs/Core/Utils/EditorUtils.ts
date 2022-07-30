@@ -1,6 +1,6 @@
 import { FairyEditor, FairyGUI, System } from "csharp";
-import { ConfigType, IMenuData } from "../Common/Types";
-export default class EditorUtils {
+import { ConfigType, IMenuData } from "../common/Types";
+export class EditorUtils {
     /**
      * @description: 创建菜单目录
      * @param data 菜单数据
@@ -15,11 +15,11 @@ export default class EditorUtils {
     private static CreateMenu2(data: IMenuData, parent: FairyEditor.Component.IMenu, nameArr: string[]): void {
         if (nameArr.indexOf(data.name) != -1) return FairyEditor.App.Alert(`目录有重名：${ data.name }--${ data.text }`);
         nameArr.push(data.name);
-        if (data.childs) {
+        if (data.isSubMenu) {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, true, data.selectCallback);
-            if (data.childEnable) {
+            if (data.subMenuData && data.subMenuData.length) {
                 const curMenu: FairyEditor.Component.IMenu = parent.GetSubMenu(data.name);
-                data.childs.forEach((v) => this.CreateMenu2(v, curMenu, nameArr));
+                data.subMenuData.forEach((v) => this.CreateMenu2(v, curMenu, nameArr));
             }
         } else {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, false, data.selectCallback);
@@ -62,7 +62,7 @@ export default class EditorUtils {
         FairyEditor.App.activeDoc.InsertObject(url);
     }
 
-    /** 获取插件根目录名字 */
+    /** 获取插件根目录 */
     public static GetPluginRootDir() {
         return FairyEditor.App.pluginManager.projectPluginFolder + "/" + (eval("__dirname") as string).split("/")[ 0 ];
     }
@@ -75,7 +75,7 @@ export default class EditorUtils {
         return this.GetPluginRootDir() + "/Packages/" + name;
     }
 
-    /**获取config下的配置文件 */
+    /**获取config目录下的配置文件 */
     public static GetConfig<T = any>(type: ConfigType, fileName: string): T {
         const dir = type ? type + "/" : "";
         const cfgPath = `${ this.GetPluginRootDir() }/config/${ dir }${ fileName }.json`;

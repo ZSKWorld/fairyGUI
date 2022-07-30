@@ -1,10 +1,10 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import { InspectorName, ShowObjectType } from "../Common/Types";
-import { ViewChild } from "../Utils/Decorators";
-import BaseInspector from "./BaseInspector";
+import { InspectorName, ShowObjectType } from "../common/Types";
+import { ViewChild } from "../utils/Decorators";
+import {BaseInspector} from "./BaseInspector";
 const { App, FRelationType } = FairyEditor;
 
-export default class TextLayoutInspector extends BaseInspector {
+export class TextLayoutInspector extends BaseInspector {
     @ViewChild("TextArea")
     private textArea: FairyGUI.GLabel;
     @ViewChild("BtnSubmit")

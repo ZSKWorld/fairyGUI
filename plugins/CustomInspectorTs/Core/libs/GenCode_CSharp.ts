@@ -1,7 +1,7 @@
 import { FairyEditor } from 'csharp';
-import CodeWriter from './CodeWriter';
+import CodeWriter from '../../libs/CodeWriter';
 
-function genCode(handler: FairyEditor.PublishHandler) {
+export function genCode_CSharp(handler: FairyEditor.PublishHandler) {
     let settings = (<FairyEditor.GlobalPublishSettings>handler.project.GetSettings("Publish")).codeGeneration;
     let codePkgName = handler.ToFilename(handler.pkg.name); //convert chinese to pinyin, remove special chars etc.
     let exportCodePath = handler.exportCodePath + '/' + codePkgName;
@@ -109,5 +109,3 @@ function genCode(handler: FairyEditor.PublishHandler) {
 
     writer.save(exportCodePath + '/' + binderName + '.cs');
 }
-
-export { genCode };

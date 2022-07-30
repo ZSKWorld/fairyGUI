@@ -1,34 +1,44 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import Tip from "../../Common/Tip";
-import { ConfigType } from "../../Common/Types";
-import EditorUtils from "../../Utils/EditorUtils";
-import MenuMain_Base from "./MenuMain_Base";
+import { Tip } from "../../common/Tip";
+import { ConfigType } from "../../common/Types";
+import { EditorUtils } from "../../utils/EditorUtils";
+import { MenuMain_Base } from "./MenuMain_Base";
 
 type Partial<T> = { [ P in keyof T ]?: Partial<T[ P ]>; };
 type PlatformConfig = { [ key: string ]: { enable: boolean, configName: string } };
 
-export default class MenuMain_Publish extends MenuMain_Base {
+export class MenuMain_Publish extends MenuMain_Base {
     /** 主菜单按钮 */
     private menuBtn: FairyGUI.GButton;
     private platformKeys: string[];
     /** 平台配置文件 */
     private platformCfg: PlatformConfig;
     private settingsMap: { [ key: string ]: Partial<FairyEditor.GlobalPublishSettings> } = {};
-    
+
     protected InitMenuData(): void {
         this.platformCfg = EditorUtils.GetConfig(ConfigType.PublishSettings, "PlatformConfig");
         if (this.platformCfg) {
             this.platformKeys = Object.keys(this.platformCfg).filter(v => !!this.platformCfg[ v ].enable);
             this.menuData = {
                 text: "发布",
-                childEnable: true,
-                childs: this.platformKeys.map(key => ({ name: key, text: key, selectCallback: (str) => this.translatePublishPlatform(str) }))
+                isSubMenu: true,
+                subMenuData: this.platformKeys.map(key => ({ name: key, text: key, selectCallback: (str) => this.translatePublishPlatform(str) }))
             };
         }
     }
 
+    protected OnCreate(): void {
+        const list = FairyEditor.App.mainView.panel.GetChild('menuBar').asCom.GetChild('list').asList;
+        this.menuBtn = list.GetChildAt(list.numChildren - 1).asButton;
+        this.menuBtn.GetChild('title').asTextField.UBBEnabled = true;
+        this.translatePublishPlatform(FairyEditor.App.project.type, false);
+    }
+
+    protected OnDestroy(): void {
+        this.menuBtn = null;
+    }
+
     private getSetting(platform: string) {
-        FairyEditor.ProjectType.Egret
         let setting = this.settingsMap[ platform ];
         if (!setting) {
             setting = this.settingsMap[ platform ] = EditorUtils.GetConfig(ConfigType.PublishSettings, this.platformCfg[ platform ].configName);
@@ -69,16 +79,5 @@ export default class MenuMain_Publish extends MenuMain_Base {
         }
         const curMenu = this.parentMenu.GetSubMenu(this.menuData.name);
         this.platformKeys.forEach(key => curMenu.SetItemChecked(key, key == FairyEditor.App.project.type));
-    }
-
-    protected OnCreate(): void {
-        const list = FairyEditor.App.mainView.panel.GetChild('menuBar').asCom.GetChild('list').asList;
-        this.menuBtn = list.GetChildAt(list.numChildren - 1).asButton;
-        this.menuBtn.GetChild('title').asTextField.UBBEnabled = true;
-        this.translatePublishPlatform(FairyEditor.App.project.type, false);
-    }
-
-    protected OnDestroy(): void {
-        this.menuBtn = null;
     }
 }

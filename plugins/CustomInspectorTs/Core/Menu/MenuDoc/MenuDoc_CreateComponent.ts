@@ -1,11 +1,11 @@
-import MenuDoc_Base from "./MenuDoc_Base";
-export default class MenuDoc_CreateComponent extends MenuDoc_Base {
+import { MenuDoc_Base } from "./MenuDoc_Base";
+export class MenuDoc_CreateComponent extends MenuDoc_Base {
     protected InitMenuData(): void {
         this.menuData = {
             text: "自定义组件",
-            childEnable: true,
+            isSubMenu: true,
             selectCallback: this.CallBack,
-            childs: [
+            subMenuData: [
                 { name: "button", text: "按钮组件", url: "ui://38ft0jfga4q55", selectCallback: this.CallBack, },
                 { name: "list", text: "列表组件", url: "ui://2pshu6oingyqa7iufv", selectCallback: this.CallBack, },
                 { name: "page", text: "分页组件", url: "ui://2pshu6oiau3n5i", selectCallback: this.CallBack, },
@@ -16,9 +16,9 @@ export default class MenuDoc_CreateComponent extends MenuDoc_Base {
         };
     }
 
-    // public constructor() {
-    //     super();
-    // }
+    protected OnCreate(): void { }
+
+    protected OnDestroy(): void { }
 
     private CallBack(name: string) {
         // let url = "";
@@ -44,9 +44,5 @@ export default class MenuDoc_CreateComponent extends MenuDoc_Base {
         // FairyEditor.App.activeDoc.SetModified(true);
     }
 
-    protected OnCreate(): void { }
-
-    protected OnDestroy(): void { }
-    
 }
 

@@ -1,12 +1,12 @@
 import { FairyEditor, FairyGUI } from "csharp";
-import BaseClass from "./BaseClass";
+import { BaseClass } from "../libs/BaseClass";
 import { PkgCustom, PkgCustom_Tip } from "./Const";
 /** 弹窗提示 */
-export default class Tip extends BaseClass {
+export class Tip extends BaseClass {
     private static _inst: Tip;
     public static get Inst() { return Tip._inst || (Tip._inst = new Tip()); }
 
-    private comp: FairyGUI.GLabel;
+    private label: FairyGUI.GLabel;
     private showAni: FairyGUI.Transition;
 
     private constructor() {
@@ -15,31 +15,29 @@ export default class Tip extends BaseClass {
     }
 
     public Show(msg: string) {
-        this.comp.title = msg;
+        this.label.title = msg;
         this.showAni.Play();
     }
 
     protected Destroy(): void {
-        if (this.comp) {
-            this.comp.Dispose();
-            this.comp = null;
+        if (this.label) {
+            this.label.Dispose();
+            this.label = null;
             this.showAni = null;
         }
     }
 
     private InitComp() {
-        if (!this.comp) {
-            this.comp = FairyGUI.UIPackage.CreateObject(PkgCustom, PkgCustom_Tip).asLabel;
-            this.showAni = this.comp.GetTransitionAt(0);
+        if (!this.label) {
+            this.label = FairyGUI.UIPackage.CreateObject(PkgCustom, PkgCustom_Tip).asLabel;
+            this.showAni = this.label.GetTransitionAt(0);
 
             const main = FairyEditor.App.mainView.panel;
-            main.AddChild(this.comp);
+            main.AddChildAt(this.label, 5);
 
-            this.comp.alpha = 0;
-            this.comp.touchable = false;
-            this.comp.SetXY(main.width / 2, main.height / 2);
-            this.comp.AddRelation(main, FairyGUI.RelationType.Center_Center);
-            this.comp.AddRelation(main, FairyGUI.RelationType.Middle_Middle);
+            this.label.touchable = false;
+            this.label.SetXY(main.width / 2, -28);
+            this.label.AddRelation(main, FairyGUI.RelationType.Center_Center);
         }
     }
 

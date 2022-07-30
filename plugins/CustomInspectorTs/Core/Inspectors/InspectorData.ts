@@ -1,7 +1,7 @@
-import { ShowObjectType } from "../Common/Types";
+import { ShowObjectType } from "../common/Types";
 
 /**检查器创建数据 */
-export default class InspectorData {
+export class InspectorData {
     /**检查器名称 */
     public InspectorName: string;
     /**包名 */

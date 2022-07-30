@@ -1,4 +1,5 @@
 import { FairyEditor } from "csharp";
+
 /**
  * 查找子节点
  * @param childName 节点名字
@@ -6,11 +7,12 @@ import { FairyEditor } from "csharp";
 export function ViewChild(childName: string) {
     if (!childName) return;
     return function (target: FairyEditor.View.PluginInspector & { __childMap?: any }, propertyKey: string) {
+        target.__childMap ||= {};
         let childMap = target.__childMap;
-        if (!childMap) childMap = target.__childMap = {};
         childMap[ propertyKey ] = childName;
     }
 }
+
 export function ViewChildInit(target: FairyEditor.View.PluginInspector & { __childMap?: any }) {
     if (target && target.__childMap) {
         const childMap = target.__childMap;
