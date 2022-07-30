@@ -6,6 +6,12 @@
 			"command": "tsc",
 			"label": "编译",
 			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"command": "tsc --outDir E:/study/IT/Projects/ProjectACG/CodeRestructureV1.1/UIEditorObject/FGUICustomInspector/plugins/CustomInspectorTs/js",
+			"label": "生成到插件项目下",
+			"problemMatcher": []
 		}
 	]
 }
