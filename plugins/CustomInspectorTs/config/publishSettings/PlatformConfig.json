@@ -1,0 +1,66 @@
+{
+    "Layabox": {
+        "enable": true,
+        "configName": "Layabox"
+    },
+    "Unity": {
+        "enable": true,
+        "configName": "Unity"
+    },
+    "Flash": {
+        "enable": false,
+        "configName": "Flash"
+    },
+    "Starling": {
+        "enable": false,
+        "configName": "Starling"
+    },
+    "Egret": {
+        "enable": false,
+        "configName": "Egret"
+    },
+    "Haxe": {
+        "enable": false,
+        "configName": "Haxe"
+    },
+    "PIXI": {
+        "enable": false,
+        "configName": "PIXI"
+    },
+    "Cocos2dx": {
+        "enable": false,
+        "configName": "Cocos2dx"
+    },
+    "CryEngine": {
+        "enable": false,
+        "configName": "CryEngine"
+    },
+    "Vision": {
+        "enable": false,
+        "configName": "Vision"
+    },
+    "MonoGame": {
+        "enable": false,
+        "configName": "MonoGame"
+    },
+    "CocosCreator": {
+        "enable": false,
+        "configName": "CocosCreator"
+    },
+    "LibGDX": {
+        "enable": false,
+        "configName": "LibGDX"
+    },
+    "Unreal": {
+        "enable": false,
+        "configName": "Unreal"
+    },
+    "Corona": {
+        "enable": false,
+        "configName": "Corona"
+    },
+    "ThreeJS": {
+        "enable": false,
+        "configName": "ThreeJS"
+    }
+}

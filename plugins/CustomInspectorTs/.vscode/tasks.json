@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "tsc",
+			"label": "编译",
+			"problemMatcher": []
+		}
+	]
+}
