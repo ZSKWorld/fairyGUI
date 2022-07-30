@@ -6,24 +6,22 @@ export class EditorUtils {
      * @param data 菜单数据
      * @param parent 父菜单
      */
-    public static CreateMenu(data: IMenuData, parent?: FairyEditor.Component.IMenu): void {
-        if (!data) return;
-        const nameCheckArr = [];
-        this.CreateMenu2(data, parent, nameCheckArr);
-    }
-
-    private static CreateMenu2(data: IMenuData, parent: FairyEditor.Component.IMenu, nameArr: string[]): void {
-        if (nameArr.indexOf(data.name) != -1) return FairyEditor.App.Alert(`目录有重名：${ data.name }--${ data.text }`);
-        nameArr.push(data.name);
+    public static CreateMenu(data: IMenuData, parent: FairyEditor.Component.IMenu): void {
+        if (data.subMenuData && data.subMenuData.length) {
+            const nameCheckArr = [];
+            for (let i = data.subMenuData.length - 1; i >= 0; i--) {
+                const name = data.subMenuData[ i ].name;
+                if (nameCheckArr.indexOf(name) != -1) return FairyEditor.App.Alert("菜单目录有重名：" + name);
+                else nameCheckArr.push(name);
+            }
+        }
         if (data.isSubMenu) {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, true, data.selectCallback);
             if (data.subMenuData && data.subMenuData.length) {
                 const curMenu: FairyEditor.Component.IMenu = parent.GetSubMenu(data.name);
-                data.subMenuData.forEach((v) => this.CreateMenu2(v, curMenu, nameArr));
+                data.subMenuData.forEach((v) => this.CreateMenu(v, curMenu));
             }
-        } else {
-            parent.AddItem(data.text, data.name, data.atIndex ?? -1, false, data.selectCallback);
-        }
+        } else parent.AddItem(data.text, data.name, data.atIndex ?? -1, false, data.selectCallback);
     }
 
     /**

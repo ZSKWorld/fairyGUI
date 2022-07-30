@@ -1,66 +1,99 @@
 {
     "Layabox": {
         "enable": true,
-        "configName": "Layabox"
+        "configNames": [
+            "Layabox"
+        ]
     },
     "Unity": {
         "enable": true,
-        "configName": "Unity"
+        "configNames": [
+            "Unity_项目路径",
+            "Unity_插件路径"
+        ]
     },
     "Flash": {
         "enable": false,
-        "configName": "Flash"
+        "configNames": [
+            "Flash"
+        ]
     },
     "Starling": {
         "enable": false,
-        "configName": "Starling"
+        "configNames": [
+            "Starling"
+        ]
     },
     "Egret": {
         "enable": false,
-        "configName": "Egret"
+        "configNames": [
+            "Egret"
+        ]
     },
     "Haxe": {
         "enable": false,
-        "configName": "Haxe"
+        "configNames": [
+            "Haxe"
+        ]
     },
     "PIXI": {
         "enable": false,
-        "configName": "PIXI"
+        "configNames": [
+            "PIXI"
+        ]
     },
     "Cocos2dx": {
         "enable": false,
-        "configName": "Cocos2dx"
+        "configNames": [
+            "Cocos2dx"
+        ]
     },
     "CryEngine": {
         "enable": false,
-        "configName": "CryEngine"
+        "configNames": [
+            "CryEngine"
+        ]
     },
     "Vision": {
         "enable": false,
-        "configName": "Vision"
+        "configNames": [
+            "Vision"
+        ]
     },
     "MonoGame": {
         "enable": false,
-        "configName": "MonoGame"
+        "configNames": [
+            "MonoGame"
+        ]
     },
     "CocosCreator": {
         "enable": false,
-        "configName": "CocosCreator"
+        "configNames": [
+            "CocosCreator"
+        ]
     },
     "LibGDX": {
         "enable": false,
-        "configName": "LibGDX"
+        "configNames": [
+            "LibGDX"
+        ]
     },
     "Unreal": {
         "enable": false,
-        "configName": "Unreal"
+        "configNames": [
+            "Unreal"
+        ]
     },
     "Corona": {
         "enable": false,
-        "configName": "Corona"
+        "configNames": [
+            "Corona"
+        ]
     },
     "ThreeJS": {
         "enable": false,
-        "configName": "ThreeJS"
+        "configNames": [
+            "ThreeJS"
+        ]
     }
 }

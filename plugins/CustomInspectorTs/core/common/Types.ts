@@ -171,3 +171,10 @@ export const enum ConfigType {
     None = "",
     PublishSettings = "publishSettings"
 }
+
+export const enum SettingName {
+    /** 发布设置 */
+    Publish = "Publish",
+    /** 自定义属性设置 */
+    CustomProperties = "CustomProperties",
+}
