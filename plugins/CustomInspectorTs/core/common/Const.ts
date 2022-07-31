@@ -4,3 +4,6 @@ export const PkgCustom_Btn = "BtnInspector";
 export const PkgCustom_Text = "TextInspector";
 export const PkgCustom_Tip = "Tip";
 //#endregion
+
+/**类实例统一销毁方法名 */
+export const DestroyInstanceMethodName = "DestroyInstance";

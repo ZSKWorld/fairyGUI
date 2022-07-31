@@ -2,7 +2,7 @@ import { FairyEditor, FairyGUI } from "csharp";
 import { Tip } from "../common/Tip";
 import { IComponentCustomData, InspectorName } from "../common/Types";
 import { ViewChild } from "../utils/Decorators";
-import {BaseInspector} from "./BaseInspector";
+import { BaseInspector } from "./BaseInspector";
 const App = FairyEditor.App;
 
 export class BtnInspector extends BaseInspector {

@@ -1,4 +1,5 @@
 import { FairyEditor } from "csharp";
+import { DestroyInstanceMethodName } from "../common/Const";
 
 /**
  * 查找子节点
@@ -36,10 +37,10 @@ export function ViewChildInit(target: FairyEditor.View.PluginInspector & { __chi
  */
 export function DestroyInstanceClass(destroyFuncName: string) {
     return function (constructor: any): any {
-        const constructor2 = constructor as unknown as { new(...args): any };
-        class NewClass extends constructor2 {
+        const OldClass = constructor as unknown as { new(...args): any };
+        class NewClass extends OldClass {
             private static __instances: NewClass[] = [];
-            public static DestroyInstance() {
+            public static [ DestroyInstanceMethodName ]() {
                 this.__instances.forEach(v => v[ destroyFuncName ]());
                 this.__instances.length = 0;
                 this.__instances = null;

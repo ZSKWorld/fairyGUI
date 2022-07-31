@@ -2,14 +2,14 @@ import { FairyEditor, FairyGUI } from "csharp";
 import { Tip } from "../../common/Tip";
 import { ConfigType, SettingName } from "../../common/Types";
 import { EditorUtils } from "../../utils/EditorUtils";
-import { MenuMain_Base } from "./MenuMain_Base";
+import { MenuBase } from "../MenuBase";
 
 type Partial<T> = { [ P in keyof T ]?: Partial<T[ P ]>; };
 type PlatformConfig = { [ key: string ]: { enable: boolean, configNames: string[] } };
 
 const CUSTOM_KEY = "SelectedCfgIndex";
 
-export class MenuMain_Publish extends MenuMain_Base {
+export class MenuMain_Publish extends MenuBase {
     /** 主菜单按钮 */
     private menuBtn: FairyGUI.GButton;
     private platformKeys: string[];
@@ -119,8 +119,8 @@ export class MenuMain_Publish extends MenuMain_Base {
             this.lastCfgIndex = cfgIndex;
             let cfgStr = `[color=#ff0000]${ FairyEditor.App.project.type }[/color]`;
             const platformCfg = this.platformCfg[ this.selectedPlatform ];
-            const containCfg = platformCfg.configNames.length > 1;
-            if (containCfg) cfgStr += ` [color=#0000ff]${ platformCfg.configNames[ cfgIndex ] }[/color]`;
+            if (platformCfg.configNames.length > 1)
+                cfgStr += ` [color=#0000ff]${ platformCfg.configNames[ cfgIndex ] }[/color]`;
             this.menuBtn.title = `当前发布到 ${ cfgStr }`;
             showTip && Tip.Inst.Show(`已切换发布平台到 ${ cfgStr }`);
         } else {
@@ -136,9 +136,11 @@ export class MenuMain_Publish extends MenuMain_Base {
         this.platformKeys.forEach(key => {
             curMenu.SetItemChecked(key, key == this.selectedPlatform);
             const curSubMenu = curMenu.GetSubMenu(key);
-            if (this.platformCfg[ key ].configNames.length > 1)
-                this.platformCfg[ key ].configNames.forEach((_, index) =>
-                    curSubMenu.SetItemChecked(index.toString(), key == this.selectedPlatform && index == cfgIndex));
+            if (this.platformCfg[ key ].configNames.length > 1) {
+                this.platformCfg[ key ].configNames.forEach((_, index) => {
+                    curSubMenu.SetItemChecked(index.toString(), key == this.selectedPlatform && index == cfgIndex)
+                });
+            }
         });
     }
 }

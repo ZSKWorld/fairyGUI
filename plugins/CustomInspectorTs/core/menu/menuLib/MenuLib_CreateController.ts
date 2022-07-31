@@ -3,14 +3,14 @@ import { $generic } from "puerts";
 import { Tip } from "../../common/Tip";
 import { AppConfirmResult, InspectorControlListIndex, InspectorName, MoreControllIndex, ShowObjectType } from "../../common/Types";
 import { EditorUtils } from "../../utils/EditorUtils";
-import { MenuLib_Base } from "./MenuLib_Base";
+import { MenuBase } from "../MenuBase";
 const List = $generic(System.Collections.Generic.List$1, FairyEditor.FPackageItem);
 
-export class MenuLib_CreateController extends MenuLib_Base {
+export class MenuLib_CreateController extends MenuBase {
     /** libView item 点击事件 */
     private itemClick: FairyGUI.EventCallback1;
     /** “+更多控制” 点击事件 */
-    private addMoreControlClick: FairyGUI.EventCallback1;
+    private moreControlClick: FairyGUI.EventCallback1;
     /** 资源库选中资源 */
     private selectRES: System.Collections.Generic.List$1<FairyEditor.FPackageItem>;
     private createEnable: boolean;
@@ -27,30 +27,32 @@ export class MenuLib_CreateController extends MenuLib_Base {
 
     protected OnCreate(): void {
         this.selectRES = new List<FairyEditor.FPackageItem>();
-        this.itemClick = new FairyGUI.EventCallback1(event => this.OnItemClick(event))
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onClickItem.Add(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onClickItem.Add(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onRightClickItem.Add(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onRightClickItem.Add(this.itemClick);
+        this.itemClick = new FairyGUI.EventCallback1(event => this.OnItemClick(event));
+        const comp = FairyEditor.App.libView.GetChildAt(0).asCom;
+        comp.GetChild("treeView").asList.onClickItem.Add(this.itemClick);
+        comp.GetChild("listView").asList.onClickItem.Add(this.itemClick);
+        comp.GetChild("treeView").asList.onRightClickItem.Add(this.itemClick);
+        comp.GetChild("listView").asList.onRightClickItem.Add(this.itemClick);
 
-        this.addMoreControlClick = new FairyGUI.EventCallback1((event) => {
+        this.moreControlClick = new FairyGUI.EventCallback1((event) => {
             try {
                 this.OnAddMoreControlClick(event);
             } catch (error) {
                 return Tip.Inst.Show("偶尔有bug很正常，稍安勿躁，重新创建试试!!!");
             }
         });
-        FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Add(this.addMoreControlClick);
+        FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Add(this.moreControlClick);
     }
 
     protected OnDestroy(): void {
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onClickItem.Remove(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onClickItem.Remove(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("treeView").asList.onRightClickItem.Remove(this.itemClick);
-        FairyEditor.App.libView.GetChildAt(0).asCom.GetChild("listView").asList.onRightClickItem.Remove(this.itemClick);
-        FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Remove(this.addMoreControlClick);
+        const comp = FairyEditor.App.libView.GetChildAt(0).asCom;
+        comp.GetChild("treeView").asList.onClickItem.Remove(this.itemClick);
+        comp.GetChild("listView").asList.onClickItem.Remove(this.itemClick);
+        comp.GetChild("treeView").asList.onRightClickItem.Remove(this.itemClick);
+        comp.GetChild("listView").asList.onRightClickItem.Remove(this.itemClick);
+        FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("add").asButton.onClick.Remove(this.moreControlClick);
         this.itemClick = null;
-        this.addMoreControlClick = null;
+        this.moreControlClick = null;
         this.selectRES.Clear();
         this.selectRES = null;
     }
@@ -90,7 +92,8 @@ export class MenuLib_CreateController extends MenuLib_Base {
         const controller = FairyEditor.App.activeDoc.content.GetController(this.controllerName);
 
         //选择图标控制器
-        FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel.GetChild("list").asList.GetChildAt(InspectorControlListIndex.Icon).asCom.GetChild("controller").asLabel.onClick.Call();
+        FairyEditor.App.inspectorView.GetInspector(InspectorName.Gear).panel
+            .GetChild("list").asList.GetChildAt(InspectorControlListIndex.Icon).asCom.GetChild("controller").asLabel.onClick.Call();
 
         let iconControlBtn: FairyGUI.GButton;
         let ctrlList = FairyEditor.App.groot.GetChildAt(1).asCom.GetChildAt(1).asList;

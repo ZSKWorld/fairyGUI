@@ -18,7 +18,7 @@ export class EditorUtils {
         if (data.isSubMenu) {
             parent.AddItem(data.text, data.name, data.atIndex ?? -1, true, data.selectCallback);
             if (data.subMenuData && data.subMenuData.length) {
-                const curMenu: FairyEditor.Component.IMenu = parent.GetSubMenu(data.name);
+                const curMenu = parent.GetSubMenu(data.name);
                 data.subMenuData.forEach((v) => this.CreateMenu(v, curMenu));
             }
         } else parent.AddItem(data.text, data.name, data.atIndex ?? -1, false, data.selectCallback);
@@ -77,11 +77,17 @@ export class EditorUtils {
     public static GetConfig<T = any>(type: ConfigType, fileName: string): T {
         const dir = type ? type + "/" : "";
         const cfgPath = `${ this.GetPluginRootDir() }/config/${ dir }${ fileName }.json`;
-        if (System.IO.File.Exists(cfgPath) == false) return console.warn("文件不存在" + cfgPath) as unknown as T;
+        if (System.IO.File.Exists(cfgPath) == false)
+            return console.warn("文件不存在" + cfgPath) as unknown as T;
         const cfgJsonStr = System.IO.File.ReadAllText(cfgPath);
-        if (!cfgJsonStr) return console.warn("文件内容为空" + cfgPath) as unknown as T;
-        try { return JSON.parse(cfgJsonStr) as T; }
-        catch (e) { return console.warn("文件内容格式错误") as unknown as T; }
+        if (!cfgJsonStr)
+            return console.warn("文件内容为空" + cfgPath) as unknown as T;
+        try {
+            return JSON.parse(cfgJsonStr) as T;
+        }
+        catch (e) {
+            return console.warn("文件内容格式错误") as unknown as T;
+        }
 
     }
 }

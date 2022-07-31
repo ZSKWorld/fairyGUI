@@ -1,8 +1,8 @@
 import { FairyEditor } from "csharp";
 import { ShowObjectType } from "../../common/Types";
-import { MenuDoc_Base } from "./MenuDoc_Base";
+import { MenuBase } from "../MenuBase";
 
-export class MenuDoc_CreateLuaName extends MenuDoc_Base {
+export class MenuDoc_CreateLuaName extends MenuBase {
     private typeToType = {
         Button: "FairyGUI.GButton",
         text: "FairyGUI.GTextField",

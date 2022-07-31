@@ -1,8 +1,8 @@
 import { FairyEditor, FairyGUI } from 'csharp';
 import { InspectorName, ViewID } from '../../common/Types';
-import { MenuDoc_Base } from './MenuDoc_Base';
+import { MenuBase } from '../MenuBase';
 
-export class MenuDoc_CreateRelation extends MenuDoc_Base {
+export class MenuDoc_CreateRelation extends MenuBase {
     /** 关联对象 */
     private relationFirst: FairyEditor.FObject;
     /** 被关联对象 */
@@ -14,11 +14,12 @@ export class MenuDoc_CreateRelation extends MenuDoc_Base {
             text: "关联",
             atIndex: 0,
             isSubMenu: true,
-            subMenuData: []
+            subMenuData: Object.keys(FairyEditor.FRelationType).slice(0, 25).map(v => ({
+                name: v,
+                text: this.GetRelationText(v),
+                selectCallback: (name: string) => this.CallBack(name)
+            }))
         };
-        Object.keys(FairyEditor.FRelationType).slice(0, 25).forEach((v) => {
-            this.menuData.subMenuData.push({ name: v, text: this.GetRelationText(v), selectCallback: (name: string) => this.CallBack(name) });
-        });
     }
 
     protected OnCreate(): void {
