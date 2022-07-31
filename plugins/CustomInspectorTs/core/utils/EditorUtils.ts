@@ -80,7 +80,9 @@ export class EditorUtils {
         if (System.IO.File.Exists(cfgPath) == false) return console.warn("文件不存在" + cfgPath) as unknown as T;
         const cfgJsonStr = System.IO.File.ReadAllText(cfgPath);
         if (!cfgJsonStr) return console.warn("文件内容为空" + cfgPath) as unknown as T;
-        return JSON.parse(cfgJsonStr) as T;
+        try { return JSON.parse(cfgJsonStr) as T; }
+        catch (e) { return console.warn("文件内容格式错误") as unknown as T; }
+
     }
 }
 

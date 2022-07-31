@@ -172,6 +172,23 @@ export const enum ConfigType {
     PublishSettings = "publishSettings"
 }
 
+/** 主菜单中各子菜单名字 */
+export const enum MainMenuType {
+    /** 主菜单=》“文件” */
+    File = "file",
+    /** 主菜单=》“编辑” */
+    Edit = "edit",
+    /** 主菜单=》“资源” */
+    Assets = "assets",
+    /** 主菜单=》“工具” */
+    Tool = "tool",
+    /** 主菜单=》“视图” */
+    View = "view",
+    /** 主菜单=》“帮助” */
+    Help = "help",
+}
+
+/** 编辑器里各种设置的名字 */
 export const enum SettingName {
     /** 发布设置 */
     Publish = "Publish",

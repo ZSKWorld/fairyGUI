@@ -1,6 +1,6 @@
 import { FairyEditor } from 'csharp';
 import { PkgCustom, PkgCustom_Btn, PkgCustom_Text } from './core/common/Const';
-import { InspectorName, ShowObjectType } from './core/common/Types';
+import { InspectorName, MainMenuType, ShowObjectType } from './core/common/Types';
 import { BaseInspector } from './core/inspectors/BaseInspector';
 import { BtnInspector } from './core/inspectors/BtnInspector';
 import { ComInspector } from './core/inspectors/ComInspector';
@@ -19,12 +19,17 @@ import { EditorUtils } from './core/utils/EditorUtils';
 /** 加载插件UI包 */
 FairyEditor.App.pluginManager.LoadUIPackage(EditorUtils.GetFilePath(PkgCustom));
 
+const docMenu = FairyEditor.App.docFactory.contextMenu;
+const libMenu = FairyEditor.App.libView.contextMenu;
+const mainMenu = FairyEditor.App.menu;
+const mainSubMenu = (name: MainMenuType) => mainMenu.GetSubMenu(name);
+
 [
     //编辑区菜单
     // new MenuDoc_CreateComponent(),
     // new MenuDoc_CreateRelation(),
     // new MenuDoc_CreateLuaName(),
-    // new MenuDoc_Test(),
+    new MenuDoc_Test(),
 
     //资源库菜单
     // new MenuLib_CreateController(),

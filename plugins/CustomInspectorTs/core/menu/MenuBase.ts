@@ -33,6 +33,7 @@ export abstract class MenuBase extends BaseClass {
     /**初始化菜单数据 */
     protected abstract InitMenuData(): void;
 
+    /**菜单创建完后执行 */
     protected abstract OnCreate(): void;
 
     protected abstract OnDestroy(): void;
