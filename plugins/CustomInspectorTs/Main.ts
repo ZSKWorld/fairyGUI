@@ -1,13 +1,16 @@
 import { FairyEditor } from 'csharp';
 import { DestroyInstanceMethodName, PkgCustom } from './core/common/Const';
+import { CustomSetting } from './core/common/CustomSetting';
 import { MainMenuType } from './core/common/Types';
 import { BaseInspector } from './core/inspectors/BaseInspector';
 import { BaseClass } from './core/libs/BaseClass';
+import { MenuDoc_CreateLayaName } from './core/menu/menuDoc/MenuDoc_CreateLayaName';
 import { MenuMain_Publish } from './core/menu/menuMain/MenuMain_Publish';
 import { EditorUtils } from './core/utils/EditorUtils';
 
 /** 加载插件UI包 */
-FairyEditor.App.pluginManager.LoadUIPackage(EditorUtils.GetFilePath(PkgCustom));
+FairyEditor.App.pluginManager.LoadUIPackage(EditorUtils.GetPackagePath(PkgCustom));
+CustomSetting.Init();
 
 const docMenu = FairyEditor.App.docFactory.contextMenu;
 const libMenu = FairyEditor.App.libView.contextMenu;
@@ -22,6 +25,7 @@ const mainSubMenu = (name: MainMenuType) => mainMenu.GetSubMenu(name);
     // new MenuDoc_CreateComponent(docMenu),
     // new MenuDoc_CreateRelation(docMenu),
     // new MenuDoc_CreateLuaName(docMenu),
+    new MenuDoc_CreateLayaName(docMenu),
 
     //资源库菜单
     // new MenuLib_CreateController(libMenu),
@@ -46,6 +50,6 @@ const mainSubMenu = (name: MainMenuType) => mainMenu.GetSubMenu(name);
 // }
 
 export function onDestroy() {
-    BaseClass[ DestroyInstanceMethodName ]();
-    BaseInspector[ DestroyInstanceMethodName ]();
+    BaseClass[DestroyInstanceMethodName]();
+    BaseInspector[DestroyInstanceMethodName]();
 }

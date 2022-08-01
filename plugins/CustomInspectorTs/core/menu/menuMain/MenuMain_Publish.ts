@@ -1,4 +1,5 @@
 import { FairyEditor, FairyGUI } from "csharp";
+import { CustomSetting } from "../../common/CustomSetting";
 import { Tip } from "../../common/Tip";
 import { ConfigType, SettingName } from "../../common/Types";
 import { EditorUtils } from "../../utils/EditorUtils";
@@ -59,8 +60,7 @@ export class MenuMain_Publish extends MenuBase {
         this.selectedPlatform = FairyEditor.App.project.type;
 
         if (this.settingsMap[ this.selectedPlatform ]) {
-            const settingEles = (FairyEditor.App.project.GetSettings(SettingName.CustomProperties) as FairyEditor.CustomProps).elements;
-            let cfgIndex = settingEles.ContainsKey(CUSTOM_KEY) ? (+settingEles.get_Item(CUSTOM_KEY) || 0) : 0;
+            let cfgIndex = CustomSetting.PublishSelectedCfgIndex;
             cfgIndex = Math.min(cfgIndex, this.settingsMap[ this.selectedPlatform ].length - 1);
             this.refreshPublishPlatform(cfgIndex, false);
         }
@@ -112,9 +112,8 @@ export class MenuMain_Publish extends MenuBase {
             FairyEditor.App.project.Save();
 
             //设置选择索引并保存
-            const customSetting = (FairyEditor.App.project.GetSettings(SettingName.CustomProperties) as FairyEditor.CustomProps);
-            customSetting.elements.set_Item(CUSTOM_KEY, cfgIndex.toString());
-            customSetting.Save();
+            CustomSetting.PublishSelectedCfgIndex = cfgIndex;
+            CustomSetting.Save();
 
             this.lastCfgIndex = cfgIndex;
             let cfgStr = `[color=#ff0000]${ FairyEditor.App.project.type }[/color]`;

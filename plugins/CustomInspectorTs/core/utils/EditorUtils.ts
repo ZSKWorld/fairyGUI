@@ -10,7 +10,7 @@ export class EditorUtils {
         if (data.subMenuData && data.subMenuData.length) {
             const nameCheckArr = [];
             for (let i = data.subMenuData.length - 1; i >= 0; i--) {
-                const name = data.subMenuData[ i ].name;
+                const name = data.subMenuData[i].name;
                 if (nameCheckArr.indexOf(name) != -1) return FairyEditor.App.Alert("菜单目录有重名：" + name);
                 else nameCheckArr.push(name);
             }
@@ -40,7 +40,7 @@ export class EditorUtils {
         // xml.SetAttribute("homePageType","variable"); //首页类型
         // xml.SetAttribute("homePage","Test");
         if (!pageNames || !pageNames.length) {
-            pageNames = [ "", "" ];
+            pageNames = ["", ""];
         }
         let pageData = "";
         pageNames.forEach((v, index) => { pageData += index + "," + v + (index == pageNames.length - 1 ? "" : ",") });
@@ -55,28 +55,34 @@ export class EditorUtils {
      */
     public static AddComponent(url: string): void {
         if (!FairyEditor.App.activeDoc) return;
-        if (url.startsWith("ui://") == false) return FairyEditor.App.Alert(`错误的组件URL---${ url }\nURL必须以 ui:// 开头`);
+        if (url.startsWith("ui://") == false) return FairyEditor.App.Alert(`错误的组件URL---${url}\nURL必须以 ui:// 开头`);
         FairyEditor.App.activeDoc.UnselectAll();
         FairyEditor.App.activeDoc.InsertObject(url);
     }
 
     /** 获取插件根目录 */
     public static GetPluginRootDir() {
-        return FairyEditor.App.pluginManager.projectPluginFolder + "/" + (eval("__dirname") as string).split("/")[ 0 ];
+        return FairyEditor.App.pluginManager.projectPluginFolder + "/" + (eval("__dirname") as string).split("/")[0];
     }
 
     /**
      * 获取包地址
      * @param name 包名
      */
-    public static GetFilePath(name: string): string {
+    public static GetPackagePath(name: string): string {
         return this.GetPluginRootDir() + "/Packages/" + name;
     }
 
-    /**获取config目录下的配置文件 */
-    public static GetConfig<T = any>(type: ConfigType, fileName: string): T {
+    
+    /**获取config目录下的配置路径 */
+    public static GetConfigPath(type: ConfigType, fileName: string): string {
         const dir = type ? type + "/" : "";
-        const cfgPath = `${ this.GetPluginRootDir() }/config/${ dir }${ fileName }.json`;
+        return `${this.GetPluginRootDir()}/config/${dir}${fileName}.json`; 
+    }
+
+    /**获取config目录下的配置数据 */
+    public static GetConfig<T = any>(type: ConfigType, fileName: string): T {
+        const cfgPath = this.GetConfigPath(type, fileName);
         if (System.IO.File.Exists(cfgPath) == false)
             return console.warn("文件不存在" + cfgPath) as unknown as T;
         const cfgJsonStr = System.IO.File.ReadAllText(cfgPath);
@@ -126,3 +132,7 @@ export class EditorUtils {
 
 //从插件目录开始的路径
 //eval("__dirname")
+
+
+// FairyEditor.App.mainView.panel
+// toolbar holder startScene logItem newVersionPrompt menuBar userInfo
