@@ -2,16 +2,14 @@
     "Layabox": {
         "enable": true,
         "configFiles": [
-            "Layabox",
-            "Layabox2"
+            "Layabox"
         ]
     },
     "Unity": {
         "enable": true,
         "configFiles": [
             "Unity_项目路径",
-            "Unity_插件路径",
-            "Unity_插件路径2"
+            "Unity_插件路径"
         ]
     },
     "Flash": {

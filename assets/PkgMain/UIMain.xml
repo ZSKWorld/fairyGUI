@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="750,1334" overflow="hidden" designImage="ui://vith2b66sbd0i" designImageOffsetX="-766" designImageAlpha="100" designImageLayer="1" bgColorEnabled="true" bgColor="#000000">
-  <controller name="ctrlShow" pages="0,,1,,2,,3,,4," selected="2"/>
+  <controller name="ctrlShow" pages="0,,1,,2,,3,,4," selected="4"/>
   <displayList>
     <graph id="n67_7vow" name="n67" xy="10,224" size="730,1024" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff1a1918">
+      <gearDisplay controller="ctrlShow" pages="0,1,2,3,4"/>
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <graph id="n68_7vow" name="n68" xy="10,224" size="730,87" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff24272f">
+      <gearDisplay controller="ctrlShow" pages="0,1,2,3,4"/>
       <relation target="" sidePair="width-width"/>
     </graph>
     <component id="n60_sbd0" name="ComLiLian" src="sbd01" fileName="Component/ComLiLian.xml" xy="10,224" size="730,1024">
@@ -28,27 +30,30 @@
       <gearDisplay controller="ctrlShow" pages="4"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n12_sbd0" name="BtnLiLian" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="0,1264" pivot="0.5,1" size="150,70" group="n58_sbd0">
+    <component id="n12_sbd0" name="BtnLiLian" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="0,1264" size="125,70" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0" values="#ffffff" default="#000000"/>
       <Button title="历练" titleColor="#000000" titleFontSize="45" controller="ctrlShow" page="0"/>
     </component>
-    <component id="n14_sbd0" name="BtnJueSe" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="150,1264" pivot="0.5,1" size="150,70" group="n58_sbd0">
+    <component id="n14_sbd0" name="BtnJueSe" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="125,1264" size="125,70" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,1" values="#000000|#ffffff" default="#000000"/>
       <Button title="角色" titleColor="#000000" titleFontSize="45" controller="ctrlShow" page="1"/>
     </component>
-    <component id="n15_sbd0" name="BtnWuPin" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="300,1264" pivot="0.5,1" size="150,70" group="n58_sbd0">
+    <component id="n15_sbd0" name="BtnWuPin" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="250,1264" size="125,70" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,2" values="#000000|#ffffff" default="#000000"/>
-      <Button title="物品" titleColor="#ffffff" titleFontSize="45" controller="ctrlShow" page="2"/>
+      <Button title="物品" titleColor="#000000" titleFontSize="45" controller="ctrlShow" page="2"/>
     </component>
-    <component id="n16_sbd0" name="BtnShangCheng" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="450,1264" pivot="0.5,1" size="150,70" group="n58_sbd0">
+    <component id="n16_sbd0" name="BtnShangCheng" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="375,1264" size="125,70" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,3" values="#000000|#ffffff" default="#000000"/>
       <Button title="商城" titleColor="#000000" titleFontSize="45" controller="ctrlShow" page="3"/>
     </component>
-    <component id="n17_sbd0" name="BtnDongFu" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="600,1264" pivot="0.5,1" size="150,70" group="n58_sbd0">
+    <component id="n17_sbd0" name="BtnDongFu" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="500,1264" size="125,70" group="n71_o772">
       <gearColor controller="ctrlShow" pages="0,4" values="#000000|#ffffff" default="#000000"/>
-      <Button title="洞府" titleColor="#000000" titleFontSize="45" controller="ctrlShow" page="4"/>
+      <Button title="洞府" titleColor="#ffffff" titleFontSize="45" controller="ctrlShow" page="4"/>
     </component>
-    <group id="n58_sbd0" name="n58" xy="0,1264" size="750,70"/>
+    <component id="n69_o772" name="BtnChat" src="qjdo1" fileName="Component/BtnTxt.xml" pkg="vx9zwser" xy="625,1264" size="125,70" group="n71_o772">
+      <Button title="聊天" titleFontSize="45"/>
+    </component>
+    <group id="n71_o772" name="n71" xy="0,1264" size="750,70"/>
     <graph id="n35_sbd0" name="BtnInfo" xy="10,0" size="730,207" group="n37_sbd0" type="rect" lineSize="4" lineColor="#ff6d6f74" fillColor="#ff272b37">
       <relation target="" sidePair="width-width"/>
     </graph>
@@ -80,7 +85,9 @@
       <relation target="n35_sbd0" sidePair="right-right"/>
       <Button icon="ui://vith2b66sbd0d"/>
     </component>
-    <group id="n37_sbd0" name="n37" xy="10,0" size="730,207"/>
+    <group id="n37_sbd0" name="n37" xy="10,0" size="730,207" advanced="true">
+      <gearDisplay controller="ctrlShow" pages="0,1,2,3,4"/>
+    </group>
     <component id="n66_e3vt" name="BtnSphere" src="amcp1u" fileName="Component/BtnSphere.xml" xy="556,9"/>
   </displayList>
 </component>

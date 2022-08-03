@@ -77,7 +77,7 @@
     <image id="qjdo28" name="Pic_CaiPinBiaoQian.png" path="/Texture/"/>
     <image id="qjdo29" name="Pic_DuiHuaQiPao01.png" path="/Texture/"/>
     <image id="qjdo2a" name="Pic_FengGeXian.png" path="/Texture/"/>
-    <image id="qjdo2c" name="Pic_GouxuanBG.png" path="/Texture/"/>
+    <image id="qjdo2c" name="Pic_GouxuanBG.png" path="/Texture/" exported="true" scale="9grid" scale9grid="8,8,16,16"/>
     <image id="qjdo2d" name="Pic_Guang02.png" path="/Texture/"/>
     <image id="qjdo2e" name="Pic_GuangDian.png" path="/Texture/"/>
     <image id="qjdo2f" name="Pic_GuKeBiaoQian.png" path="/Texture/"/>
@@ -100,8 +100,8 @@
     <image id="qjdo2w" name="Frame_Copyright.png" path="/Texture/"/>
     <image id="qjdo2x" name="Frame_DialogCompletePV01.png" path="/Texture/" scale="9grid" scale9grid="100,7,128,2"/>
     <image id="qjdo2y" name="Frame_ErJiKuang.png" path="/Texture/"/>
-    <image id="qjdo2z" name="Frame_ItemBG01.png" path="/Texture/"/>
-    <image id="qjdo30" name="Frame_ItemBG02.png" path="/Texture/"/>
+    <image id="qjdo2z" name="Frame_ItemBG01.png" path="/Texture/" exported="true" scale="9grid" scale9grid="41,42,82,84"/>
+    <image id="qjdo30" name="Frame_ItemBG02.png" path="/Texture/" exported="true" scale="9grid" scale9grid="41,42,82,84"/>
     <image id="qjdo31" name="Frame_ItemBG03.png" path="/Texture/"/>
     <image id="qjdo32" name="Frame_BiaoTiLan.png" path="/Texture/"/>
     <image id="qjdo33" name="Frame_ItemBG04.png" path="/Texture/"/>
@@ -124,7 +124,7 @@
     <image id="qjdo3k" name="Btn_DuiHuaQiPao02.png" path="/Texture/"/>
     <image id="qjdo3l" name="Btn_DuiHuaQiPao03.png" path="/Texture/"/>
     <image id="qjdo3m" name="Btn_DuiHuaQiPao04.png" path="/Texture/"/>
-    <image id="qjdo3n" name="Btn_FanHui.png" path="/Texture/"/>
+    <image id="qjdo3n" name="Btn_FanHui.png" path="/Texture/" exported="true"/>
     <image id="qjdo3o" name="Btn_FanZhuan.png" path="/Texture/"/>
     <image id="qjdo3p" name="Btn_Goto_L.png" path="/Texture/"/>
     <image id="qjdo3q" name="Btn_Goto_S.png" path="/Texture/"/>
