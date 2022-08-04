@@ -100,21 +100,24 @@ export class MenuMain_Publish extends MenuBase {
     private refreshPublishPlatform(cfgIndex: number, showTip: boolean = true) {
         const newSetting = this.settingsMap[ this.selectedPlatform ][ cfgIndex ];
         if (newSetting) {
+            const project = FairyEditor.App.project;
             //设置全局设置并保存
-            const globalSetting = FairyEditor.App.project.GetSettings(SettingName.Publish) as FairyEditor.GlobalPublishSettings;
+            const globalSetting = project.GetSettings(SettingName.Publish) as FairyEditor.GlobalPublishSettings;
             this.copySetting(globalSetting, newSetting);
             globalSetting.Save();
 
             //设置项目类型并保存
-            FairyEditor.App.project.type = this.selectedPlatform;
-            FairyEditor.App.project.Save();
+            project.type = this.selectedPlatform;
+            project.Save();
 
             //设置选择索引并保存
             CustomSetting.PublishSelectedCfgIndex = cfgIndex;
-            CustomSetting.Save();
+            CustomSetting.Save()
+        
+            project.allPackages.ForEach(v => v.Open());
 
             this.lastCfgIndex = cfgIndex;
-            let cfgStr = `[color=#ff0000]${ FairyEditor.App.project.type }[/color]`;
+            let cfgStr = `[color=#ff0000]${ project.type }[/color]`;
             const platformCfg = this.platformCfg[ this.selectedPlatform ];
             if (platformCfg.configFiles.length > 1)
                 cfgStr += ` [color=#0000ff]${ platformCfg.configFiles[ cfgIndex ] }[/color]`;

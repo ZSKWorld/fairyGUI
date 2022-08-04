@@ -6,6 +6,7 @@ import { BaseInspector } from './core/inspectors/BaseInspector';
 import { BaseClass } from './core/libs/BaseClass';
 import { MenuDoc_CreateLayaName } from './core/menu/menuDoc/MenuDoc_CreateLayaName';
 import { MenuMain_Publish } from './core/menu/menuMain/MenuMain_Publish';
+import { Menu_Test } from './core/menu/Menu_Test';
 import { EditorUtils } from './core/utils/EditorUtils';
 
 /** 加载插件UI包 */
@@ -19,13 +20,13 @@ const mainSubMenu = (name: MainMenuType) => mainMenu.GetSubMenu(name);
 
 [
     //测试用例
-    // new Menu_Test(docMenu),
+    new Menu_Test(docMenu),
 
     //编辑区菜单
     // new MenuDoc_CreateComponent(docMenu),
     // new MenuDoc_CreateRelation(docMenu),
     // new MenuDoc_CreateLuaName(docMenu),
-    new MenuDoc_CreateLayaName(docMenu),
+    // new MenuDoc_CreateLayaName(docMenu),
 
     //资源库菜单
     // new MenuLib_CreateController(libMenu),
